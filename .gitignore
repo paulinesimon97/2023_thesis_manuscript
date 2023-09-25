@@ -9,6 +9,7 @@
 *.blg
 *.brf
 *.bst
+*.cpt
 *.dvi
 *.fdb_latexmk
 *.fls
@@ -26,6 +27,7 @@
 *.maf
 *.mtc
 *.mtc1
+*.mtc*
 *.nav
 *.nlo
 *.nls
