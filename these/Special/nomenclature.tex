@@ -1,0 +1,177 @@
+%\usepackage{xspace}
+%\xspaceaddexceptions{]\}}
+%Uncomment next line if AMS fonts required
+%\usepackage{iopams}
+
+%========================
+% Nomenclature
+
+%% This code creates the groups
+% -----------------------------------------
+
+\renewcommand\nomgroup[1]{%
+  \item[
+  \ifstrequal{#1}{P}{{\bf Constantes et paramètres physiques}}{%
+  \ifstrequal{#1}{N}{{\bf Paramètres numériques}}{%
+  \ifstrequal{#1}{R}{{\bf Systèmes de représentation}}{
+  \ifstrequal{#1}{Q}{{\bf Quantités}}{
+  \ifstrequal{#1}{O}{{\bf Opérateurs et opérations} (exemples donnés entre quantités indéfinies \ensuremath{A}, \ensuremath{B}).}{
+  }}}}}%
+]}
+
+% This will add the units
+%----------------------------------------------
+\newcommand{\nomunit}[1]{%
+\renewcommand{\nomentryend}{\hspace*{\fill}#1}}
+%----------------------------------------------
+
+%nomenclature text 
+\renewcommand{\nompreamble}{La liste suivante contient les notations utilisées récurrament dans l'ensemble de cette thèse ainsi que quelques éléments de définition. L'usage courant des notations est généralement respecté et sauf unités spécifiques utilisées dans la communauté astrophysique, les unités sont exprimées dans le système international (SI). 
+Les vecteurs sont notés en gras, les tenseurs en gras surmontés d'une (ordre 2) ou deux barres (ordre 3).
+Les quantités liées à l'écoulement sont indicées par $\alpha$, $e$, $i$ si une distinction est faite sur le type de particules s'écoulant (resp. espèce quelconque mais distincte, électrons, ions). Les valeurs moyennes sont en générale indicées par un $0$ et les fluctuations linéaires par un $1$ si requis (exemple dans le cadre des linéarisations). Dans les études de turbulence, les quantités exprimées en $\mathbf{x'}$ sont primés. 
+
+ }
+
+% Paramètres physiques
+\nomenclature[P]{\ensuremath{e}}{charge élémentaire. \nomunit{$\SI{1.602176634e-19}{C}$}}
+\nomenclature[P]{\ensuremath{m_p}}{masse d'un proton. \nomunit{$\SI{ 1.6726e-27 }{kg}$}}
+\nomenclature[P]{\ensuremath{m_i}}{masse ionique proportionnelle à \ensuremath{m_p}.}
+\nomenclature[P]{\ensuremath{m_e}}{masse d'un électron. \nomunit{$\SI{9.1094e-31 }{kg}$}}
+\nomenclature[P]{\ensuremath{\mu}}{rapport massique \ensuremath{m_e/m_i}.}
+\nomenclature[P]{\ensuremath{\nu}}{viscosité du fluide, caractérise la dissipation cinétique. }
+\nomenclature[P]{\ensuremath{\eta}}{résistivité du fluide, caractérise la diffusivité magnétique.}
+\nomenclature[P]{\ensuremath{a_p}}{taux d'anisotropie de pression, correspond à une pression perpendiculaire sur une pression parallèle.}
+\nomenclature[P]{\ensuremath{R_e}}{nombre de Reynolds, rapport entre convection et dissipation cinétique (voir section \ref{sec-011}).}
+\nomenclature[P]{\ensuremath{R_m}}{nombre de Reynolds magnétique, rapport entre convection et diffusivité magnétique (voir section \ref{sec-011}).}
+\nomenclature[P]{\ensuremath{\beta}}{paramètre du plasma, correspond à une pression sur la pression magnétique, indicé suivant le type de pression (ex. : \ensuremath{\beta_{\parallel} = p_{\parallel}/p_m}).}
+\nomenclature[P]{\ensuremath{\epsilon_0}}{permittivité du vide. \nomunit{$\SI{8.854e-12}{A^2 .s^4 .kg^{-1} .m^{-3}}$}}
+\nomenclature[P]{\ensuremath{\mu_0}}{perméabilité (magnétique) du vide, \ensuremath{1/(\epsilon_0 c^2)}.}
+\nomenclature[P]{\ensuremath{c}}{vitesse de la lumière dans le vide. \nomunit{$\SI{2.99 792 458 e8}{ m s^{-1}}$}}
+\nomenclature[P]{\ensuremath{d_{i,e}}}{longueur d'inertie ionique (resp. électronique).}
+\nomenclature[P]{\ensuremath{\rho_{Li,Le}}}{rayon de Larmor ionique (resp. électronique).}
+\nomenclature[P]{\ensuremath{q_{\alpha}}}{charge particulaire, à ne pas confondre avec les flux de chaleurs.}
+\nomenclature[P]{\ensuremath{\omega_{ci,ce}}}{pulsation cyclotron ionique (resp. électronique).}
+\nomenclature[P]{\ensuremath{\lambda_{i,e}}}{rapport masse-charge élémentaire des ions et électrons}
+\nomenclature[P]{\ensuremath{\lambda_{c}}}{longueur de corrélation.}
+\nomenclature[P]{\ensuremath{au}}{unité atronomique, distance Soleil-Terre. \nomunit{$\SI{1.49597870700 e-11 }{m}$}} 
+\nomenclature[P]{\ensuremath{Rs}}{rayon solaire. \nomunit{$\SI{6.958 e-8 }{m}$}} 
+
+% Variables
+\nomenclature[Q]{\ensuremath{t}}{instant, temps.}
+\nomenclature[Q]{\ensuremath{f}}{fréquence temporelle.}
+\nomenclature[Q]{\ensuremath{\mathbf{x}}}{position.}
+\nomenclature[Q]{\ensuremath{\mathbf{v}}}{vitesse d'une particule individuelle.}
+\nomenclature[Q]{\ensuremath{x,y,z}}{composantes cartésiennes de la position.}
+\nomenclature[N]{\ensuremath{n_x, n_y, n_z}}{position en nombre de points dans la grille numérique.}
+\nomenclature[Q]{\ensuremath{\mathbf{x'}}}{position \ensuremath{\mathbf{x}} translatée de \ensuremath{\boldsymbol{\ell}}.}
+\nomenclature[Q]{\ensuremath{\boldsymbol{\ell}}}{échelle, incrément spatial aussi noté \ensuremath{\delta x}.}
+\nomenclature[Q]{\ensuremath{\boldsymbol{\ell_F}}}{échelle de forçage.}
+\nomenclature[Q]{\ensuremath{\boldsymbol{k}}}{vecteur d'onde (position dans l'espace de Fourier).}
+\nomenclature[Q]{\ensuremath{\omega}}{pulsation/fréquence temporelle (dans l'espace de Fourier).}
+\nomenclature[Q]{\ensuremath{k_{\perp},k_{\parallel}}}{composante perpendiculaire et parallèle au champ magnétique moyen du vecteur d'onde.}
+
+% Quantités fluides
+\nomenclature[Q]{\ensuremath{\rho}}{densité massique d'un fluide, moment d'ordre 0 de la fonction de distribution des particules.}
+\nomenclature[Q]{\ensuremath{Q}}{densité de charge.}
+\nomenclature[Q]{\ensuremath{n}}{densité de particule.}
+\nomenclature[Q]{\ensuremath{\boldsymbol{v}}}{vitesse d'écoulement d'un fluide, moment d'ordre 1 de la fonction de distribution des particules.}
+\nomenclature[Q]{\ensuremath{\boldsymbol{j}}}{densité de courant, moment d'ordre 1 de la fonction de distribution des particules.}
+\nomenclature[Q]{\ensuremath{\boldsymbol{v}_{SW}}}{vitesse d'écoulement du vent solaire de module \ensuremath{v_{SW}}. \nomunit{$\SI{400-800}{ m s^{-1}}$}}
+
+% Quantités électromagnétiques
+\nomenclature[Q]{\ensuremath{\boldsymbol{v_A}}}{vitesse d'Alfvén.}
+\nomenclature[Q]{\ensuremath{v_A}}{module de la vitesse d'Alfvén.}
+\nomenclature[Q]{\ensuremath{\boldsymbol{B}}}{champ magnétique.}
+\nomenclature[Q]{\ensuremath{\boldsymbol{E}}}{champ électrique.}
+\nomenclature[Q]{\ensuremath{\boldsymbol{b}}}{direction du champ magnétique.}
+\nomenclature[Q]{\ensuremath{B}}{module du champ magnétique.}
+
+% Quantités pressions
+\nomenclature[Q]{\ensuremath{\overline{\boldsymbol{P}}}}{tenseur de pression, moment d'ordre 2 de la fonction de distribution des particules.}
+\nomenclature[Q]{\ensuremath{\overline{\boldsymbol{P_*}}}}{tenseur de pression totale, contient \ensuremath{\overline{\boldsymbol{P}}} et \ensuremath{p_m}.}
+\nomenclature[Q]{\ensuremath{p_m}}{pression magnétique.}
+\nomenclature[Q]{\ensuremath{\overline{\boldsymbol{I}}}}{tenseur identité.}
+\nomenclature[Q]{\ensuremath{\overline{\boldsymbol{\Pi}}}}{composante anisotrope du tenseur de pression.}
+\nomenclature[Q]{\ensuremath{p}}{pression isotrope, tiers de la trace du tenseur de pression.}
+\nomenclature[Q]{\ensuremath{p_{\parallel}}}{pression parallèle, composante gyrotrope de \ensuremath{\overline{\boldsymbol{P}}} dans la direction \ensuremath{\boldsymbol{b}}.}
+\nomenclature[Q]{\ensuremath{p_{\perp}}}{pression perpendiculaire, composante gyrotrope de \ensuremath{\overline{\boldsymbol{P}}} perpendiculaire à la direction \ensuremath{\boldsymbol{b}}.}
+\nomenclature[Q]{\ensuremath{\boldsymbol{\overline{P_E}}}}{\ensuremath{\frac{Q}{\rho} \overline{\boldsymbol{P}} }}
+
+% Quantités lié au forçage
+\nomenclature[Q]{\ensuremath{\boldsymbol{f_c}}}{forçage cinétique, appliqué dans l'équation d'évolution de \ensuremath{\boldsymbol{v}}.}
+\nomenclature[Q]{\ensuremath{\boldsymbol{f_m}}}{forçage magnétique, appliqué sur l'équation d'évolution de \ensuremath{\boldsymbol{v_A}}.}
+
+% Quantités lié à la dissipations
+\nomenclature[Q]{\ensuremath{\boldsymbol{d_c}}}{dissipation cinétique, appliqué dans l'équation d'évolution de \ensuremath{\boldsymbol{v}}.}
+\nomenclature[Q]{\ensuremath{\boldsymbol{d_m}}}{dissipation magnétique, appliqué sur l'équation d'évolution de \ensuremath{\boldsymbol{v_A}}.}
+
+% Quantités thermodynamiques
+\nomenclature[Q]{\ensuremath{u}}{énergie interne spécifique (divisée par la masse).}
+\nomenclature[Q]{\ensuremath{s}}{entropie spécifique (divisée par la masse).}
+\nomenclature[Q]{\ensuremath{\overline{\overline{\boldsymbol{q}}}}}{tenseur de flux de chaleur.}
+\nomenclature[Q]{\ensuremath{\boldsymbol{q}}}{flux de chaleur, forme réduite par produit dual avec \ensuremath{\overline{\boldsymbol{I}}} de \ensuremath{\overline{\overline{\boldsymbol{q}}}}.}
+\nomenclature[Q]{\ensuremath{\mathcal{Q}}}{chaleur dans le premier principe thermodynamique.}
+\nomenclature[Q]{\ensuremath{\mathcal{W}}}{travail dans le premier principe thermodynamique.}
+\nomenclature[Q]{\ensuremath{q}}{module ou composante du flux de chaleur sauf dans le chapitre \ref{ch-02} ou c'est la charge associée à l'espèce des particules.}
+\nomenclature[P]{\ensuremath{\gamma}}{indice polytropique.}
+\nomenclature[P]{\ensuremath{\gamma_a}}{indice adiabatique, \ensuremath{5/3} pour un gaz (semi-)parfait. }
+\nomenclature[P]{\ensuremath{\sigma}}{facteur polytrope.}
+\nomenclature[P]{\ensuremath{c_s}}{vitesse thermique.}
+
+% Quantités énergétiques
+\nomenclature[Q]{\ensuremath{E_c}}{énergie cinétique.}
+\nomenclature[Q]{\ensuremath{E_m}}{énergie magnétique.}
+\nomenclature[Q]{\ensuremath{E_{tot}}}{énergie totale.}
+\nomenclature[Q]{\ensuremath{E_F}}{énergie provenant du forçage.}
+\nomenclature[Q]{\ensuremath{E_D}}{énergie dissipée.}
+\nomenclature[Q]{\ensuremath{\varepsilon_{mhd}}}{tout taux de cascade calculé avec l'approximation \acs{MHD}}
+\nomenclature[Q]{\ensuremath{\varepsilon_{cgl}}}{tout taux de cascade calculé avec la fermeture \acs{CGL}}
+\nomenclature[Q]{\ensuremath{\varepsilon_{iso}}}{tout taux de cascade calculé avec le composante isotrope du tenseur de pression}
+\nomenclature[Q]{\ensuremath{\varepsilon_{\overline{\boldsymbol{\Pi}}}}}{correction du taux de cascade dépendant de la part anisotrope du tenseur de pression.}
+\nomenclature[Q]{\ensuremath{\varepsilon_{hall}}}{correction étendant le domaine de validité du taux \ensuremath{\varepsilon_{mhd}} aux échelles \acs{Hall}.}
+\nomenclature[Q]{\ensuremath{\varepsilon_D}}{taux de dissipation défini avec la loi \acs{KHM}.}
+\nomenclature[Q]{\ensuremath{\varepsilon_F}}{taux de forçage défini avec la loi \acs{KHM}.}
+\nomenclature[Q]{\ensuremath{\varepsilon_{NL}}}{taux de transfert non linéaire.}
+\nomenclature[Q]{\ensuremath{\mathcal{E}_D}}{taux de dissipation obtenu avec la loi \acs{KHM} dépendant de la fonction de corrélation incrémentale.}
+\nomenclature[Q]{\ensuremath{\mathcal{E}_F}}{taux de forçage obtenu avec la loi \acs{KHM} dépendant de la fonction de corrélation incrémentale.}
+\nomenclature[Q]{\ensuremath{\mathcal{E}_{NL}}}{taux de transfert non linéaire obtenu avec la loi \acs{KHM} dépendant de la fonction de corrélation incrémentale.}
+\nomenclature[Q]{\ensuremath{\varepsilon}}{taux de cascade dans la zone inertielle.}
+\nomenclature[Q]{\ensuremath{\mathcal{R}}}{fonction de corrélation d'énergie totale.}
+\nomenclature[Q]{\ensuremath{\mathcal{R}_c}}{fonction de corrélation d'énergie cinétique.}
+\nomenclature[Q]{\ensuremath{\mathcal{R}_m}}{fonction de corrélation d'énergie magnétique.}
+\nomenclature[Q]{\ensuremath{\mathcal{R}_u}}{fonction de corrélation d'énergie interne.}
+\nomenclature[Q]{\ensuremath{\mathcal{S}}}{fonction de corrélation incrémentale d'énergie totale.}
+
+% Système de représentation
+\nomenclature[Q]{\ensuremath{\boldsymbol{e_x},\boldsymbol{e_y},\boldsymbol{e_z}}}{vecteurs directeurs cartésiens, \ensuremath{\boldsymbol{e_z}} est souvent aligné sur le champ magnétique moyen. }
+\nomenclature[Q]{\ensuremath{\theta}}{angle entre \ensuremath{\boldsymbol{k}} et \ensuremath{\boldsymbol{e_z}}}
+
+% Opérateurs de dérivation
+\nomenclature[O]{\ensuremath{\Delta}}{\ensuremath{=\nabla \cdot \nabla}, Laplacien.}
+\nomenclature[O]{\ensuremath{\nabla}}{opérateur de dérivation spatiale, \ensuremath{\partial_{\mathbf{x}}}.}
+\nomenclature[O]{\ensuremath{\nabla'}}{opérateur de dérivation spatiale, \ensuremath{\partial_{\mathbf{x'}}}.}
+\nomenclature[O]{\ensuremath{\partial_A}}{dérivée partielle suivant une quantité quelconque A, \ensuremath{\frac{\partial}{\partial A}}.}
+\nomenclature[O]{\ensuremath{d_t}}{dérivée temporelle totale suivant, \ensuremath{\partial_t + \boldsymbol{v} \cdot \nabla}.}
+\nomenclature[O]{\ensuremath{d A}}{élément différentiel de \ensuremath{A}.}
+\nomenclature[O]{\ensuremath{\nabla_{\boldsymbol{\ell}}}}{opérateur de dérivation en échelle spatiale, \ensuremath{\partial_{\boldsymbol{\ell}}}.}
+
+\renewcommand{\dj}{\ensuremath{\rlap{\textrm{d}}{\bar{\phantom{w}}}}}
+\nomenclature[O]{\ensuremath{\dj A}}{différentielle inexacte (intégration dépendant du chemin) d'une quantité quelconque A, \ensuremath{\frac{\partial}{\partial A}}.}
+
+\nomenclature[O]{\ensuremath{\Re[A]}}{partie réelle de \ensuremath{A}.}
+\nomenclature[O]{\ensuremath{\Im[A]}}{partie imaginaire de \ensuremath{A}.}
+
+% Produits
+\nomenclature[O]{\ensuremath{A\cdot B}}{produit scalaire, donne un scalaire si appliqué entre deux vecteurs, un vecteur si appliqué entre un vecteur et un tenseur d'ordre 2, etc., ne s'applique pas entre un scalaire et un vecteur, aussi utilisé pour noté un produit indéfini entre quantités indéfinies.}
+\nomenclature[O]{\ensuremath{A \times B}}{produit vectoriel, entre quantités vectorielles, donne un vecteur.}
+\nomenclature[O]{\ensuremath{A:B}}{produit dual, ou double produit scalaire (entre quantités tensorielles), on ne l'utilisera que si l'un des tenseurs est symétrique, il peut s'écrire comme deux produits scalaires si l'un des tenseur est construit par produit tensoriel (ex : pour \ensuremath{A = \boldsymbol{v}\boldsymbol{v}} et \ensuremath{B = \boldsymbol{b}\boldsymbol{b}}, \ensuremath{A:B = \boldsymbol{v}\boldsymbol{v}:\boldsymbol{b}\boldsymbol{b} = \boldsymbol{v}\cdot \boldsymbol{b}\boldsymbol{b} \cdot \boldsymbol{v} = (\boldsymbol{v}\cdot \boldsymbol{b})(\boldsymbol{b} \cdot \boldsymbol{v})}).}
+\nomenclature[O]{\ensuremath{AB}}{produit tensoriel, donne un scalaire si utilisé avec des quantités scalaires, un vecteur si utilisé entre un vecteur et un scalaire, un tenseur d'ordre 2 si utilisé avec deux vecteurs, etc..}
+\nomenclature[O]{\ensuremath{A^S}}{\ensuremath{=A+A^T}, symétrisation de \ensuremath{A} par somme avec la transposée.}
+
+% Opérations statistiques
+\nomenclature[O]{\ensuremath{\left< A \right>}}{moyenne de \ensuremath{A}.}
+\nomenclature[O]{\ensuremath{A'}}{A évalué en \ensuremath{\mathbf{x'}}.}
+\nomenclature[O]{\ensuremath{\delta A}}{\ensuremath{= A'-A}, incrément spatial de \ensuremath{A}.}
+\nomenclature[O]{\ensuremath{\mathcal{R}_{AB}}}{corrélation symétrique de \ensuremath{A} et \ensuremath{B}, \ensuremath{ \frac{1}{2} \left< A' \cdot  B + A \cdot  B' \right>}.}
+\nomenclature[O]{\ensuremath{\mathcal{S}_{AB}}}{corrélation incrémentale de \ensuremath{A} et \ensuremath{B}, \ensuremath{ \left<\delta A \cdot \delta B\right>}.}
+\nomenclature[Q]{\ensuremath{\mathcal{P}_{\alpha}}}{fonction de distribution des particules d'espèce $\alpha$.}

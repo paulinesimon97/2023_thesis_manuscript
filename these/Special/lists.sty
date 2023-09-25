@@ -1,0 +1,102 @@
+\RequirePackage{shorttoc}
+\RequirePackage[french]{minitoc}
+\RequirePackage{hyperref}
+%-----------
+
+\dominitoc%[n] 		% Initialisation de minitoc ([n] enleve le ``content'')
+
+\newcommand\sommaire{   % Sommaire
+    \pagevide
+    \shorttoc{Sommaire}{0}
+    \renewcommand\partie{Sommaire}
+    \addcontentsline{toc}{chapter}{Sommaire} \mtcaddchapter}
+
+\newcommand\toc{        % Table des Matières
+    \tableofcontents 
+    \renewcommand\partie{\contentsname}
+    \addcontentsline{toc}{chapter}{\contentsname} \mtcaddchapter}
+
+\newcommand\todolist{        % Table des Matières
+    \listoftodos
+    \renewcommand\partie{Table des Todos}
+    \addcontentsline{toc}{chapter}{Table des Todos} \mtcaddchapter}
+
+\newcommand\tof{        % Table des figures
+    \listoffigures 
+    \renewcommand\partie{\listfigurename}
+    \addcontentsline{toc}{chapter}{\listfigurename} \mtcaddchapter}
+
+\newcommand\tot{        % Table des tableaux
+    \listoftables 
+    \renewcommand\partie{\listtablename}
+    \addcontentsline{toc}{chapter}{\listtablename} \mtcaddchapter}
+
+\RequirePackage{acronym}
+\newcommand\toa{        % Table des acronymes
+    \chapter*{Listes des acronymes}
+    \renewcommand\partie{Liste des Acronymes}
+    \addcontentsline{toc}{chapter}{Listes des acronymes} \mtcaddchapter
+    \input{Special/acronyms}
+}
+
+\RequirePackage{nomencl} %nocfg
+\renewcommand{\nomname}{Liste des symboles}
+\makenomenclature
+
+\newcommand\ton{
+    %\chapter*{Listes des symboles}
+    \renewcommand\partie{\nomname}
+    \addcontentsline{toc}{chapter}{\nomname} \mtcaddchapter
+    \printnomenclature
+}
+
+% \tableofcontents  		% Table des Matières
+% \addcontentsline{toc}{chapter}{\contentsname} \mtcaddchapter
+% %-----------
+% \makeatletter
+%   \providecommand\@dotsep{5}
+% \makeatother
+
+% \clearpage
+% \ifodd\value{page}\else
+%   \thispagestyle{empty}
+% \fi
+
+
+% \listoftodos
+% \addcontentsline{toc}{chapter}{List of notes} \mtcaddchapter
+% \relax
+
+% % % liste des figures
+% \listoffigures \addcontentsline{toc}{chapter}{\listfigurename} \mtcaddchapter
+% % \cleardoublepage
+% \clearpage
+% \ifodd\value{page}\else
+%   \thispagestyle{empty}
+% \fi
+% %
+% % % liste des tableaux
+% \listoftables \addcontentsline{toc}{chapter}{\listtablename} \mtcaddchapter
+% % \cleardoublepage
+% \clearpage
+% \ifodd\value{page}\else
+%   \thispagestyle{empty}
+% \fi
+% %
+% % % liste des algos
+% % \lstlistoflistings \addcontentsline{toc}{chapter}{\lstlistlistingname} \mtcaddchapter
+
+% % % Add List of Acronymes
+% \input{Special/acronyms}
+
+% % % Add list of symbols
+
+
+% %==============================
+% %  Nomanclature \string: list of the symbols used
+
+
+% \printnomenclature
+% \addcontentsline{toc}{chapter}{\nomname} \mtcaddchapter
+% %\inlinenote{Update with the variable name}
+

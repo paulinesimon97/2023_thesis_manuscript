@@ -1,0 +1,22 @@
+\toc
+\tof
+\tot
+\toa
+\ton
+\printbibliography[title=Bibliographie]
+ \addcontentsline{toc}{chapter}{Bibliographie}
+%\nocite{*}
+
+\part*{\linia
+        \bigskip
+        ARTICLES
+        \bigskip
+        \linia}
+   \addtocontents{toc}{\protect\vspace{2ex}\textbf{ARTICLES}\par}     
+\setcounter{part}{-1}
+\refstepcounter{part}\label{part_art}
+\renewcommand{\chaptername}{ARTICLES}
+\renewcommand\Partie{ARTICLES }
+	
+\includepdf[pages=1-last]{articles/Simon et Sahraoui-2021}
+\includepdf[pages=1-last]{articles/Simon et Sahraoui-2022}

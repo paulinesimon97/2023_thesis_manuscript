@@ -1,0 +1,71 @@
+\newgeometry{
+        left=25mm,
+        right=25mm, 
+        top=15mm,
+        bottom=10mm}
+\thispagestyle{empty}
+\begin{center}
+%\fbox{
+\begin{minipage}[l]{0.46\linewidth}
+    \begin{flushleft}
+	\includegraphics[height=0.3\linewidth]{Couv/logo_SU.png}
+  \end{flushleft}
+\end{minipage}%}
+%\fbox{
+% \begin{minipage}[c]{0.3\linewidth}
+%     \begin{center}
+%         \includegraphics[height=0.4\linewidth]{Couv/logo_aaif2.jpg}
+%     \end{center}
+% \end{minipage}%}
+%\fbox{
+\begin{minipage}[r]{0.46\linewidth}
+    \begin{flushright}
+	\includegraphics[height=0.3\linewidth]{Couv/logo_LPP.png}
+  \end{flushright}
+\end{minipage}%}
+%\begin{center}
+
+\bigskip \bigskip \bigskip
+\LARGE{\EAnom} \\
+\large{\EDnom} \\
+\textit{{\LABname}}\\
+\textit{\LABequipe} \\
+
+\bigskip %\bigskip
+
+\linia
+\bigskip
+\LARGE{\textbf{\titrefr}} \\
+\Large{\textit{\soustitrefr}} \\
+\bigskip
+\linia
+
+\bigskip \bigskip
+
+\large{Par \auteur} \\
+\medskip
+\large{{\diplome} d'\discipline} \\
+\medskip 
+\large{Dirigée par {\directeurA} et \directeurB} \\
+
+\bigskip\bigskip
+
+\normalsize{Présentée et soutenue publiquement le \PhDdate} \\
+\normalsize{Devant un jury composé de :} \\
+
+\NewDocumentCommand\Jury{ m m m m}{% personne fonction établissement rôle
+        \textbf{#4} : & & \\ #1, & {#2}, & {#3}}
+\NewDocumentCommand\Comite{ m m m m m m m}{% personne fonction établissement rôle
+    \begin{tabular}{llr}
+         #1 \\[5pt] #2 \\[5pt] #3 \\[5pt] #4 \\[5pt] #5 \\[5pt] #6 \\[5pt] #7
+    \end{tabular}}
+    
+\begin{table}[h!]
+\centering
+\small
+\Comite{\juryRA}{\juryRB}{\juryEA}{\juryEB}{\juryP}{\juryDA}{\juryDB}
+\end{table}
+\bigskip\bigskip
+%\includegraphics[height=0.04\linewidth]{Couv_1/licence.png}
+\end{center}
+\restoregeometry

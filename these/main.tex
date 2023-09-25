@@ -1,0 +1,105 @@
+\documentclass[ a4paper,	%Pour papier A4
+   %b5paper,	%Pour papier B5
+   12pt,		%Taille de la police 12
+   twoside,	%recto-verso
+   headinclude, headsepline, plainheadsepline,
+   bibliography=totoc, toc=listof,
+   numbers=noenddot,
+   captions=tableheading,
+   % fleqn,   % left alignment of formula
+   amsmath, hidelinks ]{book}
+\usepackage{graphicx} % Required for inserting images
+ \usepackage{ragged2e}
+
+\usepackage{lipsum}
+	
+\usepackage{pdfpages}
+
+\usepackage{bold-extra}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc} 
+\usepackage[utf8]{inputenc} 
+\usepackage[singlespacing]{setspace}
+
+\usepackage{bm, amsmath,amssymb,color,sistyle}
+ \usepackage{multirow}
+\usepackage{cprotect}
+\usepackage{wrapfig}
+\usepackage{footmisc}
+\usepackage{subcaption}
+
+\usepackage[makeroom]{cancel}
+
+%\usepackage[square,sort,authoryear]{natbib}
+\usepackage{csquotes}
+\usepackage[
+   backend=biber,        % compilateur par défaut pour biblatex
+   sorting=nyt,          % trier par nom, année, titre
+   citestyle=authoryear, % style de citation auteur-année
+   bibstyle=science,
+   %bibstyle=vancouver,  % style de bibliographie alphabétique
+   isbn=false, url=false, doi=false, eprint=false,
+   uniquename=false,
+   date=year,
+]{biblatex}
+\addbibresource{biblio.bib}
+%\usepackage{hyperref}
+
+\DefineBibliographyStrings{french}{%
+  pages = {pp\adddot},
+  in ={\emph{in}},
+  volume={vol\adddot\addspace},
+  number={\no}
+}
+\AtEveryBibitem{%
+  \clearfield{note}%
+}
+
+\DeclareFieldFormat{no}{\bibsstring{number}#1}
+\DeclareFieldFormat{vol}{\bibsstring{volume}#1}
+
+\renewbibmacro*{volume+number+eid}{%
+  \addcomma\addspace%
+  \printfield[vol]{volume}%
+  \setunit{\addcomma\addspace}%
+  \printfield[no]{number}%
+  \setunit{\addcomma\addspace}%
+  \printfield{eid}
+}
+
+\usepackage{set_format}
+\usepackage{Metadata/infos}
+\usepackage{Special/pages_speciales}
+\usepackage{Special/lists}
+\usepackage{Special/todo}
+
+
+
+\begin{document}
+\input{Special/nomenclature}
+\include{Couv/1ere_page}  % recto première de couverture
+\pagevide                   % verso première de couverture
+
+%\todolist
+
+\frontmatter
+\include{frontmatter}
+
+\mainmatter
+\newcommand\Partie{ }
+\include{Part_0/part_0}
+\include{Part_1/part_1}
+\include{Part_2/part_2}
+\include{Part_3/part_3}
+\include{Part_4/part_4}
+
+\appendix
+\include{Part_Appendix/part_A}
+
+\backmatter
+\include{backmatter}
+
+
+
+\include{Couv/4eme_page}
+\end{document}

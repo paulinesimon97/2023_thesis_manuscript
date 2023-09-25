@@ -1,0 +1,87 @@
+\pdfobjcompresslevel 0
+
+% packages
+\RequirePackage{xparse}
+\RequirePackage{geometry}
+\RequirePackage[colaction]{multicol}
+
+\RequirePackage{chngcntr}
+%\counterwithin*{equation}{chapter}{part}
+\renewcommand{\theequation}{\thechapter.\arabic{equation}}
+%\counterwithin*{figure}{chapter}{part}
+\renewcommand{\thefigure}{\thechapter.\arabic{figure}}
+\newcommand{\figref}[1]{\textsc{Figure} \ref{#1}}
+\renewcommand{\thetable}{\thechapter.\arabic{table}}
+\newcommand{\tabref}[1]{\textsc{Table} \ref{#1}}
+%\renewcommand{\thesection}{\Roman{part}.\arabic{chapter}.\arabic{section}}
+
+% Formatage requis par Abes
+\geometry{%
+        left=25mm,
+        right=25mm, 
+        top=25mm,
+        bottom=25mm}
+
+
+\NewDocumentCommand\personne{ o m o }{% titre nom prénom
+     \textbf{\IfValueT{#1}{#1} \IfValueT{#3}{#3} {\textsc{#2}}}}
+
+% Formatage requis par SU
+
+% Formatage optionnel
+
+ \RequirePackage{etoolbox}
+% \makeatletter
+ \newcommand{\extraPartText}[1]{\def\@extraPartText{#1}}
+ \pretocmd{\@endpart}{\vspace{8ex}\begingroup\centering\@extraPartText\par\endgroup\let\@extraPartText\relax}{}{}
+% \makeatother
+
+\newcommand{\linia}{\rule{\linewidth}{0.5pt}\\}
+\setlength{\headheight}{14.49998pt}
+\RequirePackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand\headrulewidth{1.5pt}
+\fancyhead[LE,RO]{\thepage}
+\newcommand\partie{ }
+\fancyhead[RE]{\partie}
+\fancyhead[LO]{Section {\thesection}}
+%\fancyhead[LO]{{\sectionname} {\thesection}}
+
+\fancyfoot{}
+%\fancyfoot[R]{\today}
+
+% formatage chapitres 
+
+
+%\RequirePackage{epigraph}
+\RequirePackage[Glenn]{fncychap}
+\ChRuleWidth{5pt}
+
+\patchcmd{\@makechapterhead}{\vspace*{50\p@}}{\vspace*{0\p@}}{}{}
+\patchcmd{\@makeschapterhead}{\vspace*{50\p@}}{\vspace*{0\p@}}{}{}
+\patchcmd{\DOTI}{\vskip 80\p@}{\vskip 40\p@}{}{}
+\patchcmd{\DOTIS}{\vskip 40\p@}{\vskip 40\p@}{}{}
+
+\NewDocumentCommand\Chapter{o m }{
+\let\Oldchaptername\chaptername
+\let\Oldthechapter\thechapter
+\renewcommand{\chaptername}{\IfValueT{#1}{#1}}
+\renewcommand{\thechapter}{}
+\chapter{#2}
+\renewcommand{\chaptername}{\Oldchaptername}
+\renewcommand{\thechapter}{\Oldthechapter}
+\setcounter{chapter}{0}
+}
+
+\newcommand\quotechapt[2]{
+    \begin{flushright}
+    \Dedicace{#1}{#2}
+    \end{flushright}}
+
+
+%\newcommand\headerchaptername[1]{
+%\renewcommand\leftmark{  \expandafter\MakeUppercase{ \chaptername\ \thechapter.\ #1}}
+%}
+
+%\newcommand\pageCompt[2]{ \ref{#1} has [\the\numexpr\getpagerefnumber{#2}-\getpagerefnumber{#1}\relax] pages in %it. }
+

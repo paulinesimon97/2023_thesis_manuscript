@@ -1,0 +1,45 @@
+% page titre 
+\newcommand\pagetitre{
+\thispagestyle{empty}
+\null\vfill
+\begin{center}
+\linia
+\bigskip
+\LARGE{\textbf{\titrefr}} \\
+\Large{\textit{\soustitrefr}} \\
+\bigskip
+\linia
+\end{center}
+\vfill\vfill\null}
+
+% page credits
+\newcommand\pagecredits{ %auteur citation
+\thispagestyle{empty}
+    \null\vfill
+    \raggedright
+    Version : \today \\
+    \bigskip
+    \LABname \\
+    \LABaff \\
+    \LABaddress \\
+    \bigskip \bigskip
+    \begin{center}
+    \includegraphics[height=0.05\linewidth]{Couv/licence.png}
+    \end{center}
+    \bigskip
+    \null}
+
+% page dedicace
+\NewDocumentCommand\Dedicace{m m}{ %auteur citation
+    \textit{#2} \\ \textit{#1}}
+
+\newcommand\pagededicace{ %auteur citation
+\thispagestyle{empty}
+    \null\vfill
+    \begin{flushright}
+    \dedicace
+    \end{flushright}
+    \vfill\null}
+
+\newcommand\pagevide{ %auteur citation
+\thispagestyle{empty}}

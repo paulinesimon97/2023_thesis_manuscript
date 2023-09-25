@@ -1,0 +1,87 @@
+% REQUIS PAR ABES
+% Page de titre : 
+%   -  le nom administratif (éventuellement complété par le nom usuel) de l'établissement de soutenance 
+\newcommand\EAnom{\acl{SU}}
+\newcommand\EAfaculte{Facultée des Sciences et Ingénierie}
+\newcommand\EAabrev{\acs{SU}}
+\newcommand\EAlogo{logo_SU.png}
+
+%   -  le nom de l'école doctorale 
+\newcommand\EDnom{\acl{AAIF}}
+%\newcommand\EDnum{127}
+\newcommand\EDabrev{\acs{AAIF}}
+\newcommand\EDlogo{logo_ED.png}
+
+%   -  le type de diplôme (thèse de doctorat) ;
+\newcommand\diplome{Thèse de doctorat}
+
+%   -  le champ disciplinaire dans lequel est soutenue la thèse ;
+\newcommand\discipline{Astronomie et Astrophysique}
+
+%   -  les noms (en majuscules) et prénoms (en minuscules) patronymiques (éventuellement complétés par les noms et prénoms usuels) de l'auteur de la thèse. Les accents et caractères diacritiques doivent être saisis.
+\newcommand\auteur{\personne{Simon}[Pauline]}
+
+%   -  le titre de la thèse ;
+\newcommand\titrefr{D’une pression isotrope à l'anisotropie de pression dans les plasmas spatiaux turbulents}
+\newcommand\soustitrefr{Investigation analytique, numérique et observationnelle}
+
+%   -  les noms (en majuscules) et prénoms (en minuscules) du ou des directeurs de thèse. Les accents et caractères diacritiques doivent être saisis.
+\newcommand\directeurA{\personne[Dr.]{Sahraoui}[Fouad]}
+\newcommand\directeurB{\personne[Prof.]{Galtier}[Sébastien]}
+
+%   -  la date de soutenance ;
+\newcommand\PhDdate{22 Septembre 2023}
+\newcommand\PhDannee{2023}
+%   -  les noms (en majuscules) et prénoms (en minuscules) des membres du jury, ainsi que leur rôle (président du jury, rapporteurs, examinateurs). Les accents et caractères diacritiques doivent être saisis.
+\newcommand\juryP{\Jury{\personne[Prof.]{Daigne}[Frédéric]}{Professeur des universités}{\acs{SU}/\acs{IAP}}{Examinateur}}
+\newcommand\juryDA{\Jury{\directeurA}{Directeur de recherche et professeur}{\acs{CNRS}/\acs{LPP}/\acs{X}}{Directeur}}
+\newcommand\juryDB{\Jury{\directeurB}{Professeur des universités}{\acs{UPSy}/\acs{LPP}}{Co-Directeur}}
+\newcommand\juryRB{\Jury{\personne[Dr.]{Sorriso-Valvo}[Luca]}{Chercheur}{\acs{CNR}/\acs{ISTP}}{Rapporteur}}
+\newcommand\juryRA{\Jury{\personne[Dr.]{Noullez}[Alain]}{Directeur de recherche}{\acs{CNRS}/\acs{LAGRANGE}}{Rapporteur}}
+\newcommand\juryEA{\Jury{\personne[Dr.]{Ferrière}[Katia]}{Directrice de recherche}{\acs{CNRS}/\acs{IRAP}}{Examinatrice}}
+\newcommand\juryEB{\Jury{\personne[Dr.]{Matteini}[Lorenzo]}{Chercheur}{\acs{Imperial}/\acs{SPAT}}{Examinateur}}
+
+%   -  le nom du laboratoire et/ou de l'unité de recherche au sein duquel/de laquelle la thèse a été préparée.
+\newcommand\LABname{\acl{LPP}}
+%\newcommand\LABnum{UMR 7648}
+\newcommand\LABabrev{\acs{LPP}}
+\newcommand\LABequipe{Équipe Plasmas Spatiaux}
+\newcommand\LABaff{\acs{CNRS}, \acl{OBSPM}, \acl{SU}, \acl{UPSy}, \\ \acl{X}, Institut Polytechnique de Paris}
+\newcommand\LABaddress{Route de Saclay, 91120 Palaiseau, France}
+
+% une ou plusieurs pages placées après la page de titre, ou à la fin de la thèse, sur lesquelles figurent au minimum :
+
+%   -   un résumé en anglais (4 000 caractères maximum)  
+% => \include{Metadata/resume}
+%   -   un résumé en français (4 000 caractères maximum) 
+% => \include{Metadata/abstract}
+
+%   -   des mots-clés en anglais et en français 
+\newcommand\keywordfr{Plasmas, Turbulence, Magnétohydrodynamique, Théorie, Simulation, Observations in situ}
+\newcommand\keyworden{Plasmas, Turbulence, Magnetohydrodynamics, Theory, Simulation, In-situ observations}
+
+%   -   un titre en anglais.
+\newcommand\titreen{From isotropic pressure to pressure anisotropy in turbulent space plasmas}
+\newcommand\soustitreen{analytical, numerical and observational investigation}
+
+%     - un sommaire (situé au début de la thèse) et une table des matières (située à la fin de la thèse). Le sommaire et la table des matières doivent être générés et mis à jour automatiquement.
+
+%     - la liste des sources primaires que vous avez étudiées ou auxquelles vous faites référence
+
+%     - une bibliographie listant les sources secondaires que vous citez, auxquelles vous faites références, ou que vous avez utilisées au cours de vos recherches
+
+%     - si la thèse est rédigée dans une langue autre que le français, elle doit comporter un résumé substantiel en français (plusieurs pages), en sus du résumé traditionnel (4 000 caractères maximum).
+
+% Si la thèse comporte des annexes, celles-ci doivent être listées à la fin de la table des matières.
+
+% Les notes de bas de page doivent être générées automatiquement.
+
+% Enfin, la thèse peut comporter un index général et/ou des index thématiques, lesquels doivent également être générés de manière automatique.
+
+% TEMPLATE SU
+%    - Dédicace
+\newcommand\dedicace{\Dedicace{\directeurA, pendant une réunion à propos des résultats de simulations. Je tiens particulièrement à le remercier car sans lui, cette thèse n'aurait pas eu lieu.}{<<La physique, c'est beau. Quand c'est moche, ce n'est pas physique.>>}
+}
+%\textit{Le Grand Livre des gnomes}}{La Science explique ce qui se passe tout le temps autour de nous. La religion aussi, mais la science marche mieux, parce qu'elle trouve des excuses plus crédibles quand elle se trompe.}
+
+

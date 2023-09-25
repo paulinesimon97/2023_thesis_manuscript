@@ -1,0 +1,35 @@
+\newpage                    % page de titre
+\clearpage
+
+\pagetitre                  % format défini dans Special/pages_speciales 
+
+\newpage                    % verso page de titre : crédits
+\clearpage
+\pagecredits                % format défini dans Special/pages_speciales 
+
+\newpage                    % page de dédicace
+\clearpage
+\pagededicace               % format défini dans Special/pages_speciales 
+
+\newpage                    % verso page de dédicace
+\pagevide
+\setcounter{page}{0}
+
+\newpage 
+
+\justifying
+\chapter{Note d'information} 
+\input{Special/notice}
+
+\chapter{Remerciements}
+\input{Special/remerciements}
+
+\chapter{Résumé détaillé}
+\input{Metadata/resume}
+
+\chapter{Detailed abstract}
+\input{Metadata/abstract}
+
+\sommaire
+ \newpage                    % verso page sommaire
+\pagevide
