@@ -1,6 +1,14 @@
 \RequirePackage{shorttoc}
-\RequirePackage[french]{minitoc}
 \RequirePackage{hyperref}
+\RequirePackage[french]{minitoc}
+\RequirePackage{silence}
+
+\WarningFilter{minitoc(hints)}{W0023}
+\WarningFilter{minitoc(hints)}{W0024}
+\WarningFilter{minitoc(hints)}{W0028}
+\WarningFilter{minitoc(hints)}{W0030}
+\WarningFilter{minitoc(hints)}{W0078}
+
 %-----------
 
 \dominitoc%[n] 		% Initialisation de minitoc ([n] enleve le ``content'')

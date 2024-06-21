@@ -2,14 +2,16 @@
    %b5paper,	%Pour papier B5
    12pt,		%Taille de la police 12
    twoside,	%recto-verso
-   headinclude, headsepline, plainheadsepline,
-   bibliography=totoc, toc=listof,
-   numbers=noenddot,
-   captions=tableheading,
-   % fleqn,   % left alignment of formula
-   amsmath, hidelinks ]{book}
+   %headinclude,
+   headsepline, %plainheadsepline,
+   %bibliography=totoc, 
+   %toc=listof,
+   %numbers=noenddot,
+   %captions=tableheading, hidelinks
+   ]{book}
+\usepackage[headinclude=true]{typearea}
 \usepackage{graphicx} % Required for inserting images
- \usepackage{ragged2e}
+\usepackage{ragged2e}
 
 \usepackage{lipsum}
 	
@@ -22,7 +24,7 @@
 \usepackage[singlespacing]{setspace}
 
 \usepackage{bm, amsmath,amssymb,color,sistyle}
- \usepackage{multirow}
+\usepackage{multirow}
 \usepackage{cprotect}
 \usepackage{wrapfig}
 \usepackage{footmisc}
@@ -71,35 +73,35 @@
 \usepackage{Metadata/infos}
 \usepackage{Special/pages_speciales}
 \usepackage{Special/lists}
-\usepackage{Special/todo}
+%\usepackage{Special/todo}
 
 
 
 \begin{document}
 \input{Special/nomenclature}
-\include{Couv/1ere_page}  % recto première de couverture
+\input{Couv/1ere_page}  % recto première de couverture
 \pagevide                   % verso première de couverture
 
 %\todolist
 
 \frontmatter
-\include{frontmatter}
+\input{frontmatter}
 
 \mainmatter
 \newcommand\Partie{ }
-\include{Part_0/part_0}
-\include{Part_1/part_1}
-\include{Part_2/part_2}
-\include{Part_3/part_3}
-\include{Part_4/part_4}
+%\input{Part_0/part_0}
+%\input{Part_1/part_1}
+%\input{Part_2/part_2}
+%\input{Part_3/part_3}
+%\input{Part_4/part_4}
 
-\appendix
-\include{Part_Appendix/part_A}
+%\appendix
+%\input{Part_Appendix/part_A}
 
 \backmatter
-\include{backmatter}
+\input{backmatter}
 
 
 
-\include{Couv/4eme_page}
+%\input{Couv/4eme_page}
 \end{document}
