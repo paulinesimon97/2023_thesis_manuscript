@@ -1,0 +1,104 @@
+\subsection{Le moment d'ordre 2 et l'équation de fermeture}
+\label{ssec-1112}
+
+Pour décrire la thermodynamique du plasma dans les modèles utilisés ici, on définit les grandeurs et relations suivantes : 
+\begin{itemize}
+ \item la pressure scalaire (isotrope) $p = \frac{1}{3} \overline{\mathbf{p}}:\overline{\mathbf{I}}$,
+ \item la densité d'énergie interne $\rho u = \frac{1}{2} \overline{\mathbf{p}}:\overline{\mathbf{I}} = \frac{3}{2} p$, avec $\overline{\mathbf{I}}$ le tenseur identité et $:$ le produit dual,
+ \item le tenseur des contraintes $\overline{\mathbf{\Pi}} = \overline{\mathbf{p}} - p\overline{\mathbf{I}}$,
+ \item la température $T = \frac{2}{3} \frac{\rho u}{n k_B}$,
+ \item la vitesse thermale $v^2_{T} = \frac{k_B T}{m} =  \frac{2}{3} u= \frac{p}{\rho}$.
+\end{itemize}  
+
+On rappelle l'équation du moment d'ordre 2 :
+\begin{equation}
+\frac{\partial \overline{\mathbf{p}}}{\partial t} + \nabla \cdot (\mathbf{v}\overline{\mathbf{p}} + \overline{\overline{\mathbf{q}}}) + \overline{\mathbf{p}} \cdot \nabla \mathbf{v} + (\overline{\mathbf{p}} \cdot \nabla \mathbf{v})^T + \mathbf{B}\times \overline{\mathbf{p}}_E + (\mathbf{B}\times \overline{\mathbf{p}}_E)^T  = 0 
+\end{equation}
+et que  $\overline{\mathbf{p}}$ et $ \overline{\mathbf{p}}_E$ sont par définition symétriques.
+
+En considérant la trace de cette équation, c.à.d en effectuant le produit dual avec le tenseur identité, en notant $\mathbf{q} = \frac{1}{2} \overline{\overline{\mathbf{q}}}:\overline{\mathbf{I}}$ et sachant que $(\mathbf{B}\times \overline{\mathbf{p}}_E):\overline{\mathbf{I}} = \epsilon_{ijk} B_{j} p_{Ekl} \delta_{il}  = 0 $ par symétrie, on obtient : 
+\begin{equation}
+\frac{\partial \overline{\mathbf{p}}:\overline{\mathbf{I}}}{\partial t} + \nabla \cdot (\mathbf{v}\overline{\mathbf{p}}:\overline{\mathbf{I}} + 2\mathbf{q}) + 2 \overline{\mathbf{p}} : \nabla \mathbf{v}  = 0 
+\end{equation}
+D'où l'équation sur la densité d'énergie interne : 
+\begin{equation}
+\frac{\partial \rho u}{\partial t} + \nabla \cdot (\rho u \mathbf{v}) = - \nabla \cdot \mathbf{q} - \overline{\mathbf{p}} : \nabla \mathbf{v}  \label{eq:en_int}
+\end{equation}
+
+Cette équation peut aussi être retrouvée à partir d'un bilan d'énergie \cite{hazeltine_local_2013}.
+
+Dans le cas hybride bi-fluide, les équations de pression sont à considérer séparément en fonction des espèces (ions et électrons). Dans ce cas, $\mathbf{v_e} = \mathbf{v} - \frac{1}{e n_e}\mathbf{j}$ et :
+\begin{equation}
+\frac{\partial \rho u}{\partial t} + \nabla \cdot (\rho u \mathbf{v}) = - \nabla \cdot \mathbf{q} - \overline{\mathbf{p}} : \nabla \mathbf{v} - \overline{\mathbf{p_e}} : \nabla (\frac{\mathbf{j}}{e n_e})  \label{eq:en_int}
+\end{equation}
+\todo{Vérifier équation hybride bi-fluide}
+
+\subsubsection{Cas d'une pression isotrope}
+
+Dans le cas d'une pression isotrope, $\overline{\mathbf{p}} = p \overline{\mathbf{I}}$, le dernier terme devient $- p \nabla \cdot  \mathbf{v}$ et, en supposant $\nabla \cdot \mathbf{q} = \rho T \frac{ds}{dt}$ avec $s$ l'entropie spécifique, l'équation résultante peut s'écrire sous la forme du premier principe thermodynamique : 
+\begin{equation}
+du =  \delta q + \delta w = Tds + \frac{p}{\rho^2} d\rho
+\end{equation}
+
+La définition originale, thermodynamique, des dénominations <<polytrope>>, <<isotherme>> ou <<isentrope>> ne s’applique qu’à des transformations. Mais en Astrophysique et dans bien d’autres domaines, on entend ces termes en tant que caractéristique du système et ils sont utilisé pour définir une fermeture. Ici, dans une volonté de clarifier cet usage, on considèrera qu’un système décrit avec l’une de ces caractéristiques est un système dans lequel la quantité caractérisée ne pourra évoluer qu’en suivant le type de transformation associé. Dans l’absolu, ces caractéristiques pourront toujours coexister dans un cas que l'on nommera <<trivial>>, dans le sens où l’on peut dire qu’aucune transformation ne sera possible comme une infinité le sera.
+
+\paragraph{Isentrope :} $d s = 0$. Appliquée dans le cadre où la seule source d'entropie est l'échange de chaleur avec l'extérieur, cela revient à un cas adiabate. 
+\begin{equation}
+ \frac{\partial (\rho  u)}{\partial t} +  \nabla \cdot (\rho u\mathbf{v})  = - p \nabla \cdot \mathbf{v} \, \textrm{ et } \, d u = \delta w =  \frac{p}{\rho^2} d \rho
+\end{equation}
+
+\paragraph{Isotherme :} $d T = 0$. Dans le cadre d'un gaz parfait ou semi-parfait, cela se traduit par $p = c_s^2 \rho$ avec $c_s^2$ constant ce qui est un cas particulier de l'hypothèse polytrope avec un rapport calorifique $\gamma = 1$. Dans ce cadre, l'énergie interne ne dépend que de la température et par conséquent ne pourra fluctuer ($du = 0$).
+
+\begin{eqnarray}
+   dw &=& \frac{p}{\rho^2} d \rho \\
+   dw &=& c_s^2 \frac{1}{\rho} d \rho \\
+   w - w_0 &=& c_s^2 \ln(\frac{\rho}{\rho_0})
+\end{eqnarray}
+
+ \paragraph{Compatibilité isentrope et isotherme :} Si l'on réduit hypothétiquement le caractère isentrope à certaines échelles, l'énergie interne pourra suivre la même variation que le travail de pression (variation précisée ci-après) et l'entropie s'adapter à la transformation aux échelles non-isentropique afin d'assurer la caractéristique isothermale du système. Cette hypothèse est largement utilisée pour calculer des lois exactes \cite{galtier_exact_2011}. Si la variation de l'énergie interne suivant le travail seul, s'avère vrai à toutes les échelles et accompagnée de l'hypothèse isothermal alors, pour que toutes les égalités mathématiques soient vérifiées ($du = dw = 0$), la densité de masse doit être constante  ce qui correspond à un cas incompressible.  Dans ce cas, toutes les fermetures peuvent coexister, c'est le cas trivial envisagé précédemment.
+ 
+\paragraph{Polytrope :} Pour une transformation polytrope, le facteur polytrope $\sigma = \frac{\delta q}{\delta w}$ est constant. En terme de fonction d'état, cela se traduit par $p \propto \rho^{\gamma}$. Vitesse thermale: $c_s^2 = \frac{\partial p}{\partial \rho} = \gamma \frac{p}{\rho^{\gamma -1}} $.
+
+\begin{eqnarray}
+d u &=& (\sigma+1) \frac{p}{\rho^2} d \rho \\
+   d u &=& (\sigma+1) \frac{p}{\rho^{\gamma}} \rho^{\gamma-2} d \rho \\
+   d u &=&  (\sigma+1) \frac{p}{(\gamma-1)\rho^{\gamma}} d \rho^{\gamma-1} \\
+   u - u_0 &=& \frac{(\sigma+1) p}{(\gamma-1)\rho^{\gamma}} (\rho^{\gamma-1} - \rho_0^{\gamma-1}) \, \textrm{ si }  \gamma \neq 1 
+\end{eqnarray}
+Dans le cas isentrope, $\sigma = 0$. Dans le cas $\gamma = 1$ (isotherme), $du = 0$ donc $u$ est constant. Dans l'usage de cette relation dans les calculs de lois exactes, les constantes sont souvent annulées (entre elles), ce qui donne $ \rho u = \frac{(\sigma+1)}{(\gamma-1)} p $ \cite{banerjee_kolmogorov-like_2014}. En fonction du $\gamma$ relevé dans le milieu, on peut en déduire les transformations thermodynamiques majoritaires s'y effectuant (voir figure \ref{fig:schema_gamma}). Les magnétosphères planétaires et l'héliogaine ont un $\gamma$ de type mild-explosion tandis que le vent solaire, suivant les régions, est soit super-adiabatique (vers 1AU) soit adiabatique (près du soleil) \cite{livadiotis_long-term_2018}.
+
+\begin{figure}[!h]
+ \centering
+\includegraphics[width=0.9\linewidth,trim=0cm 3cm 0cm 3cm, clip=true]{./Part_1/images/schema_gamma.pdf}
+\caption{Transformations thermodynamiques majoritaires dans le milieu et intervalles en fonction du $\gamma$ \cite{livadiotis_long-term_2018}.}
+\label{fig:schema_gamma}
+\end{figure}
+
+\subsubsection{Cas d'une pression gyrotrope}
+
+Dans le cas où la pression est tensorielle, la forme la plus simple à étudier est la forme gyrotrope, c'est à dire un tenseur diagonal présentant deux composantes identiques. La composante différente définie la direction parallèle et les deux autres composantes se place dans le plan perpendiculaire à cette direction. Dans le cas étudié ici, on considère ce repère orienté suivant le champ magnétique en accord avec les observations effectuées dans des plasmas magnétisés comme le vent solaire. Le tenseur de pression peut alors s'écrire : $\overline{\mathbf{p}} = p_{\perp} \overline{\mathbf{I}} + (p_{\parallel} - p_{\perp}) \mathbf{b} \mathbf{b} $ avec $\mathbf{b}$ la direction du champ magnétique. Écrit sous cette forme, il semble évident de définir la pression isotrope comme $p_{\perp}$ et le tenseur de contrainte $\overline{\mathbf{\Pi}} =(p_{\parallel} - p_{\perp}) \mathbf{b} \mathbf{b}$ comme si la direction du champ magnétique est la seule à porter l'anisotropie de pression définie par la différence entre les pressions parallèle et perpendiculaire. Mais une telle décomposition viole la définition de la pression scalaire en tant que trace du tenseur. La décomposition valable est donc :  
+\begin{equation}
+    \overline{\mathbf{p}} = \frac{1}{3}(2p_{\perp} + p_{\parallel}) \overline{\mathbf{I}} + (p_{\perp} - p_{\parallel}) (\frac{1}{3} \overline{\mathbf{I}} - \mathbf{b} \mathbf{b})
+\end{equation}
+avec $p =  \frac{1}{3}(2p_{\perp} + p_{\parallel}) $ et $\overline{\mathbf{\Pi}} = (p_{\perp} - p_{\parallel}) (\frac{1}{3} \overline{\mathbf{I}} - \mathbf{b} \mathbf{b})$. On remarque que dans ce cas aussi, le tenseur de contrainte est le seul à porter l'anisotropie mais plus seulement dans la direction du champ magnétique. Les implications de la différence entre les deux écritures se poseront principalement dans le cas de la limite incompressible du modèle traitée dans la section \ref{sec-112}. 
+En terme d'équations, on peut obtenir, à partir de l'équation du moment d'ordre 2, une équation pour la pression parallèle : 
+\begin{equation}
+\frac{\partial p_{\parallel}}{\partial t} + p_{\parallel} \nabla \cdot \mathbf{v} + 2 p_{\parallel} \cdot \nabla \mathbf{v} = 0 \label{eq:model_ppar}
+\end{equation}
+et une équation pour la pression perpendiculaire : 
+\begin{equation}
+\frac{\partial p_{\perp}}{\partial t} + 2 p_{\perp} \nabla \cdot \mathbf{v} - p_{\perp} \cdot \nabla \mathbf{v} = 0 \label{eq:model_pperp}
+\end{equation}
+Ces deux équations sont obtenues en considérant une hypothèse isentrope élargie : $\nabla \cdot \overline{\overline{\mathbf{q}}} = 0$ et une pression tensorielle seulement gyrotrope. Sans ces hypothèses, d'autres termes viennent compliquer ces équations (voir \cite{hunana_introductory_2019} pour le détail). Ces équations forment la fermeture dite <<CGL>> et avec les équations MHD avec tension tensorielle, le modèle CGL \cite{chew_boltzmann_1956}. 
+Elles penvent être écrite sous la forme d'équation de conservation si elles sont combinées avec l'équation d'induction dans le cas idéal : 
+\begin{equation}
+\frac{\partial }{\partial t}( \frac{p_{\parallel}|\mathbf{B}|^2}{\rho^3} ) = 0 \textrm{ et } \frac{\partial }{\partial t}( \frac{p_{\perp}}{\rho |\mathbf{B}|}) = 0 
+\end{equation}
+On remarque qu'alors $p_{\parallel} \propto \rho^3$ et $p_{\perp} \propto \rho$ et on peut définir naïvement deux rapports calorifiques : $\gamma_{\parallel}  = 3$ et $\gamma_{\perp} =1$.
+
+Pour ce qui est de la densité d'énergie interne : $\rho u =  p_{\perp} + \frac{1}{2} p_{\parallel} = \frac{3}{2} p$. Donc si l'on si l'on cherche des rapports calorifiques par ce biais, en supposant une énergie interne polytrope $\rho u \propto \frac{1}{\gamma-1} p$, on peut définir un $\gamma$ isotrope : $\gamma = \frac{5}{3}$ qui correspond au cas adiabatique, et $\gamma_{\parallel}  = 3$ et $\gamma_{\perp} = 2$
+
+L'existence de tels rapports viennent justifier l'autre nom du modèle CGL idéal : bi-adiabatique.  D'autres définitions et valeurs de ces rapports existent, via le calcul de l'entropie ou la forme des équations, mais ne sont pas l'objet d'étude ici \cite{hunana_introductory_2019}. On retiendra juste que l'<<équivalent isotrope>> du modèle CGL correspond à une pression adiabatique (avec $\gamma = \frac{5}{3}$). 
+
+Dans les modèles considérés dans ce mémoire, on considérera les équations \ref{eq:en_int}, \ref{eq:model_ppar} et \ref{eq:model_pperp} et les fermetures isotropes définies par $p \propto \rho^{\gamma}$ et $ \rho u = \frac{1}{(\gamma-1)} p $ si $\gamma \neq 1$ ou  $u = c_s^2 \ln(\rho/\rho_0)$ dans le cas isotherme.
+

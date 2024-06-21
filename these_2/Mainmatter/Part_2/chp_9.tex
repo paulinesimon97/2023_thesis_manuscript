@@ -1,0 +1,444 @@
+Dans les chapitres précédents, l'équation d'induction \eqref{eq:model_cpg_b} était celle de l'approximation \cacro{MHD}. Dans ce chapitre, nous allons relaxer les hypothèses sur cette équation en prenant d'abord en compte le terme de \cacro{Hall} (section \ref{sec-231}). Dans la section \ref{sec-233}, nous dériverons une correction à la loi exacte associée à chaque niveau d'approximation de la loi d'Ohm en partant du modèle bi-fluide. Enfin dans la section \ref{sec-232}, nous nous intéresserons au modèle gyrotrope utilisé dans les simulations étudiées dans la Partie \ref{part_3} : un modèle \sacro{LFCGLHPe} (avec la fermeture \cacro{LF} gyrotrope telle que $\overline{\overline{\boldsymbol{q}}} \neq 0$) prenant en compte la pression électronique dans la loi d'Ohm avec différentes fermetures (isotherme et gyrotrope). 
+ 
+ \section{Le modèle MHD-Hall}
+ \label{sec-231}
+ 
+ Comme on l'a vu dans le Chapitre \ref{ch-02}, le terme de \cacro{Hall} doit être pris en compte dans l'équation d'induction si l'on regarde des échelles proches de la longueur inertielle des ions, ou des fréquences proches de la fréquence cyclotron des ions. Par conséquent, la loi exacte obtenue avec une loi d'Ohm \cacro{MHD} perdra sa validité près de ces échelles. Afin de tirer la description de la cascade dans ce domaine ionique, on doit donc calculer une correction à partir du terme de \cacro{Hall}. Diverses formulations existent pour cette contribution dans le cas des modèles dépendant d'une pression isotrope mais que devient-elle dans le cadre d'une fermeture avec pression tensorielle ? 
+
+En prenant en compte le terme de \cacro{Hall}, l'équation d'induction devient : 
+\begin{equation}
+\label{eq:model_hall1} \partial_t \boldsymbol{v_A}  =   \nabla \cdot \left(\boldsymbol{v_A}\boldsymbol{u} - \boldsymbol{u}\boldsymbol{v_A}\right) -  \boldsymbol{u}  \nabla \cdot \boldsymbol{v_A} +  \frac{\boldsymbol{v_A}}{2}  \nabla \cdot \boldsymbol{u} - \frac{\lambda_i}{ \sqrt{\rho} } \nabla \times \left(\frac{\boldsymbol{j}}{\sqrt{\rho}}  \times \boldsymbol{v_A}\right) ,
+\end{equation}
+avec $\lambda_i = m_i/|q_e|$ une constante analysée dans le chapitre \ref{ch-02},  $\boldsymbol{j} = \frac{1}{\sqrt{\mu_0}} \nabla \times \left(\sqrt{\rho}\boldsymbol{v_A}\right)$ la densité de courant et $\mu_0$ la perméabilité du vide. 
+
+ Puisque $\sqrt{\rho} \boldsymbol{v_A} \cdot \nabla \times \left(\frac{\boldsymbol{j}}{\sqrt{\rho}}  \times \boldsymbol{v_A}\right) = \nabla \cdot \left(\left(\boldsymbol{j}  \times \boldsymbol{v_A}\right)\times \boldsymbol{v_A} \right)$, l'équation d'énergie magnétique \eqref{eq:model_cpi_m} devient :
+\begin{equation}
+  \label{eq:model_cpgh_m}   \partial_t E_m  +\nabla   \cdot  \left(E_m\boldsymbol{v}+ \lambda_i \left(\boldsymbol{j}  \times \boldsymbol{v_A}\right)\times \boldsymbol{v_A} \right)  = \rho  \boldsymbol{v_A}\boldsymbol{v_A}  : \nabla \boldsymbol{v}- p_m  \nabla \cdot \boldsymbol{v} .
+\end{equation}
+ Cette correction n'ajoute qu'un terme de type flux au bilan énergétique et n'impactera pas l'équation d'énergie interne. De plus, le terme de \cacro{Hall} ne dépend pas du tenseur de pression. Par conséquent, elle n'influera pas les contributions du tenseur de pression et de l'énergie interne dans la loi exacte. Il faudra tout de même faire attention à ne pas utiliser les formes conservatives des pressions parallèle et perpendiculaire \cacro{CGL} \eqref{eq:model_cpg_biadiab} qui ne sont valables que dans le cas \cacro{MHD}, l'équation d'induction \cacro{MHD} étant utilisée pour les obtenir.
+
+ En notant génériquement $\varepsilon_{mhd}$ le taux de cascade compressible obtenu avec un modèle dans lequel le terme de \cacro{Hall} est négligé et $\varepsilon_{hall}$ la correction \cacro{Hall}, le nouveau taux de cascade sera $\varepsilon = \varepsilon_{mhd} + \varepsilon_{hall}$ avec  :
+%\begin{eqnarray}
+\begin{equation}
+\label{eq:corr_hall} \boxed{
+\begin{array}{lcl}
+    -4\varepsilon_{hall} &=& \lambda_i\nabla_{\boldsymbol{\ell}} \cdot \left< \left(\boldsymbol{j}  \times \boldsymbol{v_A}+ \boldsymbol{j'}  \times \boldsymbol{v'_A}\right)\times \delta \boldsymbol{v_A} - \delta \left(\frac{\boldsymbol{j}}{\rho}  \times \boldsymbol{v_A}\right)\times \left(\rho \boldsymbol{v_A}+ \rho' \boldsymbol{v'_A}\right)\right> \\
+    &+& \frac{\lambda_i}{2} \left< \left(\rho' \boldsymbol{v'_A} \cdot \delta \boldsymbol{v_A}- \delta \left(\rho \boldsymbol{v_A}\right) \cdot \boldsymbol{v'_A} \right)\nabla \cdot \left(\frac{\boldsymbol{j}}{\rho}\right) - \left(\rho \boldsymbol{v_A} \cdot \delta \boldsymbol{v_A}- \delta \left(\rho \boldsymbol{v_A}\right) \cdot \boldsymbol{v_A} \right) \nabla' \cdot \left(\frac{\boldsymbol{j'}}{\rho'}\right)\right> \\%\nonumber 
+    &-& \lambda_i \left< \left(\rho' \boldsymbol{v'_A} \cdot \delta \left(\frac{\boldsymbol{j}}{\rho}\right)- \boldsymbol{v'_A} \cdot \delta \boldsymbol{j}  \right)\nabla \cdot \boldsymbol{v_A} - \left(\rho \boldsymbol{v_A} \cdot \delta \left(\frac{\boldsymbol{j}}{\rho}\right)- \boldsymbol{v_A} \cdot \delta \boldsymbol{j}  \right)\nabla' \cdot \boldsymbol{v'_A}\right> .
+   \end{array}}
+\end{equation} 
+%\end{eqnarray}
+Ce résultat est une adaptation à nos notations du résultat obtenu par \cite{andres_exact_2018} qui utilise la même fonction de corrélation de l'énergie magnétique que nous : $\mathcal{R}_{m} = \frac{1}{4}\left<\left(\rho'+\rho\right)\boldsymbol{v'_A} \cdot \boldsymbol{v_A}\right>$.
+
+Dans le cas incompressible avec pression isotrope, diverses formes de $\varepsilon_{hall}$ existent et ont été comparées par \cite{ferrand_exact_2019}. 
+ On retiendra la forme qu'ils ont dérivée et qui peut être retrouvée en prenant la limite incompressible de la correction \eqref{eq:corr_hall} :
+ \begin{equation}
+ \label{eq:corr_hallinc} \boxed{
+\begin{array}{lcl}
+    -4 \varepsilon_{hall} &{}_{\overrightarrow{\rho = \rho_0}}&  -\frac{\lambda_i}{2} \nabla_{\boldsymbol{\ell}} \cdot \left<\delta \boldsymbol{v_A} \cdot \delta \boldsymbol{v_A}\delta \boldsymbol{j} - 2 \delta \boldsymbol{v_A} \cdot \delta \boldsymbol{j} \delta \boldsymbol{v_A}\right> . %\nonumber \\ 
+   \end{array}}
+\end{equation} 
+Similairement à la correction compressible, cette correction est applicable à notre loi incompressible avec pression gyrotrope. 
+
+ Linéairement, le terme de \cacro{Hall} va adapter les modes \cacro{MHD} et \cacro{CGL} afin d'y faire apparaître des corrections proches de la fréquence cyclotron ionique $\omega_{ci} = \frac{B_0}{\lambda_i}$. Des modes \og whistler \fg{} (sifflants) et cyclotron ionique vont émerger\footnote{Pour plus de détails, se référer à la dérivation reprise par \cite{hunana_introductory_2019}.}. On note que plus l'angle de propagation sera oblique par rapport à $\boldsymbol{b_0}$ et plus la correction \cacro{Hall} à la relation de dispersion sera affaiblie. En terme d'instabilité, l'instabilité firehose sera quelque peu stabilisée. En effet, le critère d'instabilité devient $\frac{\beta_{\parallel 0}}{2}(1- a_{p0} ) > 1+\frac{k_{\parallel}^2 v^2_{A0}}{4\omega^2_{ci}}$. Par conséquent, la zone de stabilité du cadran $a_{p0}<1$ dans le diagramme $a_{p0}-\beta_{\parallel0}$ (\figref{fig:diag_cgl}) sera élargie : en $a_{p0}=0$, le critère rejoindra $\beta_{\parallel 0} = 2+\frac{k_{\parallel}^2 v^2_{A0}}{2\omega^2_{ci}}$ qui est supérieur au $\beta_{\parallel 0} = 2$ obtenu dans le cas \cacro{CGL}. Le critère miroir ne sera quant à lui pas modifié. 
+
+\section{Le modèle bi-fluide}
+\label{sec-233}
+
+ On s'est demandé à quoi ressemblerait la loi exacte si l'on prenait en compte l'ensemble de la loi d'Ohm généralisée \eqref{eq:ohm} dans l'équation d'induction. Au lieu d'attaquer ce problème en relaxant petit à petit les approximations appliquées sur la loi d'Ohm, j'ai choisi de partir du modèle bi-fluide puis d'y prendre en compte la quasi-neutralité, de l'exprimer en fonction des grandeurs mono-fluide, et enfin d'y injecter la loi d'Ohm généralisée. Il est ensuite possible de faire tendre la loi exacte obtenue vers différents régimes similairement au travail effectué par \cite{banerjee_scale--scale_2020}. Contrairement à \cite{banerjee_scale--scale_2020} proposant une loi dérivée avec un modèle bi-fluide fermé polytropiquement et similairement à la dérivation effectuée dans le Chapitre \ref{ch-21}, on considèrera des pressions tensorielles et les équations d'énergie interne associée à chaque espèce en négligeant les flux de chaleur. Pour alléger un peu le calcul, on ne fait pas apparaître non plus les termes de forçage et dissipation.
+ La fonction de corrélation pour l'énergie électromagnétique sera choisie au plus près de celle utilisée jusqu'à présent c'est-à-dire $\left<\rho \boldsymbol{v_A}\cdot \boldsymbol{v'_A}\right>$.
+ 
+ Les équations bi-fluides utilisées
+ %non relativiste\footnote{L'hypothèse non-relativiste nous permet de négliger $q_r n_r \boldsymbol{E}$ devant $q_r n_r \boldsymbol{v_r} \times \boldsymbol{B}$  dans \eqref{eq:model_bi_v} (on l'y indique entre parenthèse car on en aura besoin dans la loi d'Ohm généralisée) et $\varepsilon_0 \mu_0 \partial_t \boldsymbol{E}$ devant $\nabla \times \boldsymbol{B}$ dans \eqref{eq:model_bi_EB3}.} utilisée avec $r = i,e$ 
+ sont : 
+ \begin{eqnarray}
+   \label{eq:model_bi_r} \partial_t \rho_{\alpha} + \nabla \cdot \left(\rho_{\alpha} \boldsymbol{v_{\alpha}}\right) &=& 0 ,\\
+  \label{eq:model_bi_v} \partial_t \left(\rho_{\alpha} \boldsymbol{v_{\alpha}}\right) + \nabla \cdot \left(\rho_{\alpha} \boldsymbol{v_{\alpha}}\boldsymbol{v_{\alpha}} + \overline{\boldsymbol{P_{\alpha}}}\right) - Q_{\alpha} \boldsymbol{E} - \boldsymbol{j_{\alpha}} \times \boldsymbol{B} &=& 0 ,\\
+  \label{eq:model_bi_u} \partial_t  u_{\alpha} + \boldsymbol{v_{\alpha}} \cdot \nabla u_{\alpha}   + \frac{1}{\rho_{\alpha}} \overline{\boldsymbol{P_{\alpha}}} : \nabla \boldsymbol{v_{\alpha}}   &=& 0 ,\\
+\label{eq:model_bi_EB1} \nabla \cdot \boldsymbol{E} =  \frac{Q}{\varepsilon_0} \qquad \nabla \times \boldsymbol{B} = \mu_0  \boldsymbol{j} + \mu_0 \varepsilon_0 \partial_t \boldsymbol{E} \qquad \nabla \cdot \boldsymbol{B} &=& 0 , \\
+\label{eq:model_bi_EB4}\partial_t \boldsymbol{B} + \nabla \times \boldsymbol{E}   &=&  0 ,
+\end{eqnarray}
+avec $Q = \sum_{\alpha} Q_{\alpha} =  \sum_{\alpha} q_{\alpha} n_{\alpha}$, $\boldsymbol{j} = \sum_{\alpha} \boldsymbol{j_{\alpha}} = \sum_{\alpha} q_{\alpha} n_{\alpha} \boldsymbol{v_{\alpha}}  $. 
+ 
+ Ces équations contiennent beaucoup de quantités constantes : $m_{\alpha}$ dans $\rho_{\alpha}$, $q_{\alpha}$ pour chaque espèce, $ \mu_0$ et $\varepsilon_0$. Afin de réduire ce nombre de constantes qui viendront alourdir les calculs,  nous allons normaliser les équations et faire ressortir des constantes caractéristiques du plasma\footnote{Cela n'a pas été entreprit dans les modèles mono-fluides utilisés précédemment, parce qu'en \cacro{MHD} et \cacro{MHDH}, les seules échelles apparaissant sont celles des ions (puisque $m_e \ll m_i$).}. 
+Ces constantes caractéristiques sont le rapport de masse $\mu = \frac{m_e}{m_i+m_e} \simeq \frac{m_e}{m_i}$ puisque $m_e \ll m_i$, qui permet d'accéder facilement aux régimes \cacro{MHD} ($\mu \rightarrow 0$) ou \cacro{EMHD} si $\mu \rightarrow 1$, et une longueur inertielle sans dimension $\lambda_i = \frac{\sqrt{m_i+m_e}}{L_0 \sqrt{\mu_0 n_0 e^2}} \simeq \frac{\sqrt{m_i}}{L_0 \sqrt{\mu_0 n_0 e^2}}$ que l'on note $\lambda_i$ pour faciliter les comparaisons avec les résultats dimensionnés. Les vitesses seront normalisées par la vitesse de la lumière dans le vide $c$, et l'on note les quantités de références :
+\begin{itemize}
+    \item Longueur : $L_0$,
+    \item Temps : $t_0 = \frac{L_0}{c}$,
+    \item Vitesse : $V_0 = c$,
+    \item Densité de particule : $n_0$,
+    \item Champ magnétique : $B_0 = c \sqrt{\mu_0 n_0 (m_i+m_e)}$,
+    \item Champ électrique : $E_0 = c B_0$,
+    \item Pression : $P_0 = (m_i+m_e)n_0 c^2$.
+\end{itemize}
+On pourrait noter les quantités sans dimension avec un \og $\tilde{}$ \fg{}, par exemple $\tilde{\boldsymbol{v_i}} = \boldsymbol{v_i}/V_0$, etc. Cependant, dans la suite de cette section, on ne fera pas apparaître les \og $\tilde{}$ \fg{} afin d'alléger les notations.
+
+Le système sans dimension s'écrit donc :
+\begin{eqnarray}
+  \label{eq:model_adbi_ri} \partial_t n_i + \nabla \cdot \left(n_i \boldsymbol{v_i}\right) &=& 0, \qquad \\
+  \label{eq:model_adbi_re} \partial_t n_e + \nabla \cdot \left(n_e \boldsymbol{v_e}\right) &=& 0, \\
+  \label{eq:model_adbi_vi} \partial_t  \boldsymbol{v_i} +\boldsymbol{v_i} \cdot \nabla \boldsymbol{v_i} + \frac{1}{(1-\mu) n_i} \nabla \cdot \overline{\boldsymbol{P_i}} - \frac{1}{(1-\mu)\lambda_i} \boldsymbol{E} - \frac{1}{(1-\mu)\lambda_i}  \boldsymbol{v_i} \times \boldsymbol{B} &=& 0 ,\\
+  \label{eq:model_adbi_ve}  \partial_t  \boldsymbol{v_e} +\boldsymbol{v_e} \cdot \nabla \boldsymbol{v_e} + \frac{1}{\mu n_e} \nabla \cdot \overline{\boldsymbol{P_e}} + \frac{1}{\mu \lambda_i}  \boldsymbol{E} + \frac{1}{\mu \lambda_i} \boldsymbol{v_e} \times \boldsymbol{B} &=& 0 ,\\
+  \label{eq:model_adbi_ui} \partial_t  u_i + \boldsymbol{v_i} \cdot \nabla u_i   + \frac{1}{(1-\mu)n_i} \overline{\boldsymbol{P_i}} : \nabla \boldsymbol{v_i}   &=& 0 ,\\
+\label{eq:model_adbi_ue} \partial_t  u_e + \boldsymbol{v_e} \cdot \nabla u_e   + \frac{1}{\mu n_e} \overline{\boldsymbol{P_e}} : \nabla \boldsymbol{v_e}   &=& 0 ,\\
+\label{eq:model_adbi_EB1} \nabla \cdot \boldsymbol{E} =   \frac{1}{\lambda_i} (n_i -n_e) ,\qquad \nabla \times \boldsymbol{B} = \frac{1}{\lambda_i} (n_i \boldsymbol{v_i} - n_e \boldsymbol{v_e}) +  \partial_t \boldsymbol{E} ,
+\qquad \nabla \cdot \boldsymbol{B} &=& 0  ,  \\
+\label{eq:model_adbi_EB4}  \partial_t \boldsymbol{B}  + \nabla \times \boldsymbol{E}  &=& 0.
+% \label{eq:model_adbi_r}  \partial_t \tilde{n_r} + \tilde{\nabla} \cdot (\tilde{n_r} \tilde{\boldsymbol{v_r}}) &=& 0\\
+% \label{eq:model_adbi_vi}   \tilde{\partial_t}  \tilde{\boldsymbol{v_i}} +  \tilde{\boldsymbol{v_i}} \cdot \tilde{\nabla} \tilde{\boldsymbol{v_i}} + \frac{1}{(1-\mu) \tilde{n_i}} \tilde{\nabla} \cdot \tilde{\overline{\boldsymbol{P_i}}}  &=&  \frac{\lambda_i}{(1-\mu)} \tilde{\boldsymbol{v_i}} \times \tilde{\boldsymbol{B}} (+\frac{\lambda_i}{(1-\mu)} \tilde{\boldsymbol{E}}) \\
+% \label{eq:model_adbi_ve}  \tilde{\partial_t}  \tilde{\boldsymbol{v_e}} +  \tilde{\boldsymbol{v_e}} \cdot  \tilde{\nabla} \tilde{\boldsymbol{v_e}} + \frac{1}{\mu \tilde{n_e}} \tilde{\nabla} \cdot \tilde{\overline{\boldsymbol{P_e}}}  &=&  -\frac{\lambda_i}{\mu} \tilde{\boldsymbol{v_e}} \times \tilde{\boldsymbol{B}}  (-\frac{\lambda_i}{\mu} \tilde{\boldsymbol{E}}) \\
+% \label{eq:model_adbi_ui}    \tilde{\partial_t}  \tilde{u_i} +  \tilde{\boldsymbol{v_i}} \cdot \tilde{\nabla}  \tilde{u_i} +  \frac{1}{(1-\mu) \tilde{n_i}}  \tilde{\overline{\boldsymbol{P_i}}} : \tilde{\nabla} \tilde{\boldsymbol{v_i}}   &=& 0 \\
+% \label{eq:model_adbi_ue}   \tilde{\partial_t}  \tilde{u_e} + \tilde{\boldsymbol{v_e}}  \cdot \tilde{\nabla}  \tilde{u_e} +  \frac{1}{\mu \tilde{n_e}}\tilde{\overline{\boldsymbol{P_e}}} : \tilde{\nabla} \tilde{\boldsymbol{v_e}}   &=& 0 \\
+% \label{eq:model_adbi_EB1} \tilde{\nabla} \cdot \tilde{\boldsymbol{E}} &=& \lambda_i  (\tilde{n_i}-\tilde{n_e}) \\
+% \label{eq:model_adbi_EB2} \tilde{\nabla} \cdot \tilde{\boldsymbol{B}} &=& 0  \\
+% \label{eq:model_adbi_EB3}  \tilde{\nabla} \times \tilde{\boldsymbol{B}} &=& \lambda_i (\tilde{n_i} \tilde{\boldsymbol{v_i}} - \tilde{n_e} \tilde{\boldsymbol{v_e}}) \\
+% \label{eq:model_adbi_EB4}  \tilde{\nabla} \times \tilde{\boldsymbol{E}}  &=&  - \tilde{\partial_t} \tilde{\boldsymbol{B}} 
+\end{eqnarray}
+Les grandeurs mono-fluides seront alors définies telles que $\rho  = (1-\mu) n_i + \mu n_e $ pour la densité, $\boldsymbol{v} = \frac{(1-\mu) n_i \boldsymbol{v_i} + \mu n_e \boldsymbol{v_e}}{(1-\mu) n_i + \mu n_e}$ pour la vitesse, $\boldsymbol{j} =  \frac{1}{\lambda_i} (n_i \boldsymbol{v_i} - n_e \boldsymbol{v_e})$ pour la densité de courant. Elles permettront de compacter un peu les équations. 
+En combinant les équations \eqref{eq:model_adbi_ri}, \eqref{eq:model_adbi_re}, \eqref{eq:model_adbi_vi} et \eqref{eq:model_adbi_ve}, on obtient l'évolution de $\boldsymbol{j}$ qui sera nécessaire pour remplacer $\boldsymbol{E}$ dans \eqref{eq:model_adbi_EB4} : 
+\begin{eqnarray}
+\label{eq:model_adbi_j} \boldsymbol{E} &=& -  \frac{\rho}{\mu n_i + (1-\mu) n_e} \boldsymbol{v}  \times \boldsymbol{B} 
+-   \frac{\lambda_i(2\mu-1)}{\mu n_i + (1-\mu) n_e}  \boldsymbol{j} \times \boldsymbol{B}
++  \lambda_i \frac{\mu \nabla \cdot \overline{\boldsymbol{P_i}} - (1-\mu) \nabla \cdot \overline{\boldsymbol{P_e}}}{\mu n_i + (1-\mu) n_e} \nonumber\\
+&&+\frac{\lambda_i^2 \mu (1-\mu)}{\mu n_i + (1-\mu) n_e} \left[\partial_t \boldsymbol{j} + \nabla \cdot (
+\frac{\rho \rho}{n_i n_e}  \boldsymbol{v}  \boldsymbol{j}  
++\frac{\rho \rho}{n_i n_e}  \boldsymbol{j}  \boldsymbol{v} 
++\frac{ \lambda_i(2\mu -1 )n_i}{n_i n_e}\boldsymbol{j} \boldsymbol{j} ) \right] \nonumber \\
+&&+\frac{\lambda_i \mu (1-\mu)}{\mu n_i + (1-\mu) n_e} \nabla \cdot (
+\frac{n_e - n_i}{n_i n_e} (\rho^2 \boldsymbol{v} \boldsymbol{v} + \mu^2\lambda_i^2 \boldsymbol{j} \boldsymbol{j})  ).
+\end{eqnarray}
+Contrairement à la loi d'Ohm détaillée dans le Chapitre \ref{ch-02}, on n'y suppose ni la quasi-neutralité ($n_i = n_e = \rho$) qui viendrait annuler la dernière ligne, ni $\mu \rightarrow 0$. À partir d'ici, on supposera l'hypothèse non-relativiste, qui permet de négliger les termes dépendant de $\boldsymbol{E}$ devant ceux dépendant de $\boldsymbol{B}$ dans \eqref{eq:model_adbi_vi} et \eqref{eq:model_adbi_ve} et \eqref{eq:model_adbi_EB1}. Comme on a besoin de l'équation d'induction, on doit garder le champ électrique dans l'équation \eqref{eq:model_adbi_j} et  \eqref{eq:model_adbi_EB4}. L'hypothèse non relativiste sera donc appliquée sur \eqref{eq:model_adbi_j} en fonction de l'usage.
+
+On définit aussi la vitesse d'Alfvén telle que $\boldsymbol{v_A} = \frac{\boldsymbol{B}}{\sqrt{(1-\mu) n_i + \mu n_e}}$. L'énergie totale non relativiste de ce système peut ainsi être séparée entre une énergie totale ionique et une électronique : 
+\begin{equation*}
+E_{tot} = E_{toti} + E_{tote} =  \frac{1}{2} (1-\mu) n_i (|\boldsymbol{v_i}|^2 + |\boldsymbol{v_A}|^2 + 2 u_i) + \frac{1}{2} \mu n_e (|\boldsymbol{v_e}|^2 + |\boldsymbol{v_A}|^2 + 2 u_e).
+\end{equation*}
+
+L'équation d'induction \eqref{eq:model_adbi_EB4} s'écrit en fonction de la vitesse d'Alfvén : 
+\begin{eqnarray}
+\label{eq:model_adbi_B}  \partial_t \boldsymbol{v_A} &=& - \frac{\nabla \times  \boldsymbol{E}}{\sqrt{(1-\mu) n_i + \mu n_e}} + \frac{\boldsymbol{v_{A}}}{2}\frac{\nabla \cdot ((1-\mu) n_i \boldsymbol{v_i}+\mu n_e \boldsymbol{v_e})}{(1-\mu) n_i + \mu n_e}  .
+\end{eqnarray}
+
+
+En appliquant la méthode résumée dans la section \ref{ch-11} sur les fonctions de corrélations d'énergie totale ionique, $\mathcal{R}_{tot i} = \frac{1-\mu}{4} \left<  (n'_i + n_i) (\boldsymbol{v'_i} \cdot \boldsymbol{v_i} + \boldsymbol{v'_A} \cdot \boldsymbol{v_A}) + 2 n'_i u_i + 2 n_i u'_i \right>$, et électronique,  $ \mathcal{R}_{tot e} = \frac{\mu}{4} \left<  (n'_e + n_e) (\boldsymbol{v'_e} \cdot \boldsymbol{v_e} + \boldsymbol{v'_A} \cdot \boldsymbol{v_A}) + 2 n'_e u_e + 2 n_e u'_e \right> $, puis en supposant les hypothèses de stationnarité statistique et de séparation d'échelles de Kolmogorov, on obtient les lois exactes pour les taux de cascade, $\varepsilon_i$ et $\varepsilon_e$, associés à chaque fluide et exprimés dans la zone inertielle  :
+\begin{eqnarray}
+%\begin{equation} \boxed{\begin{array}{lcl}
+  \label{eq:turb_bi_Ri} &-&4 \varepsilon_i = \left(1-\mu\right)\left( \nabla_{\boldsymbol{\ell}} \cdot\left<  \delta \left(n_i \boldsymbol{v_i}\right) \cdot \delta \boldsymbol{v_i}\delta \boldsymbol{v_i} \right> +\left<\delta \boldsymbol{v_i}\cdot \left(n_i \boldsymbol{v_i}   \nabla' \cdot \boldsymbol{v'_i}- n'_i \boldsymbol{v'_i} \nabla \cdot \boldsymbol{v_i}\right)\right>\right)  \nonumber\\ %
+  &+& 2  \left(1-\mu\right) \left(\nabla_{\boldsymbol{\ell}} \cdot\left<  \delta n_i  \delta u_i\delta \boldsymbol{v_i} \right> +\left<\delta u_i  \left(n_i \nabla' \cdot \boldsymbol{v'_i}- n'_i \nabla \cdot \boldsymbol{v_i}\right)\right> \right) \nonumber\\ %
+  &+& \nabla_{\boldsymbol{\ell}} \cdot\left<  \delta \left(n_i \boldsymbol{v_i}\right) \cdot \delta \overline{\boldsymbol{P_i}} \delta \left(\frac{1}{n_i}\right)\right> + \left<\delta \overline{\boldsymbol{P_i}} : \left(n_i \boldsymbol{v_i}  \nabla' \left(\frac{1}{n'_i}\right) - n'_i \boldsymbol{v'_i} \nabla \left(\frac{1}{n_i}\right)\right)\right> \nonumber \\ %
+  &+& 2 \left<\delta \left(\frac{\overline{\boldsymbol{P_i}}}{n_i}\right) : \left(n'_i \nabla\boldsymbol{v_i} - n_i \nabla' \boldsymbol{v'_i}\right) \right> \nonumber \\ %
+  &+&\frac{1-\mu}{2} \left<  \boldsymbol{v'_A} \cdot \boldsymbol{v_{A}}  \left[ \frac{\left(1-\mu\right)\left(n'_i - n_i\right) -2 \mu n_e }{\rho}\nabla \cdot \left(n_i \boldsymbol{v_i}\right)+  \frac{\mu \left(n'_i + n_i\right)}{\rho}  \nabla \cdot \left(n_e \boldsymbol{v_e}\right)  \right] \right> \nonumber\\ %
+  &+& \frac{1-\mu}{2}\left< \boldsymbol{v_A} \cdot \boldsymbol{v'_{A}} \left[\frac{\left(1-\mu\right)\left(n_i - n'_i\right) -2 \mu n'_e  }{\rho'}\nabla' \cdot \left(n'_i \boldsymbol{v'_i}\right)+ \frac{ \mu \left(n'_i + n_i\right) }{\rho'}\nabla' \cdot \left(n'_e \boldsymbol{v'_e}\right)\right]  \right>\nonumber \\ %
+  &+& \frac{1}{\lambda_i} \left<\left(n'_i + n_i\right)\left(  \boldsymbol{v'_i} \cdot \boldsymbol{v_i} \times \left(\sqrt{\rho}\boldsymbol{v_A}\right) +  \boldsymbol{v_i} \cdot \boldsymbol{v'_i} \times \left( \sqrt{\rho'}\boldsymbol{v'_A}\right)\right) \right>\nonumber\\ %
+  &-& \left(1-\mu\right)\left< \left(n'_i + n_i\right)  \left( \frac{ \nabla' \cdot \left(\boldsymbol{E'}\times \boldsymbol{v_A}\right) }{\sqrt{\rho'}} + \frac{\nabla \cdot \left(  \boldsymbol{E}\times \boldsymbol{v'_A} \right) }{\sqrt{\rho}}\right)\right> ,%\nonumber%\\ %&& \\
+ \end{eqnarray}   %\end{array}}\end{equation}
+
+\begin{eqnarray} %\begin{equation} \boxed{\begin{array}{lcl} 
+  \label{eq:turb_bi_Re} &-&4 \varepsilon_e = \mu\left( \nabla_{\boldsymbol{\ell}} \cdot\left<  \delta \left(n_e \boldsymbol{v_e}\right) \cdot \delta \boldsymbol{v_e}\delta \boldsymbol{v_e} \right> +\left<\delta \boldsymbol{v_e}\cdot \left(n_e \boldsymbol{v_e}   \nabla' \cdot \boldsymbol{v'_e}- n'_e \boldsymbol{v'_e} \nabla \cdot \boldsymbol{v_e}\right)\right>\right) \nonumber \\ %
+  &+& 2  \mu \left(\nabla_{\boldsymbol{\ell}} \cdot\left<  \delta n_e  \delta u_e\delta \boldsymbol{v_e} \right> +\left<\delta u_e  \left(n_e \nabla' \cdot \boldsymbol{v'_e}- n'_e \nabla \cdot \boldsymbol{v_e}\right)\right> \right) \nonumber\\ %
+  &+& \nabla_{\boldsymbol{\ell}} \cdot\left<  \delta \left(n_e \boldsymbol{v_e}\right) \cdot \delta \overline{\boldsymbol{P_e}} \delta \left(\frac{1}{n_e}\right)\right> + \left<\delta \overline{\boldsymbol{P_e}} : \left(n_e \boldsymbol{v_e}  \nabla' \left(\frac{1}{n'_e}\right) - n'_e \boldsymbol{v'_e} \nabla \left(\frac{1}{n_e}\right)\right)\right> \nonumber \\ %
+  &+& 2 \left<\delta \left(\frac{\overline{\boldsymbol{P_e}}}{n_e}\right) : \left(n'_e \nabla\boldsymbol{v_e} - n_e \nabla' \boldsymbol{v'_e}\right) \right>  \nonumber\\ %
+  &+&\frac{\mu}{2} \left<   \boldsymbol{v'_A} \cdot \boldsymbol{v_{A}}  \left[ \frac{\mu\left(n'_e - n_e\right) -2 \left(1-\mu\right) n_i}{\rho} \nabla \cdot \left(n_e \boldsymbol{v_e}\right)+ \frac{\left(1-\mu\right) \left(n'_e + n_e\right) }{\rho}\nabla \cdot \left(n_i \boldsymbol{v_i}\right)  \right] \right>\nonumber \\ %
+  &+& \frac{\mu}{2}\left<  \boldsymbol{v_A} \cdot \boldsymbol{v'_{A}} \left[\frac{\mu\left(n_e - n'_e\right) -2 \left(1-\mu\right) n'_i }{\rho'}\nabla' \cdot \left(n'_e \boldsymbol{v'_e}\right)+ \frac{ \left(1-\mu\right) \left(n'_e + n_e\right) }{\rho'}\nabla' \cdot \left(n'_i \boldsymbol{v'_i}\right)\right]  \right>\nonumber \\ %
+  &+& \frac{1}{\lambda_i} \left<\left(n'_e + n_e\right)\left(  \boldsymbol{v'_e} \cdot \boldsymbol{v_e} \times \left(\sqrt{\rho}\boldsymbol{v_A}\right) +  \boldsymbol{v_e} \cdot \boldsymbol{v'_e} \times \left( \sqrt{\rho'}\boldsymbol{v'_A}\right)\right) \right>\nonumber\\ %
+  &-& \mu\left< \left(n'_e + n_e\right)  \left( \frac{ \nabla' \cdot \left(\boldsymbol{E'}\times \boldsymbol{v_A}\right) }{\sqrt{\rho'}} + \frac{\nabla \cdot \left(  \boldsymbol{E}\times \boldsymbol{v'_A} \right) }{\sqrt{\rho}}\right)\right> .%\nonumber%\\ %&& \\
+  \end{eqnarray}  %\end{array}}\end{equation}
+  
+ On y retrouve des fonctions de structures et des termes sources similaires à ceux dérivés dans les cas \cacro{MHD} et \cacro{CGL} (voir équations \eqref{eq:turb_cpg_Rc}, \eqref{eq:turb_cpg_Ru} et \eqref{eq:turb_ref_ptot}) pour les contributions cinétique et thermodynamique ($\boldsymbol{v_i}$, $\boldsymbol{v_e}$, $u_i$, $u_e$, $\overline{\boldsymbol{P_i}}$ et $\overline{\boldsymbol{P_e}}$). Par contre, la contribution électromagnétique diffère (quatre dernières lignes de \eqref{eq:turb_bi_Ri} et \eqref{eq:turb_bi_Re}). On remarque d'ailleurs qu'elle reflète le couplage des deux fluides par le champ électromagnétique étant donné que, dans \eqref{eq:turb_bi_Ri} comme dans \eqref{eq:turb_bi_Re}, elle dépend de $\boldsymbol{E}$, $\boldsymbol{v_A}$, $\boldsymbol{v_i}$, $\boldsymbol{v_e}$, $n_i$ et $n_e$. Pour réduire cette contribution, on doit sommer \eqref{eq:turb_bi_Ri} et \eqref{eq:turb_bi_Re}. On obtient ainsi après quelques manipulations, la loi exacte pour l'énergie totale bi-fluide :
+\begin{equation} \boxed{\begin{array}{ll}\label{eq:turb_bi_EL}
+{}_{[1]} \quad  - 4  \varepsilon &= \left(1-\mu\right)\left( \nabla_{\boldsymbol{\ell}} \cdot\left<  \delta \left(n_i \boldsymbol{v_i}\right) \cdot \delta \boldsymbol{v_i}\delta \boldsymbol{v_i} \right> +\left<\delta \boldsymbol{v_i}\cdot \left(n_i \boldsymbol{v_i}   \nabla' \cdot \boldsymbol{v'_i}- n'_i \boldsymbol{v'_i} \nabla \cdot \boldsymbol{v_i}\right)\right>\right)  \\ %\nonumber
+{}_{[2]} \quad &+ \mu\left( \nabla_{\boldsymbol{\ell}} \cdot\left<  \delta \left(n_e \boldsymbol{v_e}\right) \cdot \delta \boldsymbol{v_e}\delta \boldsymbol{v_e} \right> +\left<\delta \boldsymbol{v_e}\cdot \left(n_e \boldsymbol{v_e}   \nabla' \cdot \boldsymbol{v'_e}- n'_e \boldsymbol{v'_e} \nabla \cdot \boldsymbol{v_e}\right)\right>\right)  \\ %\nonumber
+{}_{[3]} \quad  &+ 2  \left(1-\mu\right) \left(\nabla_{\boldsymbol{\ell}} \cdot\left<  \delta n_i  \delta u_i\delta \boldsymbol{v_i} \right> +\left<\delta u_i  \left(n_i \nabla' \cdot \boldsymbol{v'_i}- n'_i \nabla \cdot \boldsymbol{v_i}\right)\right> \right) \\ %\nonumber
+{}_{[4]} \quad  &+ 2  \mu \left(\nabla_{\boldsymbol{\ell}} \cdot\left<  \delta n_e  \delta u_e\delta \boldsymbol{v_e} \right> +\left<\delta u_e  \left(n_e \nabla' \cdot \boldsymbol{v'_e}- n'_e \nabla \cdot \boldsymbol{v_e}\right)\right> \right) \\ %\nonumber
+{}_{[5]} \quad  &+ \nabla_{\boldsymbol{\ell}} \cdot\left<  \delta \left(n_i \boldsymbol{v_i}\right) \cdot \delta \overline{\boldsymbol{P_i}} \delta \left(\frac{1}{n_i}\right)\right> + \left<\delta \overline{\boldsymbol{P_i}} : \left(n_i \boldsymbol{v_i}  \nabla' \left(\frac{1}{n'_i}\right) - n'_i \boldsymbol{v'_i} \nabla \left(\frac{1}{n_i}\right)\right)\right>  \\ %\nonumber
+{}_{[6]} \quad  &+ \nabla_{\boldsymbol{\ell}} \cdot\left<  \delta \left(n_e \boldsymbol{v_e}\right) \cdot \delta \overline{\boldsymbol{P_e}} \delta \left(\frac{1}{n_e}\right)\right> + \left<\delta \overline{\boldsymbol{P_e}} : \left(n_e \boldsymbol{v_e}  \nabla' \left(\frac{1}{n'_e}\right) - n'_e \boldsymbol{v'_e} \nabla \left(\frac{1}{n_e}\right)\right)\right>  \\ %\nonumber
+{}_{[7]} \quad  &+ 2 \left<\delta \left(\frac{\overline{\boldsymbol{P_i}}}{n_i}\right) : \left(n'_i \nabla\boldsymbol{v_i} - n_i \nabla' \boldsymbol{v'_i}\right) +\delta \left(\frac{\overline{\boldsymbol{P_e}}}{n_e}\right) : \left(n'_e \nabla\boldsymbol{v_e} - n_e \nabla' \boldsymbol{v'_e}\right) \right>  \\ %\nonumber
+{}_{[8]} \quad  &- \nabla_{\boldsymbol{\ell}} \cdot \left< \left(\rho' + \rho\right) \left(\frac{ \boldsymbol{E'}\times \boldsymbol{v_A} }{\sqrt{\rho'}} - \frac{ \boldsymbol{E}\times \boldsymbol{v'_A} }{\sqrt{\rho}}\right)\right> +  \frac{1}{2}\left<\left(\rho' - \rho\right) \boldsymbol{v_A} \cdot \boldsymbol{v'_{A}} \left(  \nabla \cdot \boldsymbol{v}-  \nabla' \cdot \boldsymbol{v'}\right)\right> \\ %\nonumber
+{}_{[9]} \quad  &+ \left<\left(\rho' - \rho\right) \left(\left(-\frac{ \boldsymbol{E}\times \boldsymbol{v'_A} }{\sqrt{\rho}} + \frac{1}{2}\boldsymbol{v_A} \cdot \boldsymbol{v'_{A}} \boldsymbol{v}\right) \cdot \frac{\nabla  \rho }{\rho}+\left(\frac{ \boldsymbol{E'}\times \boldsymbol{v_A} }{\sqrt{\rho'}} - \frac{1}{2}\boldsymbol{v'_A} \cdot \boldsymbol{v_{A}} \boldsymbol{v'}\right) \cdot \frac{\nabla'  \rho' }{\rho'}\right)\right> \\ %\nonumber
+{}_{[10]} \quad  &+ \frac{1}{\lambda_i} \left<\left(n'_i + n_i\right)\left(  \boldsymbol{v'_i} \cdot \boldsymbol{v_i} \times \left(\sqrt{\rho}\boldsymbol{v_A}\right) +  \boldsymbol{v_i} \cdot \boldsymbol{v'_i} \times \left( \sqrt{\rho'}\boldsymbol{v'_A}\right)\right) \right> \\ %\nonumber
+{}_{[11]} \quad  &- \frac{1}{\lambda_i} \left<\left(n'_e + n_e\right)\left(  \boldsymbol{v'_e} \cdot \boldsymbol{v_e} \times \left(\sqrt{\rho}\boldsymbol{v_A}\right) +  \boldsymbol{v_e} \cdot \boldsymbol{v'_e} \times \left( \sqrt{\rho'}\boldsymbol{v'_A}\right)\right)\right>.
+\end{array}}\end{equation} %\end{eqnarray} 
+Cette loi dépend de  $\mu$, $n_i$, $n_e$, $\boldsymbol{v_i}$ et $\boldsymbol{v_e}$ explicitement et à travers $\rho$ et $\boldsymbol{v}$. Elle dépend aussi de $u_i$, $u_e$, $\overline{\boldsymbol{P_i}}$ et $\overline{\boldsymbol{P_e}}$ et de $\lambda_i$, $\boldsymbol{v_A}$ et $\boldsymbol{E}$. $\boldsymbol{E}$ peut y être remplacé par la loi d'Ohm \eqref{eq:model_adbi_j}.
+
+ On peut aussi exprimer la loi \eqref{eq:turb_bi_EL} en fonction des quantités mono-fluides en remplaçant $\boldsymbol{v_i}$ et $\boldsymbol{v_e}$ avec $\boldsymbol{v_i} = \frac{\rho}{n_i} \boldsymbol{v} + \frac{\lambda_i\mu}{  n_i} \boldsymbol{j}$ et $\boldsymbol{v_e} = \frac{\rho}{n_e} \boldsymbol{v} - \frac{\lambda_i (1-\mu)}{n_e} \boldsymbol{j}$. On supposera aussi le fluide quasi-neutre, c'est-à-dire $n_i = n_e = \rho$ et on va travailler les termes séparément en fonction de leur dépendance. 
+ 
+ Tout d'abord les lignes [1] et [2], purement cinétiques, pevent s'écrire comme suit : 
+\begin{equation}\begin{array}{rl}\label{eq:turb_bi_EL1-2}%\begin{eqnarray}% \boxed{
+%    =& \left(1-\mu\right)\left( \nabla_{\boldsymbol{\ell}} \cdot\left<  \delta \left(n_i \boldsymbol{v_i}\right) \cdot \delta \boldsymbol{v_i}\delta \boldsymbol{v_i} \right> +\left<\delta \boldsymbol{v_i}\cdot \left(n_i \boldsymbol{v_i}   \nabla' \cdot \boldsymbol{v'_i}- n'_i \boldsymbol{v'_i} \nabla \cdot \boldsymbol{v_i}\right)\right>\right) \nonumber \\ %
+%  &+ \mu\left( \nabla_{\boldsymbol{\ell}} \cdot\left<  \delta \left(n_e \boldsymbol{v_e}\right) \cdot \delta \boldsymbol{v_e}\delta \boldsymbol{v_e} \right> +\left<\delta \boldsymbol{v_e}\cdot \left(n_e \boldsymbol{v_e}   \nabla' \cdot \boldsymbol{v'_e}- n'_e \boldsymbol{v'_e} \nabla \cdot \boldsymbol{v_e}\right)\right>\right) \nonumber \\ %
+- 4  \varepsilon_{[1-2]} &= \nabla_{\boldsymbol{\ell}} \cdot\left<  \delta \left(\rho\boldsymbol{v}\right) \cdot \delta \boldsymbol{v} \delta  \boldsymbol{v} \right> +\left< \delta  \boldsymbol{v}\cdot \left(\rho \boldsymbol{v} \nabla' \cdot \boldsymbol{v'} - \rho' \boldsymbol{v'} \nabla \cdot \boldsymbol{v} \right)\right>\\%\nonumber
+&+ \lambda_i^2 \mu\left(1-\mu\right) \nabla_{\boldsymbol{\ell}} \cdot\left< \delta \left(\rho\boldsymbol{v} \right) \cdot \delta \left( \frac{\boldsymbol{j}}{\rho} \right)\delta \left(  \frac{\boldsymbol{j}}{\rho} \right) + \delta \boldsymbol{j} \cdot \delta  \boldsymbol{v}\delta \left(  \frac{\boldsymbol{j}}{\rho} \right) + \delta  \boldsymbol{j}\cdot \delta \left(  \frac{\boldsymbol{j}}{\rho} \right)\delta  \boldsymbol{v}\right> \\%\nonumber
+&+\lambda_i^2 \mu\left(1-\mu\right) \left< \delta  \frac{\boldsymbol{j}}{\rho} \cdot \left( \boldsymbol{j} \nabla' \cdot \boldsymbol{v'}  -  \boldsymbol{j} \nabla \cdot \boldsymbol{v} \right)\right>\\%\nonumber
+&+\lambda_i^2 \mu\left(1-\mu\right) \left< \left( \boldsymbol{j}\cdot\delta  \boldsymbol{v} +\rho \boldsymbol{v}  \cdot\delta  \frac{\boldsymbol{j}}{\rho}  \right)\nabla' \cdot \frac{\boldsymbol{j'}}{\rho'} - \left( \boldsymbol{j'}\cdot\delta  \boldsymbol{v} + \rho \boldsymbol{v} \cdot\delta  \frac{\boldsymbol{j}}{\rho} \right) \nabla \cdot \frac{\boldsymbol{j}}{\rho} \right>\\%\nonumber
+&+ \lambda_i^3\mu\left(1-\mu\right)\left(2\mu - 1\right) \nabla_{\boldsymbol{\ell}} \cdot\left< \delta  \boldsymbol{j} \cdot \delta \left(  \frac{\boldsymbol{j}}{\rho}  \right)\delta \left(  \frac{\boldsymbol{j}}{\rho}  \right) \right>  \\%\nonumber
+&+ \lambda_i^3\mu\left(1-\mu\right)\left(2\mu - 1\right) \left< \delta \left( \frac{\boldsymbol{j}}{\rho}\right) \cdot \left( \boldsymbol{j} \nabla' \cdot \frac{\boldsymbol{j'}}{\rho'} -  \boldsymbol{j'} \nabla \cdot \frac{\boldsymbol{j}}{\rho} \right)\right>.
+\end{array}\end{equation} %\end{eqnarray} %}
+Lorsque $\mu \rightarrow 0$ (\ac{MHD}) ou $\mu \rightarrow 1$ (\acs{EMHD}), seule la première ligne de \eqref{eq:turb_bi_EL1-2} subsiste. On remarque aussi que les lignes suivantes sont en $\lambda_i^2$ et $\lambda_i^3$, par conséquent ces termes tendront rapidement vers 0 pour des échelles $L_0$ grandes devant la longueur d'inertie du plasma. 
+
+ Ensuite les lignes [3] et [4] dépendant de l'énergie interne nous donne, en notant $u = \left(1-\mu\right)u_i + \mu u_e$ : 
+\begin{equation}\begin{array}{rl}\label{eq:turb_bi_EL3-4}%\begin{eqnarray}% \boxed{
+  - 4  \varepsilon_{[3-4]} 
+%    =& 2  \left(1-\mu\right) \left(\nabla_{\boldsymbol{\ell}} \cdot\left<  \delta n_i  \delta u_i\delta \boldsymbol{v_i} \right> +\left<\delta u_i  \left(n_i \nabla' \cdot \boldsymbol{v'_i}- n'_i \nabla \cdot \boldsymbol{v_i}\right)\right> \right) \nonumber\\ %
+%   &+ 2  \mu \left(\nabla_{\boldsymbol{\ell}} \cdot\left<  \delta n_e  \delta u_e\delta \boldsymbol{v_e} \right> +\left<\delta u_e  \left(n_e \nabla' \cdot \boldsymbol{v'_e}- n'_e \nabla \cdot \boldsymbol{v_e}\right)\right> \right)\ \nonumber \\ %
+ =& 2  \left( \nabla_{\boldsymbol{\ell}} \cdot\left<  \delta \rho  \delta u \delta \boldsymbol{v} \right> +\left<\delta u  \left(\rho \nabla' \cdot \left(\boldsymbol{v'} \right)- \rho' \nabla \cdot \left(\boldsymbol{v}  \right)\right)\right> \right) \\%\nonumber
+  &+ 2 \lambda_i \mu\left(1-\mu\right) \nabla_{\boldsymbol{\ell}} \cdot\left<  \delta \rho  \delta \left(u_i-u_e\right) \delta \left(  \frac{\boldsymbol{j}}{\rho} \right)\right> \\ %\nonumber
+  &+ 2  \lambda_i \mu\left(1-\mu\right)\left<\delta \left(u_i-u_e\right)  \left(\rho \nabla' \cdot \left(  \frac{\boldsymbol{j'}}{\rho'} \right)- \rho' \nabla \cdot \left(\frac{\boldsymbol{j}}{\rho} \right)\right)\right> .
+\end{array}\end{equation}%\end{eqnarray} %} 
+Ici aussi, lorsque $\mu \rightarrow 0$ (\cacro{MHD}) ou $\mu \rightarrow 1$ (\cacro{EMHD}), seule la première ligne de  \eqref{eq:turb_bi_EL3-4} subsiste.
+
+ Les lignes [5] à [7] de \eqref{eq:turb_bi_EL} dépendant des tenseurs de pressions s'écrivent en notant  $\overline{\boldsymbol{P}} = \overline{\boldsymbol{P_i}}+\overline{\boldsymbol{P_e}}$ :
+\begin{equation}\begin{array}{rl}\label{eq:turb_bi_EL5-7}%\begin{eqnarray}% \boxed{
+  - 4  \varepsilon_{[5-7]} 
+%    =& \nabla_{\boldsymbol{\ell}} \cdot\left<  \delta \left(n_i \boldsymbol{v_i}\right) \cdot \delta \overline{\boldsymbol{P_i}} \delta \left(\frac{1}{n_i}\right)\right> + \left<\delta \overline{\boldsymbol{P_i}} : \left(n_i \boldsymbol{v_i}  \nabla' \left(\frac{1}{n'_i}\right) - n'_i \boldsymbol{v'_i} \nabla \left(\frac{1}{n_i}\right)\right)\right>  \nonumber\\ %
+%   &+ \nabla_{\boldsymbol{\ell}} \cdot\left<  \delta \left(n_e \boldsymbol{v_e}\right) \cdot \delta \overline{\boldsymbol{P_e}} \delta \left(\frac{1}{n_e}\right)\right> + \left<\delta \overline{\boldsymbol{P_e}} : \left(n_e \boldsymbol{v_e}  \nabla' \left(\frac{1}{n'_e}\right) - n'_e \boldsymbol{v'_e} \nabla \left(\frac{1}{n_e}\right)\right)\right> \nonumber \\ %
+%   &+ 2 \left<\delta \left(\frac{\overline{\boldsymbol{P_i}}}{n_i}\right) : \left(n'_i \nabla\boldsymbol{v_i} - n_i \nabla' \boldsymbol{v'_i}\right) +\delta \left(\frac{\overline{\boldsymbol{P_e}}}{n_e}\right) : \left(n'_e \nabla\boldsymbol{v_e} - n_e \nabla' \boldsymbol{v'_e}\right) \right>  \nonumber\\ %\nonumber
+  =& \nabla_{\boldsymbol{\ell}} \cdot\left<  \delta \left(\rho \boldsymbol{v}\right) \cdot \delta \overline{\boldsymbol{P}} \delta \left(\frac{1}{\rho}\right)\right> + \left<\delta \overline{\boldsymbol{P}} : \left(\rho \boldsymbol{v}  \nabla' \left(\frac{1}{\rho'}\right) - \rho' \boldsymbol{v'} \nabla \left(\frac{1}{\rho}\right)\right)\right> \\%\nonumber
+  &+ 2 \left<\delta \left(\frac{\overline{\boldsymbol{P}}}{\rho}\right) : \left(\rho' \nabla \boldsymbol{v}- \rho \nabla' \boldsymbol{v'} \right) \right>  \\%\nonumber
+  &+ \lambda_i  \nabla_{\boldsymbol{\ell}} \cdot\left<  \delta \boldsymbol{j} \cdot \delta \left(\mu\overline{\boldsymbol{P_i}}-\left(1-\mu\right) \overline{\boldsymbol{P_e}}\right)\delta \left(\frac{1}{\rho}\right)\right> \\%\nonumber
+  &+ \lambda_i \left<\delta \left(\mu\overline{\boldsymbol{P_i}}-\left(1-\mu\right) \overline{\boldsymbol{P_e}}\right) : \left(\boldsymbol{j}  \nabla' \left(\frac{1}{\rho'}\right) - \boldsymbol{j'} \nabla \left(\frac{1}{\rho}\right)\right)\right> \\%\nonumber
+  &+ 2\lambda_i\left<\delta \left(\mu\frac{\overline{\boldsymbol{P_i}}}{\rho}-\left(1-\mu\right)\frac{\overline{\boldsymbol{P_e}}}{\rho}\right) : \left(\rho' \nabla \left(  \frac{\boldsymbol{j}}{\rho}\right) - \rho \nabla' \left( \frac{\boldsymbol{j'}}{\rho'}\right) \right)\right> .
+  \end{array}\end{equation}%\end{eqnarray} % 
+Dans les deux premières lignes de \eqref{eq:turb_bi_EL5-7}, on retrouve la formulation f3 \eqref{eq:turb_ref_ptot} de la  contribution du tenseur de pression de la loi générale \cacro{MHD} gyrotrope \eqref{eq:turb_cpg_elk}. Elles s'écrivent de la même manière, que les quantités soient sans dimension ou pas. Les lignes suivantes dépendent de la densité de courant $\boldsymbol{j}$ et des tenseurs de pressions. Elles rappellent la contribution thermique de la loi d'Ohm \eqref{eq:model_adbi_j} et ne s'annulent pas complètement si $\mu \rightarrow 0$ ou $\mu \rightarrow 1$. 
+
+Les lignes [8] à [11] de \eqref{eq:turb_bi_EL} dépendent de la vitesse d'Alfvén et du champ électrique. En y appliquant la même transformation qu'aux autres lignes, elles deviennent : 
+\begin{equation}\begin{array}{rl}%\begin{eqnarray}% \boxed{
+  - 4&  \varepsilon_{[8-11]}  \\%\nonumber\label{eq:turb_bi_EL8-11A}
+   =&- \nabla_{\boldsymbol{\ell}} \cdot \left< \left(\rho' + \rho\right) \left(\frac{ \boldsymbol{E'}\times \boldsymbol{v_A} }{\sqrt{\rho'}} - \frac{ \boldsymbol{E}\times \boldsymbol{v'_A} }{\sqrt{\rho}}\right)\right> +  \frac{1}{2}\left<\left(\rho' - \rho\right) \boldsymbol{v_A} \cdot \boldsymbol{v'_{A}} \left(  \nabla \cdot \boldsymbol{v}-  \nabla' \cdot \boldsymbol{v'}\right)\right> \\ %\nonumber
+  &+\frac{1}{2} \left<\left(\rho' - \rho\right) \left(\left(-\frac{ \boldsymbol{E}\times \boldsymbol{v'_A} }{\sqrt{\rho}} + \boldsymbol{v_A} \cdot \boldsymbol{v'_{A}} \boldsymbol{v}\right) \cdot \frac{\nabla  \rho }{\rho}+\left(\frac{ \boldsymbol{E'}\times \boldsymbol{v_A} }{\sqrt{\rho'}} - \boldsymbol{v'_A} \cdot \boldsymbol{v_{A}} \boldsymbol{v'}\right) \cdot \frac{\nabla'  \rho' }{\rho'}\right)\right> \\%\nonumber
+        &+ \left<\left(\frac{1}{\rho'}+ \frac{1}{\rho}\right)\left(  \boldsymbol{j'} \cdot   \rho\boldsymbol{v}  \times \left( \sqrt{\rho}\boldsymbol{v_A}\right) 
+        +  \boldsymbol{j} \cdot \rho' \boldsymbol{v'}\times \left( \sqrt{\rho'}\boldsymbol{v'_A}\right)
+        \right)\right> \\%\nonumber
+        &+ \lambda_i\left(2\mu-1\right) \left<\left(\frac{1}{\rho'}+ \frac{1}{\rho}\right)\left( \boldsymbol{j'} \cdot \boldsymbol{j} \times \left( \sqrt{\rho}\boldsymbol{v_A}\right) + \boldsymbol{j} \cdot  \boldsymbol{j'} \times \left( \sqrt{\rho'}\boldsymbol{v'_A}\right)\right)\right> \\%\nonumber
+        &+ \left<\left(\frac{1}{\rho'}+ \frac{1}{\rho}\right)\left( \rho  \boldsymbol{v'} \cdot  \boldsymbol{j}  \times \left( \sqrt{\rho}\boldsymbol{v_A}\right) + \rho' \boldsymbol{v} \cdot  \boldsymbol{j'}\times \left( \sqrt{\rho'}\boldsymbol{v'_A}\right)\right)\right> \\%\nonumber
+        \label{eq:turb_bi_EL8-11B}=&- \nabla_{\boldsymbol{\ell}} \cdot \left< \left(\rho' + \rho\right) \left(\frac{ \boldsymbol{E'}\times \boldsymbol{v_A} }{\sqrt{\rho'}} - \frac{ \boldsymbol{E}\times \boldsymbol{v'_A} }{\sqrt{\rho}}\right)\right> +  \frac{1}{2}\left<\left(\rho' - \rho\right) \boldsymbol{v_A} \cdot \boldsymbol{v'_{A}} \left(  \nabla \cdot \boldsymbol{v}-  \nabla' \cdot \boldsymbol{v'}\right)\right> \\ %\nonumber
+  &+\frac{1}{2} \left<\left(\rho' - \rho\right) \left(\left(-\frac{ \boldsymbol{E}\times \boldsymbol{v'_A} }{\sqrt{\rho}} + \boldsymbol{v_A} \cdot \boldsymbol{v'_{A}} \boldsymbol{v}\right) \cdot \frac{\nabla  \rho }{\rho}+\left(\frac{ \boldsymbol{E'}\times \boldsymbol{v_A} }{\sqrt{\rho'}} - \boldsymbol{v'_A} \cdot \boldsymbol{v_{A}} \boldsymbol{v'}\right) \cdot \frac{\nabla'  \rho' }{\rho'}\right)\right> \\%\nonumber
+        &+ \left<\left(\frac{1}{\rho'}+ \frac{1}{\rho}\right)\left(  \boldsymbol{j'} \cdot   \rho\boldsymbol{v}  \times \left( \sqrt{\rho}\boldsymbol{v_A}\right) 
+        +  \boldsymbol{j} \cdot \rho' \boldsymbol{v'}\times \left( \sqrt{\rho'}\boldsymbol{v'_A}\right)
+        \right)\right> \\%\nonumber
+        &+ \lambda_i\left(2\mu-1\right) \left<\left(\frac{1}{\rho'}+ \frac{1}{\rho}\right)\left( \boldsymbol{j'} \cdot \boldsymbol{j} \times \left( \sqrt{\rho}\boldsymbol{v_A}\right) + \boldsymbol{j} \cdot  \boldsymbol{j'} \times \left( \sqrt{\rho'}\boldsymbol{v'_A}\right)\right)\right> \\%\nonumber
+&+\nabla_{\boldsymbol{\ell}} \cdot  \left<( \rho + \rho' )( \boldsymbol{v} \cdot  \boldsymbol{v'_A}  \boldsymbol{v'_A} - \frac{1}{2} \boldsymbol{v'_A} \cdot \boldsymbol{v'_A} \boldsymbol{v} - \boldsymbol{v'} \cdot  \boldsymbol{v_A}  \boldsymbol{v_A} + \frac{1}{2} \boldsymbol{v_A} \cdot \boldsymbol{v_A} \boldsymbol{v'})\right> \\%\nonumber
+         &+ \left<( \rho'  \boldsymbol{v'} \cdot  \boldsymbol{v_A}  \boldsymbol{v_A} - \frac{1}{2}\rho' \boldsymbol{v_A} \cdot \boldsymbol{v_A} \boldsymbol{v'})\cdot  \frac{\nabla\rho}{\rho} 
+         % \nonumber\\&&+ 
+         +(  \rho \boldsymbol{v} \cdot  \boldsymbol{v'_A}  \boldsymbol{v'_A} - \frac{1}{2} \rho \boldsymbol{v'_A} \cdot \boldsymbol{v'_A} \boldsymbol{v})\cdot \frac{\nabla'\rho'}{\rho'}     \right> .
+\end{array} \end{equation}
+La dernière égalité est obtenue en remplaçant $\boldsymbol{j}$ par $\nabla \times \left( \sqrt{\rho}\boldsymbol{v_A}\right)$ dans la dernière ligne de \eqref{eq:turb_bi_EL8-11B}. Les termes résultants rappellent les fonctions de structure $\left<\delta (\rho \boldsymbol{v_A})\cdot  \delta \boldsymbol{v_A} \delta \boldsymbol{v}\right>$, $\left<\delta (\rho \boldsymbol{v_A})\cdot  \delta \boldsymbol{v} \delta \boldsymbol{v_A}\right>$, $\left<\delta (\rho \boldsymbol{v})\cdot  \delta \boldsymbol{v_A} \delta \boldsymbol{v_A}\right>$ et $\left<\delta (\rho \boldsymbol{v}) \delta  (\frac{\rho \boldsymbol{v_A}^2}{2}) \delta (1/\rho) \right>$ présentes dans les lois \ac{MHD}. Pour les faire apparaître, il nous manque des termes qui sont cachés dans la première ligne. On doit y remplacer $\boldsymbol{E}$ qui provient de l'équation d'induction grâce à la loi d'Ohm \eqref{eq:model_adbi_j} qui devient avec l'hypothèse quasi-neutre et en fonction de la vitesse d'Alfvén :
+\begin{equation}\label{eq:model_adbi_jqn}\begin{array}{rl}
+ \boldsymbol{E} =& -  \boldsymbol{v}  \times \sqrt{\rho}\boldsymbol{v_A}
+-   \frac{\lambda_i(2\mu-1)}{\rho}  \boldsymbol{j} \times \sqrt{\rho}\boldsymbol{v_A}
++  \lambda_i \frac{\mu \nabla \cdot \overline{\boldsymbol{P_i}} - (1-\mu) \nabla \cdot \overline{\boldsymbol{P_e}}}{\rho} \\%\nonumber
+&+\frac{\lambda_i^2 \mu (1-\mu)}{\rho} \left[\partial_t \boldsymbol{j} + \nabla \cdot (
+  \boldsymbol{v}  \boldsymbol{j}  
++  \boldsymbol{j}  \boldsymbol{v} 
++\frac{ \lambda_i(2\mu -1 )}{\rho}\boldsymbol{j} \boldsymbol{j} ) \right] . 
+\end{array}\end{equation}
+On peut aussi utiliser cette expression de la loi d'Ohm pour remplacer $\boldsymbol{E}$ dans la deuxième ligne. En revanche, afin de remplacer $\lambda_i (2\mu-1)  \boldsymbol{j} \times\sqrt{\rho}\boldsymbol{v_A} + \rho \boldsymbol{v}  \times \sqrt{\rho}\boldsymbol{v_A} $ dans les troisième et quatrième lignes, il faut utiliser sa version non relativiste : 
+\begin{eqnarray}
+\label{eq:model_adbi_jqr}   \rho \boldsymbol{v}  \times \sqrt{\rho}\boldsymbol{v_A}
++   \lambda_i(2\mu-1)  \boldsymbol{j} \times \sqrt{\rho}\boldsymbol{v_A} 
+&=&\frac{\lambda_i^2 \mu (1-\mu)}{\rho} \left[\partial_t \boldsymbol{j} + \nabla \cdot (
+  \boldsymbol{v}  \boldsymbol{j}  
++  \boldsymbol{j}  \boldsymbol{v} 
++\lambda_i(2\mu -1 )\boldsymbol{j} \boldsymbol{j} ) \right] \nonumber\\
+&&+\lambda_i (\mu \nabla \cdot \overline{\boldsymbol{P_i}} - (1-\mu) \nabla \cdot \overline{\boldsymbol{P_e}}) .
+\end{eqnarray}
+
+Ainsi, en appliquant \eqref{eq:model_adbi_jqn} et \eqref{eq:model_adbi_jqr} dans \eqref{eq:turb_bi_EL8-11B} contribution par contribution, on obtient les résultats suivants.
+\paragraph{Pour la contribution \ac{MHD} :} 
+\begin{equation}\begin{array}{rl}
+  \label{eq:turb_bin_TEMI}  -4&  \varepsilon^{MHD}_{[8-11]} \\%\nonumber
+    =&\nabla_{\boldsymbol{\ell}} \cdot  \left<( \rho + \rho' )( \boldsymbol{v} \cdot  \boldsymbol{v'_A}  \boldsymbol{v'_A} - \frac{1}{2} \boldsymbol{v'_A} \cdot \boldsymbol{v'_A} \boldsymbol{v} - \boldsymbol{v'} \cdot  \boldsymbol{v_A}  \boldsymbol{v_A} + \frac{1}{2} \boldsymbol{v_A} \cdot \boldsymbol{v_A} \boldsymbol{v'})\right> \\%\nonumber
+    &+ \nabla_{\boldsymbol{\ell}} \cdot \left< (\rho' + \rho) ((\boldsymbol{v'}  \times \boldsymbol{v'_A})\times \boldsymbol{v_A} -  (\boldsymbol{v}  \times \boldsymbol{v_A})\times \boldsymbol{v'_A})\right> \\%\nonumber
+    &+  \frac{1}{2}\left<(\rho' - \rho) \boldsymbol{v_A} \cdot \boldsymbol{v'_{A}} (  \nabla \cdot \boldsymbol{v}-  \nabla' \cdot \boldsymbol{v'})\right> \\%\nonumber 
+  &+\frac{1}{2} \left<(\rho' - \rho) ( (\boldsymbol{v}  \times \boldsymbol{v_A})\times \boldsymbol{v'_A} + \boldsymbol{v_A} \cdot \boldsymbol{v'_{A}} \boldsymbol{v}) \cdot \frac{\nabla  \rho }{\rho}\right> \\%\nonumber
+  &- \frac{1}{2} \left<(\rho' - \rho)( (\boldsymbol{v'}  \times \boldsymbol{v'_A})\times \boldsymbol{v_A}  + \boldsymbol{v'_A} \cdot \boldsymbol{v_{A}} \boldsymbol{v'}) \cdot \frac{\nabla'  \rho' }{\rho'}\right> \\%\nonumber
+         &+ \left<( \rho'   \boldsymbol{v'} \cdot  \boldsymbol{v_A}  \boldsymbol{v_A} - \frac{1}{2} \rho' \boldsymbol{v_A} \cdot \boldsymbol{v_A} \boldsymbol{v'})\cdot  \frac{\nabla\rho}{\rho} 
+         %\right> \\%\nonumber&&+ \left< 
+         +(  \rho \boldsymbol{v} \cdot  \boldsymbol{v'_A}  \boldsymbol{v'_A} - \frac{1}{2} \rho \boldsymbol{v'_A} \cdot \boldsymbol{v'_A} \boldsymbol{v})\cdot \frac{\nabla'\rho'}{\rho'}     \right>, \\%\nonumber
+    =&\nabla_{\boldsymbol{\ell}} \cdot  \left< \delta (\rho \boldsymbol{v_A}) \cdot \delta \boldsymbol{v'_A} \delta \boldsymbol{v} + \delta(\frac{\rho' \boldsymbol{v'_A}^2}{2}) \delta( \rho \boldsymbol{v}) \delta (\frac{1}{\rho})-  \delta \boldsymbol{v_A}\cdot \delta (\rho \boldsymbol{v})\delta  \boldsymbol{v_A} -  \delta( \rho \boldsymbol{v_A}) \cdot \delta \boldsymbol{v} \delta \boldsymbol{v_A} \right>  \\%\nonumber
+    &+  \frac{1}{2}\left< (\delta( \rho\boldsymbol{v_A}) \cdot \boldsymbol{v'_{A}}-\delta \boldsymbol{v_A} \cdot \rho'\boldsymbol{v'_{A}} )  \nabla \cdot \boldsymbol{v}-  (\delta (\rho' \boldsymbol{v'_A}) \cdot \boldsymbol{v_{A}}- \rho\boldsymbol{v_A} \cdot \delta \boldsymbol{v_{A}}) \nabla' \cdot \boldsymbol{v'})\right> \\%\nonumber 
+    &+\left< \delta (\frac{\rho \boldsymbol{v_A}^2 }{2})( \rho \boldsymbol{v} \cdot \nabla'\frac{1}{\rho'}- \rho'  \boldsymbol{v'}\cdot \nabla \frac{1}{\rho}) \right> \\%\nonumber 
+  &-\left<(2\rho \boldsymbol{v}\cdot \delta \boldsymbol{v_A}+ \rho\boldsymbol{v_A}\cdot \delta \boldsymbol{v})-\boldsymbol{v_A}\cdot \delta (\rho\boldsymbol{v}))  \nabla' \cdot \boldsymbol{v'_A} \right>\\%\nonumber
+&+ \left<(2\rho' \boldsymbol{v'} \cdot  \delta \boldsymbol{v_A} +\rho' \boldsymbol{v'_A} \cdot \delta \boldsymbol{v} -  \boldsymbol{v'_A} \cdot \delta (\rho\boldsymbol{v})) \nabla\cdot \boldsymbol{v_A}  \right>. \\%\nonumber
+\end{array}\end{equation}
+On retrouve bien la contribution électromagnétique dérivée dans le cas \cacro{MHD} (voir équations \eqref{eq:turb_cpi_khm} et \eqref{eq:turb_ref_ptot} pour les termes de pression magnétique)\footnote{On a fait en sorte de choisir les quantités servant à normaliser le système d'équations telles que les résultats présentés dans ce mémoire se recoupent.\label{fn:warning}}. Elle ne dépend ni de $\mu$ ni de $\lambda_i$, donc elle ne diffèrera pas que l'on soit dans le régime \cacro{MHD} ou \cacro{EMHD}. 
+\paragraph{Pour la contribution Hall :}
+\begin{equation}\begin{array}{rl}
+  \label{eq:turb_bin_TEMH} - 4  &\varepsilon^{Hall}_{[8-11]}\\ %\nonumber
+    =&\lambda_i\left(2\mu-1 \right)\nabla_{\boldsymbol{\ell}} \cdot \left< \left(\rho' + \rho\right) \left( \left(\frac{1}{\rho'}\boldsymbol{j'} \times \boldsymbol{v'_A}\right)\times \boldsymbol{v_A}  -  \left(\frac{1}{\rho}\boldsymbol{j} \times \boldsymbol{v_A}\right)\times \boldsymbol{v'_A}\right)\right>  \\%\nonumber 
+  &- \frac{\lambda_i\left(2\mu-1 \right)}{2} \left<\left(\rho' - \rho\right) \left(\left(\frac{1}{\rho}\boldsymbol{j} \times \boldsymbol{v_A}\right)\times \boldsymbol{v'_A} \cdot \frac{\nabla  \rho }{\rho}-\left(\frac{1}{\rho'}\boldsymbol{j'} \times \boldsymbol{v'_A}\right)\times \boldsymbol{v_A}\cdot \frac{\nabla'  \rho' }{\rho'}\right)\right>, \\%\nonumber
+  =&- \lambda_i\left(2\mu-1 \right)\nabla_{\boldsymbol{\ell}} \cdot \left< \left(\boldsymbol{j'} \times \boldsymbol{v'_A} + \boldsymbol{j} \times \boldsymbol{v_A}\right)\times \delta \boldsymbol{v_A}  - \delta \left(\frac{1}{\rho}\boldsymbol{j} \times \boldsymbol{v_A}\right)\times \left( \rho'\boldsymbol{v'_A} +  \rho\boldsymbol{v_A}\right) \right>  \\%\nonumber 
+   &+ \lambda_i\left(2\mu-1 \right) \left<\left(\frac{\rho'}{\rho} - 1\right) \boldsymbol{v'_A} \cdot \boldsymbol{j} \nabla\cdot \boldsymbol{v_A} +\left(\frac{\rho}{\rho'}-1\right) \boldsymbol{v_A} \cdot  \boldsymbol{j'}\nabla'\cdot  \boldsymbol{v'_A} \right> \\%\nonumber
+  &- \frac{\lambda_i\left(2\mu-1 \right)}{2} \left<   \left(\rho' - \rho\right) \boldsymbol{v'_A}\cdot \boldsymbol{v_A}  \nabla  \cdot\frac{\boldsymbol{j}}{\rho} - \left(\rho' - \rho\right)\boldsymbol{v_A} \cdot \boldsymbol{v'_A}\nabla'  
+  \cdot \frac{ \boldsymbol{j'} }{\rho'}\right>. 
+\end{array}\end{equation}
+Dans le cas $\mu \rightarrow 0$, on retrouve le résultat de la section \ref{sec-231} \eqref{eq:corr_hall}. 
+\paragraph{Pour la contribution des pressions :} 
+\begin{equation}\begin{array}{rl}
+  \label{eq:turb_bin_TEMP} - 4&  \varepsilon^{\nabla P}_{[8-11]} \\%\nonumber
+  =&- \lambda_i\mu \nabla_{\boldsymbol{\ell}} \cdot \left< \left(\rho' + \rho\right) \left(\frac{1}{\sqrt{\rho'}}\left(\frac{1}{\rho'}\nabla' \cdot \overline{\boldsymbol{P'_i}}\right)\times \boldsymbol{v_A} - \frac{1}{\sqrt{\rho}} \left(\frac{1}{\rho}\nabla \cdot \overline{\boldsymbol{P_i}}\right)\times \boldsymbol{v'_A}\right)\right> \\%\nonumber 
+  &+\lambda_i\mu  \left<\left(\rho' - \rho\right) \left(\frac{1}{\sqrt{\rho}}\left( \frac{1}{\rho}\nabla \cdot \overline{\boldsymbol{P_i}}\right)\times \boldsymbol{v'_A} \cdot \frac{\nabla  \rho }{\rho}-\frac{1}{\sqrt{\rho'}}\left(\frac{1}{\rho'}\nabla' \cdot \overline{\boldsymbol{P'_i}} \right)\times \boldsymbol{v_A} \cdot \frac{\nabla'  \rho' }{\rho'}\right)\right> \\%\nonumber
+  &+\lambda_i\mu \left< \left(\frac{1}{\rho'} + \frac{1}{\rho}\right)  \left(\boldsymbol{j} \cdot\nabla' \cdot \overline{\boldsymbol{P'_i}}+ \boldsymbol{j'} \cdot  \nabla \cdot \overline{\boldsymbol{P_i}}\right)\right> \\%\nonumber
+    &+\lambda_i \left(1-\mu\right) \nabla_{\boldsymbol{\ell}} \cdot \left< \left(\rho' + \rho\right) \left(\frac{1}{\sqrt{\rho'}}\left(\frac{1}{\rho'}\nabla' \cdot \overline{\boldsymbol{P'_e}}\right)\times \boldsymbol{v_A} - \frac{1}{\sqrt{\rho}}\left(\frac{1}{\rho}\nabla \cdot \overline{\boldsymbol{P_e}}\right)\times \boldsymbol{v'_A}\right)\right> \\%\nonumber 
+  &-\lambda_i \left(1-\mu\right) \left<\left(\rho' - \rho\right) \left(\frac{1}{\sqrt{\rho}}\left(\frac{1}{\rho}\nabla \cdot \overline{\boldsymbol{P_e}}\right)\times \boldsymbol{v'_A} \cdot \frac{\nabla  \rho }{\rho}-\frac{1}{\sqrt{\rho'}}\left(\frac{1}{\rho'} \nabla' \cdot \overline{\boldsymbol{P'_e}}\right)\times \boldsymbol{v_A} \cdot \frac{\nabla'  \rho' }{\rho'}\right)\right> \\%\nonumber
+  &-\lambda_i \left(1-\mu\right) \left< \left(\frac{1}{\rho'} + \frac{1}{\rho}\right) \left(\boldsymbol{j} \cdot \nabla' \cdot \overline{\boldsymbol{P'_e}} + \boldsymbol{j'} \cdot \nabla \cdot \overline{\boldsymbol{P_e}}\right) \right>. \\%\nonumber
+\end{array}\end{equation}
+Dans la section \ref{sec-232}, nous verrons (dans le cadre $\mu \rightarrow 0$) une autre formulation de cette contribution prenant en compte les termes présents dans \eqref{eq:turb_bi_EL5-7}. 
+\paragraph{Pour la contribution inertielle :} 
+\begin{equation}\begin{array}{rl}
+  \label{eq:turb_bin_TEMN} - 4&  \varepsilon^{inert}_{[8-11]} \\
+    =&- \lambda_i^2\mu \left(1-\mu\right)\nabla_{\boldsymbol{\ell}} \cdot \left< \frac{\rho' + \rho}{\rho'\sqrt{\rho'}} \left[\partial_t \boldsymbol{j'} + \nabla' \cdot \left( \boldsymbol{v'}  \boldsymbol{j'}  + \boldsymbol{j'}  \boldsymbol{v'} +\frac{ \left(2\mu -1 \right)}{\rho'} \lambda_i  \boldsymbol{j'} \boldsymbol{j'}   \right)\right]\times \boldsymbol{v_A}  \right>\\%\nonumber 
+  &+ \lambda_i^2\mu \left(1-\mu\right) \nabla_{\boldsymbol{\ell}} \cdot \left< \frac{\rho' + \rho}{\rho\sqrt{\rho}} \left[\partial_t \boldsymbol{j} +\nabla \cdot \left( \boldsymbol{v}  \boldsymbol{j}   + \boldsymbol{j}  \boldsymbol{v} +\frac{ \left(2\mu -1 \right)}{\rho} \lambda_i  \boldsymbol{j} \boldsymbol{j} \right)\right]\times \boldsymbol{v'_A}  \right>  \\%\nonumber 
+  &+ \lambda_i^2\mu \left(1-\mu\right)\left<\frac{\rho' + \rho}{\rho\sqrt{\rho}} \left[\partial_t \boldsymbol{j} +\nabla \cdot \left( \boldsymbol{v}  \boldsymbol{j}   + \boldsymbol{j}  \boldsymbol{v} +\frac{ \left(2\mu -1 \right)}{\rho} \lambda_i  \boldsymbol{j} \boldsymbol{j} \right)\right]\times \boldsymbol{v'_A}  \cdot \frac{\nabla  \rho }{\rho}\right>  \\%\nonumber 
+  &- \lambda_i^2\mu \left(1-\mu\right)\left<\frac{\rho' + \rho}{\rho'\sqrt{\rho'}} \left[\partial_t \boldsymbol{j'} + \nabla' \cdot \left( \boldsymbol{v'}  \boldsymbol{j'}  + \boldsymbol{j'}  \boldsymbol{v'} +\frac{ \left(2\mu -1 \right)}{\rho'} \lambda_i  \boldsymbol{j'} \boldsymbol{j'}   \right)\right]\times \boldsymbol{v_A}  \cdot \frac{\nabla'  \rho' }{\rho'}\right> \\%\nonumber
+         &+ \lambda_i^2\mu \left(1-\mu\right) \left< \left(\frac{1}{\rho'} + \frac{1}{\rho}\right) \boldsymbol{j'} \cdot   \left[\partial_t \boldsymbol{j} +\nabla \cdot \left( \boldsymbol{v}  \boldsymbol{j}   + \boldsymbol{j}  \boldsymbol{v} +\frac{ \left(2\mu -1 \right)}{\rho} \lambda_i  \boldsymbol{j} \boldsymbol{j} \right)\right]\right> \\%\nonumber
+         &+ \lambda_i^2 \mu \left(1-\mu\right) \left<\left(\frac{1}{\rho'} + \frac{1}{\rho}\right) \boldsymbol{j} \cdot \left[\partial_t \boldsymbol{j'} + \nabla' \cdot \left( \boldsymbol{v'}  \boldsymbol{j'}  + \boldsymbol{j'}  \boldsymbol{v'} +\frac{ \left(2\mu -1 \right)}{\rho'} \lambda_i  \boldsymbol{j'} \boldsymbol{j'}   \right)\right]\right>.
+\end{array}\end{equation}
+Cette contribution est nulle si $\mu \rightarrow 0$ (cas \cacro{MHD}) mais aussi si $\mu \rightarrow 1$ (cas \cacro{EMHD}). Ces termes en $\lambda_i^2$ sont aussi nuls aux grandes échelles.
+Cette expression est gardée brute car on ne l'utilisera pas par la suite, mais on pourrait y appliquer l'hypothèse de stationnarité statistique et l'équation de continuité pour supprimer la dépendance en $\partial_t \boldsymbol{j}$.
+
+ En dérivant une loi exacte pour un modèle bi-fluide, puis en travaillant sur les différentes contributions avec la loi d'Ohm généralisée et l'hypothèse de quasi-neutralité, on vient d'obtenir différents niveaux de correction qui viennent étendre la description de la cascade turbulente d'énergie totale à de multiples systèmes par exemple les deux régimes asymptotiques \cacro{MHD} et \cacro{EMHD}. \emph{\bf À noter que la loi exacte obtenue est valable pour des fermetures quelconques appliquées aux ions et aux électrons tant qu'elles sont en accord avec les équations des énergies internes \eqref{eq:model_adbi_ui} et \eqref{eq:model_adbi_ue}.} En fonction de l'usage, il sera toujours possible de retravailler les termes pour obtenir des formulations potentiellement plus pratiques à analyser. Les termes dépendant de la pression électronique présents dans \eqref{eq:turb_bi_EL5-7} et \eqref{eq:turb_bin_TEMP} seront par exemple reformulés dans le cadre $\mu \rightarrow 0$, dans la section \ref{sec-232}. 
+% 
+% 
+% %%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+% 
+\section{Le modèle analysé numériquement dans la partie \ref{part_3}}
+\label{sec-232}
+
+ Originellement, le modèle \cacro{CGL} est pensé en supposant des électrons dit \og froids \fg{} ($\beta_e \ll 1$ avec $\beta_e = \frac{p_e}{p_m}$) c'est-à-dire en considérant un mono-fluide d'ions [\cite{hunana_introductory_2019}]. Les quantités électroniques n'interviennent donc pas. Dans la Partie \ref{part_3}, nous allons analyser des résultats de simulation \sacro{LFCGLHPe} prenant en compte l'anisotropie de pression des ions et des électrons. Le modèle simulé suppose $\mu \ll 1$ et prend en compte la correction \cacro{Hall} donnée dans la section \ref{sec-231} et retrouvée dans la section \ref{sec-233}, ainsi que la correction \cacro{Pe}. Il faudra donc prendre en compte les termes dépendant de la pression électronique présents dans \eqref{eq:turb_bi_EL5-7} et \eqref{eq:turb_bin_TEMP}. Nous allons ici les analyser plus en détail. 
+
+
+Le modèle simulé est constitué des équations suivantes :
+\begin{eqnarray}
+\label{eq:model_simu_r} \partial_t \rho &+& \nabla \cdot \left(\rho \boldsymbol{v}\right) = 0,\\
+\label{eq:model_simu_v} \partial_t \left(\rho \boldsymbol{v}\right) &+& \nabla \cdot \left(\rho \boldsymbol{v}\boldsymbol{v} - \rho \boldsymbol{v_A}\boldsymbol{v_A}\right) +  \nabla \overline{\boldsymbol{P_*}}  = 0,  \\
+\label{eq:model_simu_Pi} \partial_t \overline{\boldsymbol{P_i}} &+& \nabla \cdot \left( \boldsymbol{v} \overline{\boldsymbol{P_i}} \right) +  \left(\overline{\boldsymbol{P_i}} \cdot \nabla \boldsymbol{v}\right)^S   = 0,  \\
+\label{eq:model_simu_Pe} \partial_t \overline{\boldsymbol{P_{e}}} &+& \nabla \cdot \left( \boldsymbol{v}  \overline{\boldsymbol{P_{e}}} \right) +  \left(\overline{\boldsymbol{P_{e}}} \cdot \nabla \boldsymbol{v}\right)^S   =  \lambda_i \nabla \cdot  \left(\frac{\boldsymbol{j}}{\rho} \overline{\boldsymbol{P_{e}}}\right) +  \lambda_i \left(\overline{\boldsymbol{P_{e}}} \cdot \nabla \left(\frac{\boldsymbol{j}}{\rho} \right)\right)^S ,  \\
+\label{eq:model_simu_b} \partial_t \boldsymbol{v_A} &-&  \nabla \cdot \left(\boldsymbol{v_A}\boldsymbol{v} - \boldsymbol{v}\boldsymbol{v_A}\right) +  \boldsymbol{v} \nabla \cdot \boldsymbol{v_A} -  \frac{\boldsymbol{v_A}}{2}  \nabla \cdot \boldsymbol{v} \nonumber \\ 
+&&=  - \frac{\lambda_i}{ \sqrt{\rho} } \nabla \times\left(\frac{\boldsymbol{j}}{\sqrt{\rho}}  \times \boldsymbol{v_A}\right)  + \frac{\lambda_i}{ \sqrt{\mu_0\rho} }  \nabla \times \left(\frac{1}{\rho} \nabla \cdot \overline{\boldsymbol{P_{e}}}\right), 
+\end{eqnarray}
+ avec $\overline{\boldsymbol{P_*}} = \overline{\boldsymbol{P_{i}}} + \overline{\boldsymbol{P_{e}}}  + p_m \overline{\boldsymbol{I}} $ et $p_m = \frac{1}{2}\rho |\boldsymbol{v_A}|^2$. Dans un premier lot de simulation, la pression électronique sera considérée comme isotrope et plus particulièrement isotherme, et dans un deuxième lot comme gyrotrope. On notera que dans le cas où la pression électronique est isotrope et que le premier principe thermodynamique \eqref{eq:synth_L1_du} est valable, on peut définir une enthalpie électronique telle que $h = u_e + \frac{m_i}{m_e}\frac{p_e}{\rho}$. Si l'hypothèse adiabatique/isentrope s'applique dans le système, alors le terme thermique de l'équation d'induction \eqref{eq:model_simu_b} s'annule puisque $\nabla \times \left(\frac{1}{\rho} \nabla \cdot \overline{\boldsymbol{P_{e}}}\right) = \nabla \times \left(\frac{1}{\rho} \nabla p_{e}\right) = \frac{m_i}{m_e} \nabla \times \nabla h = 0$. Par principe de précaution, nous le prendrons tout de même en compte dans notre analyse.  
+
+En terme d'énergétique, l'équation de densité d'énergie cinétique \eqref{eq:model_cpi_k} n'est modifiée que par la prise en compte de la pression électronique dans la pression totale. En revanche, celle de densité d'énergie magnétique devient :
+\begin{eqnarray}
+  \label{eq:model_simu_m}   \partial_t E_m  &+&\nabla   \cdot  \left(E_m\boldsymbol{v}+ \lambda_i \left(\left(\boldsymbol{j}  \times \boldsymbol{v_A}\right)\times \boldsymbol{v_A}  + \frac{\boldsymbol{v_A}}{\sqrt{\mu_0\rho}}  \times \nabla \cdot \overline{\boldsymbol{P_{e}}} -  \frac{\boldsymbol{j}}{\rho}\cdot \overline{\boldsymbol{P_{e}}}\right) \right) \nonumber\\
+  &=& \rho  \boldsymbol{v_A}\boldsymbol{v_A}  : \nabla \boldsymbol{v}- p_m  \nabla \cdot \boldsymbol{v}   - \lambda_i \overline{\boldsymbol{P_{e}}} : \nabla \left(\frac{\boldsymbol{j}}{\rho} \right)
+\end{eqnarray}
+sachant que :
+\begin{equation}
+\label{eq:calc_simu_m} 
+\sqrt{\frac{\rho}{\mu_0}} \boldsymbol{v_A} \cdot \nabla \times \left(\frac{1}{\rho} \nabla \cdot \overline{\boldsymbol{P_{e}}}\right) = - \nabla \cdot \left(\frac{1}{\sqrt{\mu_0 \rho}} \boldsymbol{v_A} \times \nabla \cdot \overline{\boldsymbol{P_{e}}}  \right) +  \nabla \cdot \left( \frac{ \boldsymbol{j}}{\rho} \cdot \overline{\boldsymbol{P_{e}}}\right) - \overline{\boldsymbol{P_{e}}} : \nabla \left(\frac{\boldsymbol{j}}{\rho} \right) .
+\end{equation}
+Et celle d'énergie interne définie telle que  $\rho u = \rho_i u_i +  \rho_e u_e = \frac{1}{2} \overline{\boldsymbol{P_{i}}} : \overline{\boldsymbol{I}} +\frac{1}{2} \overline{\boldsymbol{P_{e}}} : \overline{\boldsymbol{I}}$, est : 
+\begin{eqnarray}
+\label{eq:model_simu_u} \partial_t \left(\rho u\right) + \nabla \cdot \left(  \rho u \boldsymbol{v}\right) + \left(\overline{\boldsymbol{P_i}}+\overline{\boldsymbol{P_{e}}}\right) : \nabla \boldsymbol{v} & =&  \lambda_i \nabla \cdot  \left(\frac{m_e}{m_i} u_e \boldsymbol{j}\right) +  \lambda_i \overline{\boldsymbol{P_{e}}} : \nabla \left(\frac{\boldsymbol{j}}{\rho} \right) .
+\end{eqnarray}
+ Puisque ici $\mu \ll 1$, le terme $\lambda_i \nabla \cdot  \left(\frac{m_e}{m_i} u_e \boldsymbol{j}\right)$ pourra être négligé. Le dernier terme de \eqref{eq:model_simu_u} étant relié à $\sqrt{\rho} \boldsymbol{v_A} \cdot \nabla \times \left(\frac{1}{\rho} \nabla \cdot \overline{\boldsymbol{P_{e}}}\right) $ et à des termes flux via \eqref{eq:calc_simu_m}, sa contribution en tant que source dans le bilan énergétique s'annulera dans le cas particulier où l'on peut faire apparaître l'enthalpie $h$. Dans le bilan énergétique total, ce dernier terme vient compenser le terme $- \lambda_i \overline{\boldsymbol{P_{e}}} : \nabla \left(\frac{\boldsymbol{j}}{\rho} \right)$ émergeant dans \eqref{eq:model_simu_m} à cause de la prise en compte de la pression électronique dans l'équation d'induction \eqref{eq:model_simu_b}.
+ 
+ Les termes contribuant au taux de cascade qui n'ont pas été pris en compte dans \eqref{eq:turb_cpg_elk} ni \eqref{eq:corr_hall} seront donc $\frac{\lambda_i}{ \sqrt{\mu_0\rho} }  \nabla \times \left(\frac{1}{\rho} \nabla \cdot \overline{\boldsymbol{P_{e}}}\right)$ dans \eqref{eq:model_simu_b} et $  \lambda_i \overline{\boldsymbol{P_{e}}} : \nabla \left(\frac{\boldsymbol{j}}{\rho} \right)$ dans \eqref{eq:model_simu_u}. La correction résultante à la loi exacte s'écrit après quelques manipulations : 
+%\begin{eqnarray}
+\begin{equation}
+\label{eq:corr_pe} \boxed{
+\begin{array}{lcl}
+   -&4& \varepsilon_{\nabla pe}  \\% \nonumber 
+   &=& \frac{\lambda_i}{\sqrt{\mu_0}} \left<\left(\rho' + \rho\right)\left(\boldsymbol{v_A} \cdot \left( \frac{1}{ \sqrt{\rho'} }  \nabla' \times \left(\frac{1}{\rho'} \nabla' \cdot \overline{\boldsymbol{P'_{e}}}\right)\right) + \boldsymbol{v'_A} \cdot \left( \frac{1}{ \sqrt{\rho} }  \nabla \times \left(\frac{1}{\rho} \nabla \cdot \overline{\boldsymbol{P_{e}}}\right)\right)\right) \right> \\% \nonumber 
+   &&+ 2 \lambda_i\left< \frac{\rho'}{\rho}   \overline{\boldsymbol{P_{e}}} : \nabla \left(\frac{\boldsymbol{j}}{\rho} \right)   + \frac{\rho}{\rho'}  \overline{\boldsymbol{P'_{e}}} : \nabla' \left(\frac{\boldsymbol{j'}}{\rho'} \right) \right> \\%
+   &=&   - 2 \lambda_i \left(\nabla_{\boldsymbol{\ell}} \cdot \left<\delta \rho \delta \left( \frac{ \boldsymbol{j}}{\rho} \cdot \overline{\boldsymbol{P_{e}}}\right) \delta \left(\frac{1}{\rho} \right) \right> - \left< \left(\rho'\nabla   \left(\frac{1}{\rho} \right) - \rho   \nabla'   \left(\frac{1}{\rho'} \right)\right) \cdot\delta \left(\frac{ \boldsymbol{j}}{\rho} \cdot \overline{\boldsymbol{P_{e}}}\right)\right>\right)  \\%\nonumber
+    &&+ 2 \frac{\lambda_i}{\sqrt{\mu_0}} \nabla_{\boldsymbol{\ell}} \cdot \left<\delta \rho \delta \left( \frac{\boldsymbol{v_A} }{\sqrt{\rho}} \times \nabla \cdot \overline{\boldsymbol{P_{e}}}\right) \delta \left(\frac{1}{\rho} \right) \right> \\
+    &&-  2 \frac{\lambda_i}{\sqrt{\mu_0}}\left<  \left(\rho' \nabla   \left(\frac{1}{\rho} \right) - \rho \nabla'  \left(\frac{1}{\rho'} \right)\right)\cdot\delta \left(\frac{\boldsymbol{v_A}}{\sqrt{\rho}}  \times \nabla \cdot \overline{\boldsymbol{P_{e}}}\right)\right>\\% \nonumber 
+   &&+\frac{\lambda_i}{\sqrt{\mu_0}} \left<\left(\boldsymbol{v_A} \delta  \rho  - 2 \rho \delta \boldsymbol{v_A}\right) \cdot \left( \frac{1}{ \sqrt{\rho'} }  \nabla' \times \left(\frac{1}{\rho'} \nabla' \cdot \overline{\boldsymbol{P'_{e}}}\right)\right) \right>\\ 
+   &&-\frac{\lambda_i}{\sqrt{\mu_0}} \left<\left(\boldsymbol{v'_A} \delta  \rho  - 2 \rho' \delta \boldsymbol{v_A}\right) \cdot \left( \frac{1}{ \sqrt{\rho} }  \nabla \times \left(\frac{1}{\rho} \nabla \cdot \overline{\boldsymbol{P_{e}}}\right)\right) \right>.\\ %\nonumber  .
+   \end{array}}
+\end{equation} 
+%\end{eqnarray}
+Les deux premières lignes de l'équation \eqref{eq:corr_pe} correspondent aux formes brutes de la correction. L'égalité suivante, dépendant de termes flux et sources, est obtenue en injectant \eqref{eq:calc_simu_m} et en identifiant les fonctions de structures $\left<\delta \rho \delta \left( \frac{\boldsymbol{v_A} }{\sqrt{\rho}} \times \nabla \cdot \overline{\boldsymbol{P_{e}}}\right) \delta \left(\frac{1}{\rho} \right)\right>$, $\left<\delta \rho \delta \left( \frac{ \boldsymbol{j}}{\rho} \cdot \overline{\boldsymbol{P_{e}}}\right) \delta \left(\frac{1}{\rho} \right) \right>$ et $\left<\delta \rho \delta u_e \delta \left(\frac{\boldsymbol{j}}{\rho} \right)\right>$.  Dans le cas où l'on peut faire apparaître l'enthalpie $h$, l'avant-dernière ligne de \eqref{eq:corr_pe} sera nulle.  On s'attend à ce que cette correction, dépendant de $\lambda_i$, prenne de l'importance près des échelles ioniques similairement à la correction \acs{Hall}. Les termes dépendant de $\overline{\boldsymbol{P_{e}}}$ proviennent quant à eux d'un mélange de \eqref{eq:turb_bin_TEMP} et des trois dernières lignes de \eqref{eq:turb_bi_EL5-7}. L'équivalence ne sera pas présentée ici. On notera tout de même la présence de la constante $\mu_0$ qui provient du caractère dimensionné des équations utilisées dans cette section. 
+
+Dans la limite incompressible, la majorité des termes de \eqref{eq:corr_pe} s'annule et il ne reste que la dernière ligne qui s'écrit : 
+\begin{equation}
+\label{eq:corr_hallpeinc} \boxed{
+\begin{array}{lcl}
+   -4 \varepsilon_{\nabla pe} &{}_{\overrightarrow{\rho = \rho_0}}& - 2 \frac{\lambda_i}{\sqrt{\rho_0}} \left< \delta \boldsymbol{v_A} \cdot \delta (\nabla \times \nabla \cdot \overline{\boldsymbol{P_{e}}}) \right> .
+   \end{array}}
+\end{equation} 
+Elle s'annule si $\overline{\boldsymbol{P_{e}}}$ est isotrope. 
+
+Linéairement, la pression électronique peut influer sur les critères d'instabilités. Si la fermeture sur les ions et celle sur les électrons sont \cacro{CGL} et l'équation d'induction est \cacro{MHD} ou \cacro{MHDH}, il suffira juste de prendre en compte des pressions parallèle et perpendiculaire totale (ionique + électronique) dans le taux d'anisotropie $a_p$ et le paramètre $\beta$ présents dans les critères firehose et miroir (voir synthèse \ref{synt-21}). Dans les simulations telles que l'équation d'induction prend en compte le terme en \cacro{Pe}, avec $\overline{\boldsymbol{P_{e}}}$ tenseur gyrotrope, le modèle est complété par une fermeture dite Landau-fluide qui tient compte de l'effet Landau linéaire sur les ions et les électrons ainsi que des critères d'instabilité firehose et miroir cinétique. Dans les autres simulations, la pression électronique est isotrope et définie avec une fermeture thermodynamique isotherme telle que  $p_e \propto \rho$,  et les ions sont \cacro{CGL}. Dans le cas de l'approximation \cacro{MHD}, l'équation de dispersion est : 
+\begin{equation}
+    \begin{pmatrix}
+\label{eq:lin_cpgpe_eqdis}    M_{xx}  & 0 & M_{xz} \\
+    0 & M_{yy}   & 0 \\
+     M_{zx} & 0 & M_{zz} 
+    \end{pmatrix} 
+    \cdot \begin{pmatrix}
+    v_{x1} \\ v_{y1} \\ v_{z1}
+    \end{pmatrix} = 0
+\end{equation}
+avec : 
+\begin{equation*}\begin{array}{rcl}
+    M_{xx} &=& \frac{\omega^2}{v^2_{A0}k^2_{\parallel}} -  \left(\beta_{\parallel 0} a_{p0}+1 + \frac{\beta_{e0}}{2}\right)  \frac{k^2_{\perp}}{k^2_{\parallel}} +   \left(\frac{\beta_{\parallel 0}}{2} \left(1-a_{p0}\right)-1\right),\\
+    M_{xz} &=&  M_{zx} = -  \left(\frac{\beta_{\parallel 0}}{2} a_{p0} + \frac{\beta_{e0}}{2}\right)\frac{k_{\perp}}{k_{\parallel}},\\
+    M_{yy} &=&  \frac{\omega^2}{v^2_{A0}k^2_{\parallel}} +   \left(\frac{\beta_{\parallel 0}}{2} \left(1-a_{p0}\right)-1\right),\\
+     M_{zz} &=& \frac{\omega^2}{ v^2_{A0}k^2_{\parallel}} -  \left(\frac{3}{2} \beta_{\parallel 0} + \frac{\beta_{e0}}{2}\right) .
+\end{array}\end{equation*}
+ La relation de dispersion s'écrit alors : 
+\begin{eqnarray}
+ \label{eq:lin_cpgpe_disp}   0 = \left(\frac{\omega^2}{k^2_{\parallel} v^2_{A0}} - 1 +   \frac{\beta_{\parallel 0}}{2} \left(1-a_{p0}\right) \right)\left(\frac{\omega^2}{k^2 v^2_{A0}} - \frac{1}{2}\left(A \pm \sqrt{A^2-4B}\right)\right)
+\end{eqnarray}
+avec 
+\begin{equation*}\begin{array}{rcl}
+    A &=& 1+ \beta_{\parallel 0}a_{p0} \left(1-\frac{1}{2}\cos^2 \theta\right)+\beta_{\parallel 0}\cos^2 \theta + \frac{\beta_{e0}}{2}, \\
+    B &=&\cos^2 \theta \left( \left(\frac{3}{2}\beta_{\parallel 0} + \frac{\beta_{e0}}{2}\right)\left(1-\frac{\beta_{\parallel 0}}{2} \left(1-a_{p0}\right)\right)\cos^2 \theta \right. \\
+    && \left. + \left(\frac{3}{2}\beta_{\parallel 0}\left(1+\beta_{\parallel 0}a_{p0}\left(1-\frac{1}{6}a_{p0}\right)\right)+  \frac{\beta_{e0}}{2} \left(\frac{3}{2}\beta_{\parallel 0} + 1\right)\right)\sin^2 \theta \right) .
+\end{array}\end{equation*}
+Le mode d'Alfvén-firehose incompressible n'est pas affecté par la pression électronique contrairement aux modes magnétosonores. Le critère firehose oblique n'est donc pas impacté. Le mode rapide reste stable et le mode lent contient toujours les critères firehose parallèle et miroir. Ces critères sont visibles dans $B$. Le critère firehose parallèle ($\theta \sim \ang{0}$) est multiplié par un facteur positif dépendant de  $\beta_{e0}$, il ne sera donc pas impacté. Le critère miroir est par contre influencé par $\beta_{e0}$, et s'écrit : 
+\begin{equation}
+ \label{eq:crit_miroir_elec}   \frac{3}{2} \beta_{\parallel 0}\left(1 + \beta_{\parallel 0} a_{p_0}\left(1-\frac{1}{6}a_{p0}\right)\right) + \frac{\beta_{e 0}}{2}\left( \frac{3}{2} \beta_{\parallel 0} + 1\right) < 0 .
+\end{equation}
+Ces résultats sont valables aux échelles \cacro{MHD}. On a vu dans la section \ref{sec-231} que la correction \cacro{Hall} est indépendante des pressions et n'influe que sur le critère firehose, elle ne sera donc pas affectée par la pression électronique isotrope. De plus, si la pression électronique est définie par une fermeture thermodynamique, la correction \cacro{Pe} sera nulle. Par conséquent, le critère miroir modifié par $\beta_{e0}$ que l'on vient de dériver est valable pour les modèles \cacro{MHD}, \cacro{MHDH} et \cacro{MHDHPe}. 
+
+% \newpage
+ \section{Synthèse de l'extension de la théorie des lois exactes à d'autres régimes}
+ \label{synt-23}
+
+\fcolorbox{blue}{white}{\begin{minipage}[c]{\linewidth}
+
+\paragraph{\\Correction Hall}
+\begin{itemize}
+\item Théorie linéaire : apparition des branches whistler et cyclotron ionique, critère miroir inchangé mais décalage du critère firehose suivant le vecteur d'onde. 
+\item Correction turbulente compressible : \eqref{eq:corr_hall}
+\item Correction incompressible à la loi exacte \cacro{PP98} : \eqref{eq:corr_hallinc}
+\end{itemize}
+$\Rightarrow$ Contribution turbulente indépendante des tenseurs de pressions \\
+\end{minipage}}
+
+\fcolorbox{red}{white}{\begin{minipage}[c]{\linewidth}
+\paragraph{Dérivations des contributions provenant de la loi d'Ohm généralisée à partir du modèle bi-fluide}
+\begin{itemize}
+\item Modèle bi-fluide \textbf{sans dimension} et ouvert utilisé pour obtenir la loi exacte généralisée : équations \eqref{eq:model_adbi_ri}, \eqref{eq:model_adbi_re}, \eqref{eq:model_adbi_vi}, \eqref{eq:model_adbi_ve}, \eqref{eq:model_adbi_ui}, \eqref{eq:model_adbi_ue}, \eqref{eq:model_adbi_EB1}, \eqref{eq:model_adbi_EB4}
+\item Loi exacte \cacro{K41} généralisée écrite avec les quantités bi-fluide: \eqref{eq:turb_bi_EL}
+\item \'Ecriture de la loi exacte \cacro{K41} bi-fluide avec les quantités mono-fluide et l'hypothèse quasi-neutre : 
+\begin{itemize}
+    \item Contribution cinétique : \eqref{eq:turb_bi_EL1-2} 
+    \item Contribution d'énergie interne : \eqref{eq:turb_bi_EL3-4}
+    \item Contribution des tenseur de pression : \eqref{eq:turb_bi_EL5-7}
+    \item Contribution électromagnétique : \eqref{eq:turb_bi_EL8-11B}
+\end{itemize}
+\item Décomposition de \eqref{eq:turb_bi_EL8-11B} suivant les différentes contributions présentes dans la loi d'Ohm généralisée quasi-neutre \eqref{eq:model_adbi_jqn} : 
+\begin{itemize}
+    \item Contribution \cacro{MHD} : \eqref{eq:turb_bin_TEMI} 
+    \item Contribution \cacro{Hall} : \eqref{eq:turb_bin_TEMH} équivalente à \eqref{eq:corr_hall}
+    \item Contribution \cacro{Pe} et \sacro{Pi} : \eqref{eq:turb_bin_TEMP}
+    \item Contribution inertielle : \eqref{eq:turb_bin_TEMN}
+\end{itemize}
+\end{itemize}
+$\Rightarrow$ Ouvre le champ d'études potentielles au régime \cacro{EMHD} par exemple, et à l'étude plus rigoureuse de l'impact sur la cascade turbulente des différentes appoximations appliquées à la loi d'Ohm. 
+
+\paragraph{\\Modèle utilisé dans la Partie \ref{part_3}} 
+\begin{itemize}
+\item Modèle ouvert utilisé pour obtenir la correction turbulente : équations \eqref{eq:model_simu_r},  \eqref{eq:model_simu_v}, \eqref{eq:model_simu_b}, \eqref{eq:model_simu_u}.
+\item Théorie linéaire : la pression électronique va venir impacter le critère d'instabilité miroir.
+\item Correction turbulente compressible : \eqref{eq:corr_pe}
+\item Correction incompressible à la loi exacte \cacro{PP98} : \eqref{eq:corr_hallpeinc}
+\end{itemize}
+Ces résultats n'ont pas encore été publiés.
+\end{minipage}}

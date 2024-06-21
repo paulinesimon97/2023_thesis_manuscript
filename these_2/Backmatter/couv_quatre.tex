@@ -1,0 +1,49 @@
+\newgeometry{
+        left=25mm,
+        right=25mm, 
+        top=15mm,
+        bottom=10mm}
+\thispagestyle{empty}
+%\begin{center}
+\hfill
+\begin{multicols}{3}{
+\begin{flushleft}
+    \large\auteur 
+\end{flushleft}
+\begin{center}
+    \large\bsc\diplome 
+\end{center}
+\begin{flushright}
+    \large\PhDannee 
+\end{flushright}}
+\end{multicols} 
+
+\begin{center}
+\linia
+\medskip
+    {\Large\titrefr} \\
+\linia
+\end{center}
+\medskip 
+    \normalsize\textbf{Résumé} : \\
+    \input{Metadata/resume_vulga} \\
+\medskip \\
+\textbf{Mots clés} : \\
+\keywordfr \\
+
+\medskip
+\begin{center}
+\linia
+\medskip
+    {\Large\titreen} \\
+\linia
+\end{center}
+\medskip
+    \textbf{Abstract} : \\
+    \input{Metadata/abstract_vulga} \\
+\medskip \\
+\textbf{Keywords} : \\
+\keyworden \\
+\vfill
+%\end{center}
+\restoregeometry

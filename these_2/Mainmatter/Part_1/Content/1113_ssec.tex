@@ -1,0 +1,142 @@
+\subsection{Des solutions linéaires des modèles fluides aux instabilités de pression}
+\label{ssec-1113}
+
+Pour linéariser le système, on sépare la part moyenne de chaque quantité et on l'indice avec 0. On remarque aussi que $\mathbf{v}_0 = 0$ et on suppose sans perte de généralité que $\mathbf{B_{0}} = [0,0,B_{0}]_{x,y,z}$. 
+
+\begin{eqnarray}
+ 0 &=&  \partial_t \rho + \rho_0 (\partial_x v_x + \partial_y v_y + \partial_z v_z) \nonumber \\
+  \color{blue}{0} & \color{blue}{=}& \color{blue}{ \partial_t p_{e} + p_{e0} (\partial_x v_x + \partial_y v_y + \partial_z v_z)}  \nonumber\\
+ 0 &=& \rho_0 \partial_t v_x + \frac{\beta_0}{2} \partial_x p_{\perp} + \frac{\beta_0}{2} \frac{1}{B_0}(p_{\parallel 0} - p_{\perp 0}) \partial_z B_x - \frac{B_0}{4\pi}(\partial_z B_x - \partial_x B_z) + \color{blue}{\frac{\beta_0}{2} \partial_x p_{e} } \nonumber\\
+ 0 &=& \rho_0 \partial_t v_y + \frac{\beta_0}{2} \partial_y p_{\perp} + \frac{\beta_0}{2} \frac{1}{B_0}(p_{\parallel 0} - p_{\perp 0}) \partial_z B_y - \frac{B_0}{4\pi}(\partial_z B_y - \partial_y B_z) + \color{blue}{\frac{\beta_0}{2} \partial_y p_{e} } \nonumber\\
+ 0 &=& \rho_0 \partial_t v_z + \frac{\beta_0}{2} \partial_z p_{\parallel} + \frac{\beta_0}{2} \frac{1}{B_0}(p_{\parallel 0} - p_{\perp 0}) (\partial_x B_x + \partial_y B_y) + \color{blue}{\frac{\beta_0}{2} \partial_z p_{e} }\nonumber\\ 
+ 0 &=& \partial_t B_x - B_0 \partial_z v_x  + {\color{red}d_i\frac{B_0 }{\rho_0} \partial_z (\partial_y B_z - \partial_z B_y) }\nonumber \\
+ 0 &=& \partial_t B_y - B_0 \partial_z v_y  + {\color{red}d_i\frac{B_0 }{\rho_0} \partial_z (\partial_z B_x - \partial_x B_z) }\nonumber \\
+ 0 &=& \partial_t B_z + B_0 (\partial_x v_x + \partial_y v_y)  + {\color{red}d_i \frac{B_0 }{\rho_0}\partial_z (\partial_x B_y   - \partial_y  B_x) } \nonumber\\
+ 0 &=& \partial_t p_{\parallel} + p_{\parallel 0}  (\partial_x v_x + \partial_y v_y + 3 \partial_z v_z) \nonumber\\
+0 &=& \partial_t p_{\perp} + p_{\perp 0} (2\partial_x v_x + 2\partial_y v_y + \partial_z v_z) \nonumber
+\end{eqnarray}
+
+On passe dans l'espace de Fourier ($\partial_t \rightarrow -i \omega$, $\partial_x \rightarrow i k_{\perp} $, $\partial_y \rightarrow i k_y $, $\partial_z \rightarrow i k_{\parallel} $) et on se place tel que $k_y = 0$. 
+
+\begin{eqnarray}
+ 0 &=&  - \omega \rho + \rho_0 ( k_{\perp} v_x +  k_{\parallel} v_z)  \nonumber\\
+   \color{blue}{0} & \color{blue}{=}& \color{blue}{ - \omega  p_{e} + p_{e0} ( k_{\perp} v_x +  k_{\parallel} v_z)} \nonumber \\
+ 0 &=& - \rho_0 \omega v_x + \frac{\beta_0}{2} k_{\perp} p_{\perp} + \frac{\beta_0}{2} \frac{1}{B_0}(p_{\parallel 0} - p_{\perp 0}) k_{\parallel} B_x - \frac{B_0}{4\pi}(k_{\parallel} B_x -k_{\perp} B_z) + \color{blue}{\frac{\beta_0}{2} k_{\perp} p_{e} } \nonumber\\
+ 0 &=& - \rho_0 \omega v_y  + \frac{\beta_0}{2} \frac{1}{B_0}(p_{\parallel 0} - p_{\perp 0}) k_{\parallel} B_y - \frac{B_0}{4\pi}(k_{\parallel} B_y ) \nonumber \\
+ 0 &=& - \rho_0 \omega v_z + \frac{\beta_0}{2} k_{\parallel} p_{\parallel} + \frac{\beta_0}{2}\frac{1}{B_0}(p_{\parallel 0} - p_{\perp 0}) (k_{\perp} B_x ) + \color{blue}{\frac{\beta_0}{2} k_{\parallel} p_{e} }\nonumber\\ 
+ 0 &=&  - \omega   B_x - B_0 k_{\parallel} v_x  {\color{red} - d_i\frac{B_0 }{\rho_0} k^2_{\parallel} B_y }  \nonumber\\ 
+ 0 &=& - \omega  B_y - B_0 k_{\parallel} v_y  + {\color{red}d_i\frac{B_0 }{\rho_0} k_{\parallel} (k_{\parallel} B_x - k_{\perp} B_z) } \nonumber\\
+ 0 &=& - \omega B_z + B_0 k_{\perp} v_x   + {\color{red}d_i \frac{B_0 }{\rho_0}k_{\parallel}  k_{\perp} B_y  } \nonumber \\
+ 0 &=& - \omega p_{\parallel} + p_{\parallel 0}  (k_{\perp} v_x + 3 k_{\parallel} v_z)\nonumber \\
+0 &=& - \omega p_{\perp} + p_{\perp 0} (2k_{\perp} v_x +k_{\parallel} v_z) \nonumber
+\end{eqnarray}
+
+En notant $v^2_{A0} = \frac{B^2_0}{4\pi \rho_0}$, $\beta_{\parallel} = \beta_0 \frac{4\pi p_{\parallel 0}}{B^2_0} $ et $a_p = \frac{p_{\perp 0}}{p_{\parallel 0}}$, $D_i = \frac{d_i}{\rho_0}$, $\beta_{e} = \beta_0 \frac{4\pi p_{e 0}}{B^2_0} $ : 
+  
+
+\begin{eqnarray}
+ \omega \rho&=&   + \rho_0 ( k_{\perp} v_x +  k_{\parallel} v_z) \nonumber \\
+ \color{blue}{ \omega  \frac{p_{e}}{p_{e0}}} & \color{blue}{=}& \color{blue}{( k_{\perp} v_x +  k_{\parallel} v_z)}  \nonumber\\
+ 0 &=& - \frac{1 }{v^2_{A0}}\omega^2 v_x + \frac{\beta_{\parallel}}{2} a_p k_{\perp} \omega \frac{p_{\perp}}{p_{\perp 0}}  + (\frac{\beta_{\parallel}}{2}  (1 - a_p) -1) k_{\parallel} \omega \frac{B_x}{B_0} +k_{\perp} \omega \frac{B_z}{B_0}  + \color{blue}{\frac{\beta_{e}}{2} k_{\perp} \omega \frac{p_e}{p_{e0}} }\nonumber \\
+ 0 &=& - \frac{1 }{v^2_{A0}} \omega^2 v_y  + (\frac{\beta_{\parallel}}{2}  (1 - a_p) -1)(k_{\parallel}  \omega \frac{B_y}{B_0} ) \nonumber \\
+ 0 &=& - \frac{1 }{v^2_{A0}} \omega^2 v_z  +\frac{\beta_{\parallel}}{2} k_{\parallel} \omega \frac{p_{\parallel}}{p_{\parallel 0}} + \frac{\beta_{\parallel}}{2}  (1 - a_p) (k_{\perp} \omega \frac{B_x}{B_0} ) + \color{blue}{\frac{\beta_{e}}{2} k_{\parallel} \omega \frac{p_e}{p_{e0}} } \nonumber\\ 
+0 &=&  - \omega   \frac{B_x}{B_0} -  k_{\parallel} v_x  {\color{red} - D_i k^2_{\parallel} B_y } \nonumber \\ 
+ 0 &=& - \omega  \frac{B_y}{B_0} -  k_{\parallel} v_y  + {\color{red}D_i k_{\parallel} (k_{\parallel} B_x - k_{\perp} B_z) } \nonumber\\
+ 0 &=& - \omega \frac{B_z}{B_0} +  k_{\perp} v_x   + {\color{red}D_ik_{\parallel}  k_{\perp} B_y  }\nonumber  \\
+ \omega \frac{p_{\parallel}}{p_{\parallel 0}} &=&    (k_{\perp} v_x + 3 k_{\parallel} v_z) \nonumber\\
+ \omega \frac{p_{\perp}}{p_{\perp 0}} &=&   (2k_{\perp} v_x +k_{\parallel} v_z) \nonumber
+\end{eqnarray}
+
+Réduction et rassemblement cas hall
+\begin{eqnarray}
+ 0 &=&  - \frac{1 }{v^2_{A0}}\omega^2 v_x + \frac{\beta_{\parallel}}{2} a_p k_{\perp}(2k_{\perp} v_x +k_{\parallel} v_z)  + (\frac{\beta_{\parallel}}{2}  (1 - a_p) -1) k_{\parallel} \omega \frac{B_x}{B_0} +k_{\perp} \omega \frac{B_z}{B_0}   \nonumber\\
+  0 &=& - \frac{1 }{v^2_{A0}} \omega^2 v_y  + (\frac{\beta_{\parallel}}{2}  (1 - a_p) -1)k_{\parallel}  \omega \frac{B_y}{B_0} \nonumber  \\
+ 0 &=&  - \frac{1 }{v^2_{A0}} \omega^2 v_z  +\frac{\beta_{\parallel}}{2} k_{\parallel} (k_{\perp} v_x + 3 k_{\parallel} v_z) + \frac{\beta_{\parallel}}{2}  (1 - a_p) (k_{\perp} \omega \frac{B_x}{B_0} )\nonumber \\ 
+0 &=&  - \omega   \frac{B_x}{B_0} -  k_{\parallel} v_x  {\color{red} - D_i k^2_{\parallel} B_y }  \nonumber\\ 
+ 0 &=& - \omega  \frac{B_y}{B_0} -  k_{\parallel} v_y  + {\color{red}D_i k_{\parallel} (k_{\parallel} B_x - k_{\perp} B_z) } \nonumber\\
+ 0 &=& - \omega \frac{B_z}{B_0} +  k_{\perp} v_x   + {\color{red}D_ik_{\parallel}  k_{\perp} B_y  }  \nonumber
+\end{eqnarray}
+
+\begin{eqnarray}
+( \frac{1 }{v^2_{A0}}\omega^2 - 2\frac{\beta_{\parallel}}{2} a_p k^2_{\perp} ) v_x &=&  \frac{\beta_{\parallel}}{2} a_p k_{\perp}k_{\parallel} v_z  + (\frac{\beta_{\parallel}}{2}  (1 - a_p) -1) k_{\parallel} \omega \frac{B_x}{B_0} +k_{\perp} \omega \frac{B_z}{B_0}  \nonumber \\
+ (\frac{1 }{v^2_{A0}} \omega^2) v_y &=&    (\frac{\beta_{\parallel}}{2}  (1 - a_p) -1)k_{\parallel}  \omega \frac{B_y}{B_0}  \nonumber \\
+(\frac{1 }{v^2_{A0}} \omega^2 - 3 \frac{\beta_{\parallel}}{2} k^2_{\parallel}) v_z &=&  \frac{\beta_{\parallel}}{2} k_{\parallel} k_{\perp} v_x  + \frac{\beta_{\parallel}}{2}  (1 - a_p) (k_{\perp} \omega \frac{B_x}{B_0} )\nonumber \\ 
+(\omega^2  {\color{red} + D^2_i B^2_0 k^2_{\parallel} (k^2_{\parallel} + k^2_{\perp}) } )   B_x &=&  -  B_0  \omega   k_{\parallel} v_x    {\color{red} + D_i B^2_0  k^3_{\parallel} v_y  }  \nonumber\\ 
+ (\omega^2  {\color{red} + D^2_i B^2_0 k^2_{\parallel} (k^2_{\parallel} + k^2_{\perp}) } ) B_y &=&   - B_0 \omega k_{\parallel} v_y  {\color{red}  - D_i B^2_0 k_{\parallel} (k^2_{\parallel} + k^2_{\perp}) v_x} \nonumber  \\
+ (\omega^2  {\color{red} + D^2_i B^2_0 k^2_{\parallel} (k^2_{\parallel} + k^2_{\perp}) } )  B_z &=&   B_0 \omega    k_{\perp} v_x       {\color{red}  -  D_i B^2_0 k^2_{\parallel}  k_{\perp}   v_y } \nonumber 
+\end{eqnarray}
+
+\begin{eqnarray}
+0 &=& ((\frac{\omega^2 }{v^2_{A0}}   - (2\frac{\beta_{\parallel}}{2} a_p +1) k^2_{\perp} +  (\frac{\beta_{\parallel}}{2}  (1 - a_p) -1) k^2_{\parallel}) \omega ^2  {\color{red}+ D^2_i B^2_0k^2_{\parallel} (k^2_{\parallel} + k^2_{\perp}) (\frac{ \omega ^2 }{v^2_{A0}} - 2\frac{\beta_{\parallel}}{2} a_p  k^2_{\perp})}    )   v_x \nonumber\\
+&& {\color{red}  + D_i B_0  (  k^2_{\perp}    - (\frac{\beta_{\parallel}}{2}  (1 - a_p) -1)   k^2_{\parallel} )k^2_{\parallel}\omega v_y  }  -\frac{\beta_{\parallel}}{2} a_p k_{\perp}k_{\parallel}  (\omega^2  {\color{red} + D^2_i B^2_0 k^2_{\parallel} (k^2_{\parallel} + k^2_{\perp}) } ) v_z  \nonumber\\
+ 0 &=& {\color{red} D_i B_0  (\frac{\beta_{\parallel}}{2}  (1 - a_p) -1)k^2_{\parallel}   (k^2_{\parallel} + k^2_{\perp}) v_x} + ( \frac{\omega^2 }{v^2_{A0}} + (\frac{\beta_{\parallel}}{2}  (1 - a_p) -1)k^2_{\parallel} {\color{red} + \frac{D^2_i B^2_0 }{v^2_{A0}}  k^2_{\parallel} (k^2_{\parallel} + k^2_{\perp}) }    )\omega v_y \nonumber\\
+ 0 &=&  - \frac{\beta_{\parallel}}{2} k_{\parallel} k_{\perp} (  \omega^2 (1  -  (1 - a_p)) {\color{red} + D^2_i B^2_0 k^2_{\parallel} (k^2_{\parallel} + k^2_{\perp}) } ) v_x   {\color{red} -\omega D_i B_0  \frac{\beta_{\parallel}}{2}  (1 - a_p) k_{\perp}  k^3_{\parallel} v_y  }\nonumber \\
+ && + (\omega^2  {\color{red} + D^2_i B^2_0 k^2_{\parallel} (k^2_{\parallel} + k^2_{\perp}) } )(\frac{1 }{v^2_{A0}} \omega^2 - 3 \frac{\beta_{\parallel}}{2} k^2_{\parallel}) v_z\nonumber 
+\end{eqnarray}
+
+
+Réduction et rassemblement cas idéal
+\begin{eqnarray}
+ 0 &=& - \frac{1 }{v^2_{A0}}\omega^2 v_x + \frac{\beta_{\parallel}}{2} a_p k_{\perp}(2k_{\perp} v_x +k_{\parallel} v_z)  - (\frac{\beta_{\parallel}}{2}  (1 - a_p) -1) k_{\parallel} k_{\parallel} v_x +k_{\perp}k_{\perp} v_x  \nonumber\\
+ 0 &=& (- \frac{1 }{v^2_{A0}} \omega^2   - (\frac{\beta_{\parallel}}{2}  (1 - a_p) -1)k^2_{\parallel} ) v_y  \nonumber \\
+ 0 &=& - \frac{1 }{v^2_{A0}} \omega^2 v_z  +\frac{\beta_{\parallel}}{2} k_{\parallel} (k_{\perp} v_x + 3 k_{\parallel} v_z) - \frac{\beta_{\parallel}}{2}  (1 - a_p) k_{\perp} k_{\parallel} v_x    \nonumber
+\end{eqnarray}
+
+\begin{eqnarray}
+0 &=& ( - \frac{1 }{v^2_{A0}}\omega^2+(2\frac{\beta_{\parallel}}{2} a_p +1)k^2_{\perp} - (\frac{\beta_{\parallel}}{2}  (1 - a_p) -1) k^2_{\parallel}   )v_x + (\frac{\beta_{\parallel}}{2} a_p k_{\perp}k_{\parallel})v_z \nonumber\\
+ 0 &=& (- \frac{1 }{v^2_{A0}} \omega^2   - (\frac{\beta_{\parallel}}{2}  (1 - a_p) -1)k^2_{\parallel}  ) v_y   \nonumber\\
+ 0 &=& (- \frac{1 }{v^2_{A0}} \omega^2  + 3\frac{\beta_{\parallel}}{2} k^2_{\parallel}  ) v_z +\frac{\beta_{\parallel}}{2} a_p k_{\perp} k_{\parallel} v_x   \nonumber
+\end{eqnarray}
+
+Recherche des solutions
+
+if $v_y \neq 0$ : $\omega = \pm k_{\parallel} v_{A0} \sqrt{1-(\frac{\beta_{\parallel}}{2} (1 - a_p) )} $ => firehose
+
+if $v_y = 0$ : $\frac{1}{v^2_{A0}} \omega^2  \neq  (1- \frac{\beta_{\parallel}}{2} (1 - a_p) ) k^2_{\parallel} $
+
+\begin{eqnarray}
+0 &=& ( - \frac{1 }{v^2_{A0}}\omega^2+(2\frac{\beta_{\parallel}}{2} a_p +1)k^2_{\perp} - (\frac{\beta_{\parallel}}{2}  (1 - a_p) -1) k^2_{\parallel}   )v_x + (\frac{\beta_{\parallel}}{2} a_p k_{\perp}k_{\parallel})v_z \nonumber\\
+ 0 &=& (- \frac{1 }{v^2_{A0}} \omega^2  + 3\frac{\beta_{\parallel}}{2} k^2_{\parallel}  ) v_z +\frac{\beta_{\parallel}}{2}a_p k_{\perp} k_{\parallel} v_x   \nonumber
+\end{eqnarray}
+
+\begin{eqnarray}
+0 &=& (- \frac{1 }{v^2_{A0}} \omega^2  + 3\frac{\beta_{\parallel}}{2} k^2_{\parallel}  ) ( - \frac{1 }{v^2_{A0}}\omega^2+(2\frac{\beta_{\parallel}}{2} a_p +1)k^2_{\perp} - (\frac{\beta_{\parallel}}{2}  (1 - a_p) -1) k^2_{\parallel}   ) \nonumber\\
+&&- \frac{\beta^2_{\parallel}}{4} a_p (1 - (1 - a_p)) k^2_{\perp} k^2_{\parallel}  \nonumber\\
+&=& \frac{1 }{v^4_{A0}} \omega^4 - \frac{1 }{v^2_{A0}} \omega^2 ((2\frac{\beta_{\parallel}}{2} a_p +1)k^2_{\perp} +(\frac{\beta_{\parallel}}{2} (2+a_p) +1) k^2_{\parallel} ) \nonumber\\
+&&+\frac{\beta_{\parallel}}{2}(\frac{\beta_{\parallel}}{2}a_p (6  -  a_p)  +3) k^2_{\perp} k^2_{\parallel}  - \frac{\beta_{\parallel}}{2}(3\frac{\beta_{\parallel}}{2}  (1 - a_p) -3) k^4_{\parallel}  \nonumber 
+\end{eqnarray}
+Solution instable si $\frac{\beta_{\parallel}}{2}(\frac{\beta_{\parallel}}{2}a_p (6  -  a_p)  +3) k^2_{\perp}  + 3\frac{\beta_{\parallel}}{2}(1-\frac{\beta_{\parallel}}{2}  (1 - a_p) ) k^2_{\parallel}   <0$
+
+Réduction et rassemblement cas idéal ($d_i=0$) avec $p_e$
+\begin{eqnarray}
+ 0 &=& - \frac{1 }{v^2_{A0}}\omega^2 v_x + \frac{\beta_{\parallel}}{2} a_p k_{\perp}(2k_{\perp} v_x +k_{\parallel} v_z)  - (\frac{\beta_{\parallel}}{2}  (1 - a_p) -1) k_{\parallel} k_{\parallel} v_x +k_{\perp}k_{\perp} v_x {\color{blue} + \frac{\beta_e}{2} k_{\perp}(k_{\perp} v_x +k_{\parallel} v_z)} \nonumber\\
+ 0 &=& (- \frac{1 }{v^2_{A0}} \omega^2   - (\frac{\beta_{\parallel}}{2}  (1 - a_p) -1)k^2_{\parallel} ) v_y  \nonumber \\
+ 0 &=& - \frac{1 }{v^2_{A0}} \omega^2 v_z  +\frac{\beta_{\parallel}}{2} k_{\parallel} (k_{\perp} v_x + 3 k_{\parallel} v_z) - \frac{\beta_{\parallel}}{2}  (1 - a_p) k_{\perp} k_{\parallel} v_x {\color{blue}+ \frac{\beta_e}{2} k_{\parallel}(k_{\perp} v_x +k_{\parallel} v_z)}  \nonumber
+\end{eqnarray}
+
+\begin{eqnarray}
+0 &=& ( - \frac{1 }{v^2_{A0}}\omega^2+(2\frac{\beta_{\parallel}}{2} a_p +1{\color{blue}+ \frac{\beta_e}{2}})k^2_{\perp} - (\frac{\beta_{\parallel}}{2}  (1 - a_p) -1) k^2_{\parallel}     )v_x + (\frac{\beta_{\parallel}}{2} a_p{\color{blue}+ \frac{\beta_e}{2}}) k_{\perp}k_{\parallel}v_z \nonumber\\
+ 0 &=& (- \frac{1 }{v^2_{A0}} \omega^2   - (\frac{\beta_{\parallel}}{2}  (1 - a_p) -1)k^2_{\parallel}  ) v_y   \nonumber\\
+ 0 &=& (- \frac{1 }{v^2_{A0}} \omega^2  + (3\frac{\beta_{\parallel}}{2} {\color{blue}+ \frac{\beta_e}{2}}) k^2_{\parallel}  ) v_z +(\frac{\beta_{\parallel}}{2} a_p{\color{blue}+ \frac{\beta_e}{2}}) k_{\perp} k_{\parallel} v_x   \nonumber
+\end{eqnarray}
+
+Recherche des solutions
+
+if $v_y \neq 0$ : $\omega = \pm k_{\parallel} v_{A0} \sqrt{1-(\frac{\beta_{\parallel}}{2} (1 - a_p) )} $ => firehose
+
+if $v_y = 0$ : $\frac{1}{v^2_{A0}} \omega^2  \neq  (1- \frac{\beta_{\parallel}}{2} (1 - a_p) ) k^2_{\parallel} $
+
+\begin{eqnarray}
+0 &=& ( - \frac{1 }{v^2_{A0}}\omega^2+(2\frac{\beta_{\parallel}}{2} a_p +1{\color{blue}+ \frac{\beta_e}{2}})k^2_{\perp} - (\frac{\beta_{\parallel}}{2}  (1 - a_p) -1) k^2_{\parallel}   )v_x + (\frac{\beta_{\parallel}}{2} a_p{\color{blue}+ \frac{\beta_e}{2}})k_{\perp}k_{\parallel}v_z \nonumber\\
+ 0 &=& (- \frac{1 }{v^2_{A0}} \omega^2  + (3\frac{\beta_{\parallel}}{2} {\color{blue}+ \frac{\beta_e}{2}}) k^2_{\parallel}  ) v_z +(\frac{\beta_{\parallel}}{2} a_p{\color{blue}+ \frac{\beta_e}{2}}) k_{\perp} k_{\parallel} v_x   \nonumber
+\end{eqnarray}
+
+\begin{eqnarray}
+0 &=& (- \frac{1 }{v^2_{A0}} \omega^2  +(3\frac{\beta_{\parallel}}{2} {\color{blue}+ \frac{\beta_e}{2}})k^2_{\parallel}  ) ( - \frac{1 }{v^2_{A0}}\omega^2+(2\frac{\beta_{\parallel}}{2} a_p +1{\color{blue}+ \frac{\beta_e}{2}})k^2_{\perp} - (\frac{\beta_{\parallel}}{2}  (1 - a_p) -1) k^2_{\parallel}   ) \nonumber\\
+&&- (\frac{\beta_{\parallel}}{2} a_p{\color{blue}+ \frac{\beta_e}{2}})^2  k^2_{\perp} k^2_{\parallel}  \nonumber\\
+&=& \frac{1 }{v^4_{A0}} \omega^4 - \frac{1 }{v^2_{A0}} \omega^2 ((2\frac{\beta_{\parallel}}{2} a_p +1{\color{blue}+ \frac{\beta_e}{2}})k^2_{\perp} +(\frac{\beta_{\parallel}}{2} (2+a_p) +1{\color{blue}+ \frac{\beta_e}{2}}) k^2_{\parallel} ) \nonumber\\
+&&+((3\frac{\beta_{\parallel}}{2} {\color{blue}+ \frac{\beta_e}{2}})(2\frac{\beta_{\parallel}}{2} a_p +1{\color{blue}+ \frac{\beta_e}{2}})- (\frac{\beta_{\parallel}}{2} a_p{\color{blue}+ \frac{\beta_e}{2}})^2 ) k^2_{\perp} k^2_{\parallel}  - (3\frac{\beta_{\parallel}}{2} {\color{blue}+ \frac{\beta_e}{2}})(\frac{\beta_{\parallel}}{2}  (1 - a_p) -1) k^4_{\parallel}  \nonumber\\
+&=& \frac{1 }{v^4_{A0}} \omega^4 - \frac{1 }{v^2_{A0}} \omega^2 ((2\frac{\beta_{\parallel}}{2} a_p +1{\color{blue}+ \frac{\beta_e}{2}})k^2_{\perp} +(\frac{\beta_{\parallel}}{2} (2+a_p) +1{\color{blue}+ \frac{\beta_e}{2}}) k^2_{\parallel} ) \nonumber\\
+&&+(\frac{\beta_{\parallel}}{2}(\frac{\beta_{\parallel}}{2}a_p (6  -  a_p)  +3) {\color{blue}+ \frac{\beta_e}{2} (3\frac{\beta_{\parallel}}{2} +1)}  ) k^2_{\perp} k^2_{\parallel}  - (3\frac{\beta_{\parallel}}{2} {\color{blue}+ \frac{\beta_e}{2}})(\frac{\beta_{\parallel}}{2}  (1 - a_p) -1) k^4_{\parallel}  \nonumber  
+\end{eqnarray}
+Solution instable si $(\frac{\beta_{\parallel}}{2}(\frac{\beta_{\parallel}}{2}a_p (6  -  a_p)  +3)  {\color{blue}+ \frac{\beta_e}{2} (3\frac{\beta_{\parallel}}{2} +1)} ) k^2_{\perp}  + (3\frac{\beta_{\parallel}}{2} {\color{blue}+ \frac{\beta_e}{2}})(1-\frac{\beta_{\parallel}}{2}  (1 - a_p) ) k^2_{\parallel}   <0$

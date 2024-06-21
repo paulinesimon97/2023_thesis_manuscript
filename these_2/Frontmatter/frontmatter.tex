@@ -1,0 +1,36 @@
+\input{Frontmatter/couv_un}
+
+\pagevide 
+
+\input{Frontmatter/page_titre}
+
+\input{Frontmatter/page_credits}
+
+\input{Frontmatter/page_dedicace}
+
+\newpage                    % verso page de dédicace
+\pagevide
+\setcounter{page}{0}
+
+\newpage 
+
+\justifying
+\input{Frontmatter/notice}
+
+\input{Frontmatter/remerciements}
+
+
+\chapter{Résumé détaillé}
+\input{Metadata/resume}
+
+\chapter{Detailed abstract}
+\input{Metadata/abstract}
+
+%\sommaire
+\pagevide
+\shorttoc{Sommaire}{0}
+\renewcommand\partie{Sommaire}
+\addcontentsline{toc}{chapter}{Sommaire} 
+\mtcaddchapter
+%\newpage                    % verso page sommaire
+%\pagevide

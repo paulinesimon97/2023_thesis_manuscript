@@ -1,0 +1,38 @@
+
+\cleardoublepage\phantomsection
+\pagepart
+        {ANNEXES}
+        {part_an}
+        {ANNEXES : Chapitre}
+        {ANNEXES : }
+        {}
+        
+%\extraPartText{ }
+
+% \part*{\linia
+%         \bigskip
+%         ANNEXES
+%         \bigskip
+%         \linia}
+% 
+% \addtocontents{toc}{\protect\vspace{2ex}\textbf{ANNEXES }\par}     
+% \refstepcounter{part}\label{part_an}
+% \renewcommand{\chaptername}{ANNEXES : Chapitre}
+% \renewcommand\Partie{ANNEXES : }
+\setcounter{chapter}{0}
+
+\annexe{Explication mathématique et interprétation des termes des lois KHM}{an:A}\input{Mainmatter/Part_Appendix/chp_A}
+
+\annexe{Validation et comparaison des lois exactes avec pression isotrope}{an:B}\input{Mainmatter/Part_Appendix/chp_B}
+
+\chapter{Details du terme correctif anisotrope pour CGL3B, CGL5 et CGL6}\label{an:Pi}
+        \renewcommand\partie{\Partie\ Annexe \thechapter}
+        
+ \begin{figure}[!ht]
+  \centering
+  \includegraphics[width=0.8\linewidth,trim=0cm 1.3cm 0cm 0.5cm, clip=true]{./Mainmatter/Part_3/images_ch3/CGL3B_compa_cgl}
+ \includegraphics[width=0.8\linewidth,trim=0cm 1.3cm 0cm 0.5cm, clip=true]{./Mainmatter/Part_3/images_ch3/CGL5_compa_cgl}
+  \includegraphics[width=0.8\linewidth,trim=0cm 0.5cm 0cm 0.5cm, clip=true]{./Mainmatter/Part_3/images_ch3/CGL6_compa_cgl}
+ \cprotect\caption{Simu : CGL3B (haut), CGL5 (milieu) et  CGL6 (bas). Représentation \cacro{1D} en fonction de \ensuremath{\ell_{\perp}} du détail de \ensuremath{\varepsilon_{\overline{\boldsymbol{\Pi}}}} (bleu). Orange : \ensuremath{\nabla_{\boldsymbol{\ell}} \cdot \boldsymbol{\mathcal{F}_A}}. Vert : \ensuremath{\mathcal{S}_{A1}}. Rouge : \ensuremath{\mathcal{S}_{A2}}. Violet : \ensuremath{\mathcal{S}_{A3}}. Gris : niveau d'erreur \ensuremath{\zeta}. Les termes présents dans la zone grise délimitée par \ensuremath{\zeta} sont supposés négligeables. }
+ \label{fig:detail_pi_CGL3B-5-6}
+ \end{figure}

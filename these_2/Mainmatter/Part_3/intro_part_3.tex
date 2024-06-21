@@ -1,0 +1,66 @@
+L'outil numérique pour la turbulence permet d'étudier divers modèles, d'isoler les effets des différents processus présents dans un plasma turbulent ou de simuler des régimes présents dans des plasmas inaccessibles aux mesures/diagnostics. Par exemple, les effets de la compression et les régimes sonique ou supersonique ont été étudiés par \cite{andres_energy_2018} et des régimes proches de celui supposé dans le milieu interstellaire ont été explorés par \cite{federrath_comparing_2010} et \cite{ferrand_compressible_2020}. L'impact de l'approximation \cacro{Hall} sur la cascade incompressible d'énergie totale est le sujet de \cite{ferrand_exact_2019} et celui de la fermeture \cacro{LF} a fait l'objet de [\cite{ferrand_fluid_2021}]. Comme on le verra par la suite, le modèle \cacro{LF} est un modèle gyrotrope fermé au niveau du flux de chaleur de telle sorte que le modèle fluide capte le processus cinétique de l'effet Landau décrit par la théorie linéaire. Dans ces simulations, on a alors $\nabla \cdot \overline{\overline{\boldsymbol{q}}} \neq 0$.
+
+Dans les études présentées ici, nous allons utiliser des simulations qui ont, pour certaines, fait l'objet de [\cite{ferrand_fluid_2021}]. Le code de simulation et notre méthode de post-traitement permettant d'obtenir les différents termes des lois exactes, seront présentés dans le chapitre \ref{ch-31}. Différentes méthodes de validation feront l'objet du chapitre \ref{ch-32}. Puis, nous présenterons et analyserons, plus en détail, la cascade turbulente présente dans divers jeux de données. Ceux issus de simulations du modèle \sacro{CGLHPe} feront l'objet du Chapitre \ref{ch-33} et ceux associés au modèle \sacro{LFHPe} du Chapitre \ref{ch-34}.  
+
+L'objectif de ces études est d'affiner notre compréhension de l'impact de l'anisotropie de pression sur la cascade turbulente à travers une validation des lois dépendant d'une pression gyrotrope (voir Chapitre \ref{ch-21}) par rapport à la loi compressible avec pression isotrope dérivée dans le Chapitre \ref{ch-13}. 
+
+Les résultats de ces études n'ont pas encore été publiés et leur interprétation est encore en cours de discussion\footnote{Le chemin engagé pour obtenir les résultats montrés ici s'est révélé tortueux entre la réflexion sur les méthodes à utiliser dans le code de post-traitement, l'implémentation de ces méthodes, la nécessité de lancer de nouvelles simulations, etc. }.
+
+\newpage
+
+\section*{Paramètres et dénominations des simulations utilisées}
+\addcontentsline{toc}{section}{Paramètres et dénominations des simulations utilisées}
+Les paramètres et dénominations des simulations utilisées sont résumés dans la \tabref{tab:setups} et la \tabref{tab:setups_hd}. Nous nous y réfèrerons au fil des chapitres de cette partie. Le champ magnétique est initialisé suivant $\boldsymbol{e_z}$. CGL1, CGL2, CGL3, LF2 et LF3 ont initialement été étudiées par \cite{ferrand_fluid_2021} mais les échantillons de temps consécutifs ont été extraits pour nos études. Les simulations CGL5 et CGL6 ont été spécialement lancées pour nos études.
+ 
+  \begin{table}[!ht]
+ \begin{center}
+ \begin{tabular}{ c|c|c|c|c|c|c|c|c } 
+ Nom & Résolution & $k_{0 \perp}d_i$ & $\theta_i$ & $E_{sup}$ &  $A_f$ & $t_I$ & $N_t$ & $\delta t$  \\
+ \hline
+ CGL1 & $512^3$ & $\num{0.045}$ & $\ang{7}$ & $\num{1.6e-2}$ & $\num{1.0e-3}$ & $\num{6700}$ & $\num{4}$ & $\num{6.25e-2}$\\
+ CGL2  & $512^3$ & $\num{0.045}$ & $\ang{15}$ & $\num{1.6e-2}$& $\num{1.0e-3}$ & $\num{12900}$ & $\num{4}$ & $\num{5e-2}$ \\
+ CGL3 & $512^2 \times 1024$ & $\num{0.5}$ & $\ang{15}$ &  $\num{4.5e-2}$& $\num{8.0e-3}$ & $\num{361}$&$\num{6}$ & $\num{2e-4}$ \\
+ CGL3B & $512^2 \times 1024$ & $\num{0.5}$ & $\ang{15}$ &  $\num{1.125e-2}$ &$\num{4.0e-3}$ & $\num{410}$ & $\num{4}$ & $\num{3e-4}$ \\
+ CGL5 & $512^2 \times 1024$ & $\num{0.147}$ & $\ang{15}$ & $\num{1.6e-2}$ &$\num{3.0e-3}$  &$\num{12905}$ & $\num{6}$ & $\num{5e-3}$ \\
+ CGL6 & $512^2 \times 1024$ & $\num{0.147}$ & $\ang{15}$ & $\num{1.6e-2}$ &$\num{3.0e-3}$  &$\num{2730}$ & $\num{4}$ & $\num{5e-3}$\\
+ \hline
+ %LF1 & $512^3$ & $\num{0.045}$ & $\ang{7}$ & $\num{1.6e-2}$& $\num{1e-3}$ &$\num{3420}$ &  $\num{1}$ & $\num{6.25e-2}$ \\
+ LF2  & $512^3$ & $\num{0.045}$ & $\ang{15}$ & $\num{1.6e-2}$ & $\num{1e-3}$ & $\num{6580}$ &  $\num{1}$ & $\num{6.25e-2}$  \\
+ LF3 & $432^3$ & $\num{0.5}$ & $\ang{15}$ & $\num{4.5e-2}$ & $\num{8e-3}$ &$\num{180.2}$  &  $\num{1}$ & $\num{4e-4}$  \\
+ %LF4 & $512^3$ & $\num{0.011}$ & $\ang{15}$ & $\num{4.03e-2}$& $\num{2.5e-3}$ &$\num{17900}$ &  $\num{1}$ & $\num{1.5625e-1}$  
+ \end{tabular}
+% 
+\cprotect\caption{Extraits des paramètres des simulations traitées. \\Résolution : Nombre de points dans la grille numérique du code de simulation. \\ 
+\ensuremath{k_{0 \perp}d_i} : vecteur d'onde d'injection perpendiculaire à \ensuremath{\boldsymbol{e_z}} normalisé par la longueur inertielle \ensuremath{d_i} et lié à \ensuremath{L_{\perp} =\frac{2\pi}{k_{0}}}, la taille physique perpendiculaire de la grille simulée. \\ 
+\ensuremath{\theta_i} : angle d'injection par rapport à \ensuremath{\boldsymbol{e_z}}, lié à \ensuremath{L_{z} =\frac{L_{\perp}}{\tan \theta_i }}. \\ 
+\ensuremath{E_{sup}}  : énergie perpendiculaire cinétique + magnétique, critère d'extinction du forçage. \\ 
+\ensuremath{A_f} : paramètre d'amplitude du forçage.\\
+\ensuremath{t_I} : temps initial (en unité de temps ionique) de prélèvement de l'échantillon temporel utilisé pour l'étude le loi exacte. \\
+\ensuremath{N_t} : nombre de pas de temps consécutifs utilisés. \\
+\ensuremath{\delta t} : pas temporel, unité de temps ionique.}  \label{tab:setups}
+%\end{center}
+%\end{table}
+
+% \begin{table}[!ht]
+%\begin{center}
+\begin{tabular}{ c|c|c|c|c|c|c|c } 
+Nom & $\nu=\eta$ & $\nu_{\rho}$  & $\nu_p$ & $\nu_q$ & $\alpha$ & $a_{piI}$ & $a_{peI}$\\
+\hline
+CGL1 & $\num{7.35e-8}$ & $0$ & $\num{7.35e-9}$ & $0$ & $\num{80}$ & $\num{1}$ &  $\num{1}$ \\
+CGL2 & $\num{7.35e-8}$ & $0$ & $\num{7.35e-9}$ & $0$& $\num{10}$ & $\num{1}$ &  $\num{1}$ \\
+CGL3 & $\num{4e-14}$ & $\num{1.6e-14}$ & $\num{1.6e-14}$  & $0$& $\num{2.5}$ & $\num{1}$ &  $\num{1}$\\
+CGL3B & $\num{1.0e-14}$ & $\num{1.0e-14}$ & $\num{1.0e-14}$ & $0$ & $\num{2.5}$ & $\num{1}$ &  $\num{1}$\\
+CGL5 & $\num{3e-11}$ & $0$ & $\num{3e-12}$ & $0$& $\num{6}$ & $\num{1}$ &  $\num{1}$ \\
+CGL6 & $\num{3e-11}$ & $0$ & $\num{3e-12}$ & $0$& $\num{5}$ & $\num{4}$ &  $\num{1}$  \\
+\hline
+%LF1 & $\num{7.35e-8}$ & $0$ & $\num{7.35e-9}$ & $\num{7.35e-9}$ & $\num{1}$ & $\num{1}$ &  $\num{1}$ \\
+LF2 & $\num{7.35e-8}$ & $0$ & $\num{7.35e-9}$& $\num{7.35e-9}$& $\num{1}$  & $\num{1}$ &  $\num{1}$\\
+LF3 & $\num{7e-14}$ &$\num{7e-14}$ & $\num{7e-14}$ & $\num{7e-14}$ & $\num{1.5}$ & $\num{1}$ &  $\num{1}$\\
+%LF4 & $\num{3e-3}$ & $\num{7.5e-4}$ &  $\num{3e-3}$ & $\num{3e-3}$ & $\num{2}$  & $\num{1}$ &  $\num{1}$
+ \end{tabular}
+ \cprotect\caption{Extraits des paramètres des simulations traitées, choisis empiriquement pour l'hyperdissipation. \\
+ \ensuremath{\nu}, \ensuremath{\eta}, \ensuremath{\nu_{\rho}}, \ensuremath{\nu_p}, \ensuremath{\nu_q} : constantes caractéristiques de l'hyperdissipation respectivement de la vitesse, du champ magnétique, de la densité, des pressions et des flux de chaleurs. \\
+ \ensuremath{\alpha} : facteur d'anisotropie. \\
+ \ensuremath{a_{piI}}, \ensuremath{a_{peI}}  : taux initiaux d'anisotropie de pression respectivement ionique et electronique.}  \label{tab:setups_hd}
+ \end{center}
+ \end{table}

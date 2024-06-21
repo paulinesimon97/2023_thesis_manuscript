@@ -1,0 +1,328 @@
+La variation du résultat de l'estimation d'un indice polytropique dans différents types de plasmas spatiaux (voir \figref{fig:schema_thermo} and \cite{livadiotis_thermodynamic_2018}) vient motiver la dérivation d'une loi exacte polytrope pour étudier la cascade d'énergie totale dans ces milieux. L'objectif initial du travail présenté dans cette Partie \ref{part_1}, et dont la contribution originale analytique est introduite dans ce Chapitre \ref{ch-13}, est de dériver une loi exacte \cacro{MHD} polytrope, une extension des lois existantes pour les modèles \cacro{MHD} isothermes [\cite{banerjee_exact_2013}, \cite{andres_alternative_2017}, \cite{andres_exact_2018}, \cite{ferrand_compact_2021}] et \cacro{HD} polytrope [\cite{banerjee_kolmogorov-like_2014}]. La cascade y est décrite similairement à celle décrite par \cite{galtier_exact_2011} (cas \cacro{HD} isotherme) et, suite à la discussion sur les fermetures résumée dans le Chapitre \ref{ch-12}, on peut dire qu'elle y est supposée isentrope dans la zone inertielle. L'hypothèse d'une fermeture polytrope (resp. isotherme) avec une zone inertielle isentrope revient à la fermeture \og isentrope-polytrope\fg{} (resp. isentrope-isotherme) introduite au Chapitre \ref{ch-12}.
+
+La méthode de calcul envisagée pour atteindre l'objectif initial a, en réalité, permis d'obtenir une loi exacte générale valable pour toutes les fermetures du système tant que l'isentropie est imposée dans la zone inertielle. 
+Ce travail dont l'application à la fermeture \og isentrope-polytrope \fg{} répond à l'objectif initial est présenté dans la section \ref{sec-131}. 
+Dans la section \ref{sec-132}, on détaillera l'impact des fermetures sur une autre formulation de la loi qui a émergé du travail de relaxation de l'hypothèse d'isotropie de pression (présenté dans le Chapitre \ref{ch-21}). 
+Après avoir atteint l'objectif initial, on s'est posé la question de l'impact du flux de chaleur (a priori attendu en dehors de la zone inertielle) et on l'a pris en compte dans la loi \cacro{KHM} qui, ainsi, a réellement pris une dimension générale. Notre loi a alors adopté une troisième formulation qui sera présentée dans la section \ref{sec-133}. Des applications isobare, isotherme et polytrope y seront abordées en tant qu'exemples d'application clôturant ce travail de généralisation.
+
+\section{Dérivation d'une loi exacte compressible générale pour décrire un écoulement turbulent polytrope}
+\label{sec-131}
+
+La méthode utilisée ici pour dériver une loi exacte compressible correspond à celle détaillée dans le cas incompressible et résumée dans la section \ref{synt-11}. La première étape est de définir une fonction de corrélation. Il existe plus de possibilités que dans le cas incompressible puisque cette fois la compression ($\rho \neq 0$) impacte les densités d'énergie : $E_{tot} = \frac{1}{2} \rho \boldsymbol{v}^2 + \frac{1}{2} \rho \boldsymbol{v_A}^2 + \rho u $. Pour l'énergie cinétique, la volonté de considérer une forme de type auto-corrélation, a inspiré des études \cacro{HD} et \cacro{MHD} considérant sa racine-carré en $\sqrt{\rho} \boldsymbol{v} $ [\cite{hellinger_spectral_2021}] tandis que d'autres ont privilégié le sens physique de la quantité de mouvement $\rho \boldsymbol{v}$ [\cite{galtier_exact_2011}]. Pour l'énergie magnétique, la question est la même : $\boldsymbol{B}$ [\cite{ferrand_compact_2021}] ou $\rho \boldsymbol{v_A}$ [\cite{andres_alternative_2017}] ? Et pour l'énergie interne, les choix présents dans la littérature ont été en partie orientés suivant le type de fermeture : dans le cas polytrope par exemple, la forme explicite de l'énergie interne spécifique peut s'écrire tel que le carré de la vitesse thermique, d'où $\rho \sqrt{u}$ [\cite{banerjee_kolmogorov-like_2014}] ou $\sqrt{\rho u}$, alors que, dans le cas isotherme [\cite{galtier_exact_2011}], le choix était plutôt orienté vers la conservation de son intégrité c'est-à-dire prendre $\rho$ en un point et $u$ en un autre. Trois possibilités, extraites de ces usages, ont été envisagées pour chaque type d'énergie (dont la forme est ici généralisée en $E_\mathcal{X} = \rho X^2$) : 
+\begin{itemize}
+    \item l'auto-corrélation : $\mathcal{R_{X}}_1 = \left<\sqrt{\rho'} X' \cdot \sqrt{\rho} X \right>$ de fonction incrémentale associée :  $\mathcal{S_{X}}_1 = \left<\left(\delta \left(\sqrt{\rho} X\right)\right)^2\right>$ puisque $\mathcal{S_{X}}_1 = 2\left<E_\mathcal{X}\right> - 2\mathcal{R_{X}}_1 $
+    \item la moyenne de densité : $\mathcal{R_{X}}_2 = \frac{1}{2}\left< \left(\rho'+\rho\right) X' \cdot X \right>$ de fonction incrémentale associée :  $\mathcal{S_{X}}_2 = \left<\delta \left(\rho X\right) \cdot \delta X \right>$ 
+    \item la corrélation avec la densité : $\mathcal{R_{X}}_3 = \frac{1}{2}\left< \rho' X^2 + \rho X'{}^2\right> $ de fonction incrémentale associée :  $\mathcal{S_{X}}_3 = \left<\delta \rho  \delta X^2 \right>$ 
+\end{itemize}
+Il s'avère qu'utiliser des formes prenant en compte des racines carrées a tendance à compliquer le calcul et le résultat. Les formes finalement choisies sont donc : $\mathcal{R}_{c} = \mathcal{R}_{c2} = \left<\frac{1}{4} \left(\rho'+\rho\right) \boldsymbol{v'} \cdot  \boldsymbol{v} \right>$, $\mathcal{R}_{m} = \mathcal{R}_{m2} = \left<\frac{1}{4} \left(\rho'+\rho\right) \boldsymbol{v'_A} \cdot  \boldsymbol{v_A} \right>$ et $\mathcal{R}_{u} = \mathcal{R}_{u3} = \frac{1}{2}\left< \rho' u + \rho u'\right> $. Ce choix concorde avec celui de \cite{andres_energy_2018}, dont les résultats de simulation permettront l'étude dans les données in-situ du Chapitre \ref{ch-14} et ont servi de base de comparaison afin de valider les résultats de simulations présentés dans la Partie \ref{part_3} (voir l'Annexe \ref{an:compa_predict}).
+
+Concernant le modèle considéré, la première idée était d'appliquer la méthode de calcul des lois exactes sur le modèle fermé par l'hypothèse $p \propto \rho^{\gamma}$, dans la lignée des dérivations compressibles effectuées par exemple par \cite{galtier_exact_2011} et \cite{andres_alternative_2017}. Mais il s'est avéré qu'un autre choix plus judicieux existait. En effet, comme pour obtenir l'équation d'énergie totale \eqref{eq:model_cpi_e}, nous pouvons obtenir une loi exacte \og générale \fg{} en utilisant l'équation de densité d'énergie interne \eqref{eq:synth_cpi_u} sans expliciter la forme de $p$ ni celle de $u$. En première approximation, l'hypothèse isentrope qui implique $\nabla \cdot \boldsymbol{q} = 0$ via l'équation de compatibilité \eqref{eq:synth_L1_compu}, a d'abord été posée. Ce travail fait partie des résultats publiés dans \cite{simon_general_2021}. La loi \cacro{KHM} générale qui y est obtenue n'est alors valable que dans la zone inertielle où l'hypothèse isentrope est supposée effective et ne sert que d'étape de calcul vers une loi \cacro{K41}. Dans une volonté de donner un résultat pour la loi \cacro{KHM} générale valable pour toutes les échelles, nous prendrons en compte $\nabla \cdot \boldsymbol{q}$ dans cette section, mais nous garderons sa contribution brute, sans travail analytique en accord avec le cheminement chronologique voulu pour ce chapitre. 
+
+Les équations considérées sont celles de densité de masse \eqref{eq:synth_cpi_r}, vitesse  \eqref{eq:synth_cpi_v}, induction \eqref{eq:synth_cpi_b} et énergie interne  \eqref{eq:synth_cpi_u} avec des termes de forçage et de dissipation définis comme dans le cas incompressible (voir \eqref{eq:synth_inc_v} et \eqref{eq:synth_inc_b}). Ainsi :
+\begin{eqnarray}
+\label{eq:turb_cpi_r} \partial_t \rho &=& - \nabla \cdot \left(\rho \boldsymbol{v}\right), \\
+\label{eq:turb_cpi_v}\partial_t  \boldsymbol{v} &=&- \nabla \cdot \left(\boldsymbol{v}\boldsymbol{v}\right) + \boldsymbol{v} \nabla \cdot \boldsymbol{v}  + \frac{1}{\rho} \nabla \cdot \left(\rho \boldsymbol{v_A}\boldsymbol{v_A}\right) - \frac{1}{\rho}  \nabla p_*  + \boldsymbol{f_c} + \boldsymbol{d_c} ,\\
+\label{eq:turb_cpi_b}\partial_t \boldsymbol{v_A} &=&   \nabla \cdot \left(\boldsymbol{v_A}\boldsymbol{v} - \boldsymbol{v}\boldsymbol{v_A}\right) -  \boldsymbol{v}  \nabla \cdot \boldsymbol{v_A} +  \frac{\boldsymbol{v_A}}{2}  \nabla \cdot \boldsymbol{v} + \boldsymbol{f_m} + \boldsymbol{d_m} ,\\
+\label{eq:turb_cpi_u}\partial_t u &=& - \nabla \cdot \left(u \boldsymbol{v}\right) + u  \nabla \cdot \boldsymbol{v} -\frac{1}{\rho} \nabla \cdot \boldsymbol{q}  - \frac{p}{\rho}  \nabla \cdot \boldsymbol{v} .
+\end{eqnarray}
+
+Si l'on regarde la forme des fonctions de corrélation incrémentales associées aux formes des fonctions choisies, on peut s'attendre à pouvoir identifier les fonctions de structure $\left<\delta \left(\rho\boldsymbol{v}\right) \cdot \delta \boldsymbol{v} \delta \boldsymbol{v}\right>$, $\left<\delta \left(\rho\boldsymbol{v_A}\right) \cdot \delta \boldsymbol{v_A} \delta \boldsymbol{v}\right>$ et $\left<\delta \rho \delta u \delta \boldsymbol{v}\right>$ et, similairement au cas incompressible, $\left<\delta \left(\rho\boldsymbol{v_A}\right) \cdot \delta \boldsymbol{v} \delta \boldsymbol{v_A}\right>$ ou $\left<\delta \left(\rho\boldsymbol{v}\right) \cdot \delta \boldsymbol{v_A} \delta \boldsymbol{v_A}\right>$. Le calcul de l'évolution temporelle des fonctions de corrélation pour chaque canal énergétique nous donne, en effet, pour le canal d'énergie cinétique ($\mathcal{R}_{c} = \frac{1}{4}\left<\left(\rho'+\rho\right)\boldsymbol{v'} \cdot \boldsymbol{v}\right>$) :
+\begin{eqnarray}
+\label{eq:turb_cpi_Rc} 4\partial_t \mathcal{R}_{c} &=& \left<\partial_t \left(\rho'+\rho\right) \boldsymbol{v'} \cdot  \boldsymbol{v}  +  \left(\rho'+\rho \right) \boldsymbol{v'} \cdot  \partial_t \boldsymbol{v} +   \left(\rho'+\rho\right) \boldsymbol{v'} \cdot  \partial_t \boldsymbol{v} \right>\nonumber \\
+&=&\nabla_{\boldsymbol{\ell}} \cdot \left<\delta \left(\rho\boldsymbol{v}\right) \cdot \delta \boldsymbol{v} \delta \boldsymbol{v} -\left(\delta \left(\rho\boldsymbol{v_A}\right) \cdot \delta \boldsymbol{v} \delta \boldsymbol{v_A} + \delta \left(\rho\boldsymbol{v}\right) \cdot \delta \boldsymbol{v_A} \delta \boldsymbol{v_A} \right)\right>\nonumber \\
+&+& \nabla_{\boldsymbol{\ell}} \cdot \left<\rho' \boldsymbol{v'_A}\cdot  \boldsymbol{v} \boldsymbol{v_A} -\rho \boldsymbol{v_A}\cdot  \boldsymbol{v'} \boldsymbol{v'_A}-\rho' \boldsymbol{v'} \cdot\boldsymbol{v_A}\boldsymbol{v'_A} +  \rho  \boldsymbol{v} \cdot\boldsymbol{v'_A}\boldsymbol{v_A}\right> \nonumber\\
+&+&\left< \rho \boldsymbol{v} \cdot \delta \boldsymbol{v} \nabla' \cdot \boldsymbol{v'} -\rho' \boldsymbol{v'} \cdot \delta \boldsymbol{v} \nabla \cdot \boldsymbol{v} +2 \rho' \boldsymbol{v'} \cdot \delta \boldsymbol{v_A}\nabla \cdot \boldsymbol{v_A} - 2\rho \boldsymbol{v} \cdot \delta \boldsymbol{v_A}\nabla' \cdot \boldsymbol{v'_A}\right> \nonumber\\
+&+&  \nabla_{\boldsymbol{\ell}} \cdot \left< \left(1+\frac{\rho'}{\rho}\right)p_*  \boldsymbol{v'} -  \left(1+\frac{\rho}{\rho'}\right)p'_*  \boldsymbol{v} \right>- \left<\frac{\rho'}{\rho} p_*  \boldsymbol{v'} \cdot \frac{\nabla \rho}{\rho} + \frac{\rho}{\rho'} p'_*  \boldsymbol{v} \cdot \frac{\nabla' \rho'}{\rho'} \right>\nonumber\\
+&+&  \left<\left(\rho' + \rho\right)\left(\boldsymbol{v} \cdot \boldsymbol{f'_c} + \boldsymbol{v'} \cdot \boldsymbol{f_c}\right) \right>+ \left<\left(\rho' + \rho\right)\left(\boldsymbol{v} \cdot \boldsymbol{d'_c} + \boldsymbol{v'} \cdot \boldsymbol{d_c}\right)\right> ,
+\end{eqnarray}
+pour celui d'énergie magnétique ($\mathcal{R}_{m} = \frac{1}{4}\left<\left(\rho'+\rho\right)\boldsymbol{v'_A} \cdot \boldsymbol{v_A}\right> $) :
+\begin{eqnarray}
+\label{eq:turb_cpi_Rm} 4\partial_t \mathcal{R}_{m} &=& \left<\partial_t \left(\rho'+\rho\right) \boldsymbol{v'_A} \cdot  \boldsymbol{v_A}  +  \left(\rho'+\rho \right) \boldsymbol{v'_A} \cdot  \partial_t \boldsymbol{v_A} +   \left(\rho'+\rho\right) \boldsymbol{v'_A} \cdot  \partial_t \boldsymbol{v_A} \right>\nonumber \\
+&=&\nabla_{\boldsymbol{\ell}} \cdot \left<\delta \left(\rho\boldsymbol{v_A}\right) \cdot \delta \boldsymbol{v_A} \delta \boldsymbol{v} \right> + \left<\left(\rho \boldsymbol{v_A} \cdot \delta \boldsymbol{v_A} -\frac{1}{2} \left(\rho'+\rho\right) \boldsymbol{v'_A} \cdot \boldsymbol{v_A}\right)\nabla' \cdot \boldsymbol{v'}\right>\nonumber\\
+&-&  \left<\left(\rho' \boldsymbol{v'_A} \cdot \delta \boldsymbol{v_A} + \frac{1}{2} \left(\rho'+\rho\right) \boldsymbol{v'_A} \cdot \boldsymbol{v_A}\right)\nabla \cdot \boldsymbol{v}\right>\\
+&+& \left<\left( \rho' \boldsymbol{v'_A} \cdot \boldsymbol{v} - \rho \boldsymbol{v} \cdot \boldsymbol{v'_A}  \right)\nabla \cdot \boldsymbol{v_A} \right> + \left<\left(\rho' \boldsymbol{v'} \cdot \boldsymbol{v_A} -  \rho \boldsymbol{v_A} \cdot \boldsymbol{v'} \right)\nabla' \cdot \boldsymbol{v'_A} \right>\nonumber\\
+&-&\nabla_{\boldsymbol{\ell}} \cdot \left< \rho' \boldsymbol{v'_A}\cdot  \boldsymbol{v} \boldsymbol{v_A} - \rho \boldsymbol{v_A}\cdot  \boldsymbol{v'} \boldsymbol{v'_A}-\rho' \boldsymbol{v'} \cdot\boldsymbol{v_A}\boldsymbol{v'_A} +  \rho  \boldsymbol{v} \cdot\boldsymbol{v'_A}\boldsymbol{v_A}\right> \nonumber\\
+&+&  \left<\left(\rho' + \rho\right)\left(\boldsymbol{v_A} \cdot \boldsymbol{f'_m} + \boldsymbol{v'_A} \cdot \boldsymbol{f_m}\right) \right>+ \left<\left(\rho' + \rho\right)\left(\boldsymbol{v_A} \cdot \boldsymbol{d'_m} + \boldsymbol{v'_A} \cdot \boldsymbol{d_m}\right)\right> , \nonumber
+\end{eqnarray}
+et pour celui d'énergie interne ($\mathcal{R}_{u} = \frac{1}{2}\left<\rho' u+\rho u'\right> $) :
+\begin{eqnarray}
+\label{eq:turb_cpi_Ru} 2\partial_t \mathcal{R}_{u} &=& \left<\partial_t \left(\rho'\right) u  + \rho' \partial_t u + \partial_t \left(\rho\right) u' + \rho \partial_t u'\right> \nonumber\\
+&=&\nabla_{\boldsymbol{\ell}} \cdot \left<\delta \rho  \delta u \delta \boldsymbol{v} \right> + \left<  \rho \delta u \nabla \cdot \boldsymbol{v'}- \rho' \delta u \nabla \cdot \boldsymbol{v}\right> \nonumber\\
+&&-\left< \rho' \frac{p}{\rho}   \nabla \cdot \boldsymbol{v}  + \rho \frac{p'}{\rho'}   \nabla' \cdot \boldsymbol{v'} \right> -\left<\frac{\rho}{\rho'}  \nabla' \cdot \boldsymbol{q'} + \frac{\rho'}{\rho}  \nabla \cdot \boldsymbol{q}  \right> .
+\end{eqnarray}
+D'où pour l'énergie totale avec $\mathcal{R} = \mathcal{R}_{c} + \mathcal{R}_{m} + \mathcal{R}_{u}$ :
+\begin{equation}
+\label{eq:turb_cpi_khm} \boxed{
+\begin{array}{lcl}
+{}_{[1]} \quad 4\partial_t \mathcal{R} &=& \nabla_{\boldsymbol{\ell}} \cdot \left<\left(\delta \left(\rho\boldsymbol{v}\right) \cdot \delta \boldsymbol{v}+ \delta \left(\rho\boldsymbol{v_A}\right) \cdot \delta \boldsymbol{v_A} \right)\delta \boldsymbol{v}  -\left(\delta \left(\rho\boldsymbol{v_A}\right) \cdot \delta \boldsymbol{v}  + \delta \left(\rho\boldsymbol{v}\right) \cdot \delta \boldsymbol{v_A}  \right) \delta \boldsymbol{v_A} \right>\\
+{}_{[2]} && +\left< \left(\rho \boldsymbol{v} \cdot \delta \boldsymbol{v} +\rho \boldsymbol{v_A} \cdot \delta \boldsymbol{v_A} -\frac{1}{2} \left(\rho'+\rho\right) \boldsymbol{v'_A} \cdot \boldsymbol{v_A} \right) \nabla' \cdot \boldsymbol{v'} \right>\\
+{}_{[3]} && -\left< \left(\rho' \boldsymbol{v'} \cdot \delta \boldsymbol{v} + \rho' \boldsymbol{v'_A} \cdot \delta \boldsymbol{v_A} + \frac{1}{2} \left(\rho'+\rho\right) \boldsymbol{v'_A} \cdot \boldsymbol{v_A}  \right)\nabla \cdot \boldsymbol{v}\right>\\
+{}_{[4]} &&+ \left<\left(2 \rho' \boldsymbol{v'} \cdot \delta \boldsymbol{v_A}+\rho \boldsymbol{v} \cdot \boldsymbol{v'_A} - \rho' \boldsymbol{v'_A} \cdot \boldsymbol{v}  \right)\nabla \cdot \boldsymbol{v_A}\right> \\
+{}_{[5]} &&- \left<\left(2\rho \boldsymbol{v} \cdot \delta \boldsymbol{v_A} -\rho' \boldsymbol{v'} \cdot \boldsymbol{v_A} +  \rho \boldsymbol{v_A} \cdot \boldsymbol{v'} \right)\nabla' \cdot \boldsymbol{v'_A}\right> \\
+{}_{[6]} &&+ 2 \nabla_{\boldsymbol{\ell}} \cdot \left<\delta \rho  \delta u \delta \boldsymbol{v}\right> + 2\left<\left(\rho \delta u- \rho \frac{p'}{\rho'}\right)\nabla' \cdot \boldsymbol{v'}  - \left(\rho' \delta u + \rho' \frac{p}{\rho}\right) \nabla \cdot \boldsymbol{v} \right>\\
+{}_{[7]} &&+  \nabla_{\boldsymbol{\ell}} \cdot \left< \left(1+\frac{\rho'}{\rho}\right)p_*  \boldsymbol{v'} -  \left(1+\frac{\rho}{\rho'}\right)p'_*  \boldsymbol{v} \right>- \left<\frac{\rho'}{\rho} p_*  \boldsymbol{v'} \cdot \frac{\nabla \rho}{\rho} + \frac{\rho}{\rho'} p'_*  \boldsymbol{v} \cdot \frac{\nabla' \rho'}{\rho'} \right>\\
+{}_{[8]} &&-2\left<\frac{\rho}{\rho'}  \nabla' \cdot \boldsymbol{q'} + \frac{\rho'}{\rho}  \nabla \cdot \boldsymbol{q}  \right> \\
+{}_{[9]}&&+  \left<\left(\rho' + \rho\right)\left(\boldsymbol{v} \cdot \boldsymbol{f'_c} + \boldsymbol{v'} \cdot \boldsymbol{f_c} + \boldsymbol{v_A} \cdot \boldsymbol{f'_m} + \boldsymbol{v'_A} \cdot \boldsymbol{f_m}\right) \right>\\
+{}_{[10]}&&+ \left<\left(\rho' + \rho\right)\left(\boldsymbol{v} \cdot \boldsymbol{d'_c} + \boldsymbol{v'} \cdot \boldsymbol{d_c}+\boldsymbol{v_A} \cdot \boldsymbol{d'_m} + \boldsymbol{v'_A} \cdot \boldsymbol{d_m}\right)\right> .
+\end{array}}
+\end{equation} 
+Cette loi \cacro{KHM} est valable à toutes les échelles où le modèle \cacro{MHD} est vérifié. Comme elle est obtenue à partir du modèle \cacro{MHD} non fermé, elle est adaptable à toute fermeture thermodynamique considérée dans la zone inertielle. C'est le premier résultat majeur obtenu, il a été par la suite reformulé comme on le verra dans les sections suivantes. La ligne [1] contient la contribution à la cascade qui survit dans la limite incompressible. Ces termes sont souvent nommés \og Yaglom compressible \fg{}, sont de type flux et dénote un transfert travers les échelles. Les lignes [2] à [8] contiennent les termes purement compressibles car ils s'annulent dans la limite incompressible. Les lignes [2] à [5] contiennent des termes dits \og sources \fg{}, liés à l'effet de la dilation/compression du plasma sur les champs cinétiques et magnétiques (resp. $\nabla \cdot \boldsymbol{v}$ et $\nabla \cdot \boldsymbol{v_A}$). La ligne [6] contient des contributions d'énergie interne et de pression convectées par le champ de vitesse sous la forme d'un terme flux, qui semble indiquer l'existence d'une cascade d'énergie interne à travers les échelles, et de termes sources. La ligne [7] contient la contribution de pression totale qui peut être écrite en factorisant la pression magnétique en fonction du paramètre $\beta = p/p_m$ du plasma et qui contient la majorité des termes nommés \og hybrides \fg{} par \cite{andres_alternative_2017} car il est possible de les écrire tels des termes flux ou sources. Cette ligne sera principalement affectée par les reformulations présentées dans les sections \ref{sec-132} et \ref{sec-133}. La ligne [8] contient la contribution du flux de chaleur qui sera abordée et reformulée dans la section \ref{sec-133}. Et, pour finir, les lignes [9] et [10] correspondent aux taux d'injection et de dissipation de l'énergie totale compressible. 
+
+Dans le cadre d'une zone inertielle isentrope, il faut prendre en compte les lignes [1] à [7] dans le taux de cascade. On obtient ainsi la \og loi exacte générale de type \cacro{K41} dans le cadre d'une zone inertielle supposée isentrope \fg{} : 
+\begin{equation}
+\boxed{
+\begin{array}{lcl}
+\label{eq:turb_elg_f1} -4\varepsilon &=& \nabla_{\boldsymbol{\ell}} \cdot \left<\left(\delta \left(\rho\boldsymbol{v}\right) \cdot \delta \boldsymbol{v}+ \delta \left(\rho\boldsymbol{v_A}\right) \cdot \delta \boldsymbol{v_A} \right)\delta \boldsymbol{v}  -\left(\delta \left(\rho\boldsymbol{v_A}\right) \cdot \delta \boldsymbol{v}  + \delta \left(\rho\boldsymbol{v}\right) \cdot \delta \boldsymbol{v_A}  \right) \delta \boldsymbol{v_A} \right>\\
+&& +\left< \left(\rho \boldsymbol{v} \cdot \delta \boldsymbol{v} +\rho \boldsymbol{v_A} \cdot \delta \boldsymbol{v_A} -\frac{1}{2} \left(\rho'+\rho\right) \boldsymbol{v'_A} \cdot \boldsymbol{v_A} \right) \nabla' \cdot \boldsymbol{v'} \right>\\
+&& -\left< \left(\rho' \boldsymbol{v'} \cdot \delta \boldsymbol{v} + \rho' \boldsymbol{v'_A} \cdot \delta \boldsymbol{v_A} + \frac{1}{2} \left(\rho'+\rho\right) \boldsymbol{v'_A} \cdot \boldsymbol{v_A}  \right)\nabla \cdot \boldsymbol{v}\right>\\
+&&+ \left<\left(2 \rho' \boldsymbol{v'} \cdot \delta \boldsymbol{v_A}+\rho \boldsymbol{v} \cdot \boldsymbol{v'_A} - \rho' \boldsymbol{v'_A} \cdot \boldsymbol{v}  \right)\nabla \cdot \boldsymbol{v_A}\right>\\
+&&- \left<\left(2\rho \boldsymbol{v} \cdot \delta \boldsymbol{v_A} -\rho' \boldsymbol{v'} \cdot \boldsymbol{v_A} +  \rho \boldsymbol{v_A} \cdot \boldsymbol{v'} \right)\nabla' \cdot \boldsymbol{v'_A}\right> \\
+&&+ 2 \nabla_{\boldsymbol{\ell}} \cdot \left<\delta \rho  \delta u \delta \boldsymbol{v}\right> + 2\left<\left(\rho \delta u- \rho \frac{p'}{\rho'}\right)\nabla' \cdot \boldsymbol{v'}  - \left(\rho' \delta u + \rho' \frac{p}{\rho}\right) \nabla \cdot \boldsymbol{v} \right>\\
+&&+  \nabla_{\boldsymbol{\ell}} \cdot \left< \left(1+\frac{\rho'}{\rho}\right)p_*  \boldsymbol{v'} -  \left(1+\frac{\rho}{\rho'}\right)p'_*  \boldsymbol{v} \right>- \left<\frac{\rho'}{\rho} p_*  \boldsymbol{v'} \cdot \frac{\nabla \rho}{\rho} + \frac{\rho}{\rho'} p'_*  \boldsymbol{v} \cdot \frac{\nabla' \rho'}{\rho'} \right>.
+\end{array}}
+\end{equation} 
+
+
+Grâce au premier principe de la thermodynamique \eqref{eq:synth_L1_du} qui peut alors s'écrire $\rho^2 \partial u = p \partial \rho $, on peut reformuler le dernier terme en fonction de l'énergie interne et du paramètre caractéristique en physique des plasmas $\beta = p/p_m$ local :
+\begin{eqnarray}
+\label{eq:turb_ref_beta}    \left<\frac{\rho'}{\rho} p_*  \boldsymbol{v'} \cdot \frac{\nabla \rho}{\rho} \right.&+& \left.\frac{\rho}{\rho'} p'_*  \boldsymbol{v} \cdot \frac{\nabla' \rho'}{\rho'} \right> = \left<\left(1+\frac{p_m}{p}\right)\rho' \boldsymbol{v'} \cdot \nabla u + \left(1+\frac{p'_m}{p'}\right)\rho \boldsymbol{v} \cdot \nabla' u'\right>\nonumber \\ &=& \nabla_{\boldsymbol{\ell}} \cdot \left<\rho u' \boldsymbol{v} - \rho' u \boldsymbol{v'}\right> + \left<\frac{1}{\beta}\nabla\cdot\left(\rho'  u \boldsymbol{v'}\right)  + \frac{1}{\beta'}\nabla'\cdot\left(\rho u'\boldsymbol{v}\right)   \right> .
+\end{eqnarray}
+On retrouve ainsi le résultat publié et analysé dans \cite{simon_general_2021} (eq. 18).
+
+ L'injection de la fermeture isentrope-polytrope dans la loi \eqref{eq:turb_elg_f1} permet de répondre à l'objectif initial : trouver une loi exacte \cacro{MHD} polytrope. Le résultat s'obtient directement et s'écrit, dans le cas $\gamma \neq 1$ (car l'on y injecte l'expression explicite de l'énergie interne), en fonction de $\gamma$ et $c^2_s$, : 
+\begin{equation}
+\label{eq:turb_elpol_f1}
+\boxed{
+\begin{array}{rcl}
+-4\varepsilon &=& \nabla_{\boldsymbol{\ell}} \cdot \left<\left(\delta \left(\rho\boldsymbol{v}\right) \cdot \delta \boldsymbol{v}+ \delta \left(\rho\boldsymbol{v_A}\right) \cdot \delta \boldsymbol{v_A} \right)\delta \boldsymbol{v}  -\left(\delta \left(\rho\boldsymbol{v_A}\right) \cdot \delta \boldsymbol{v}  + \delta \left(\rho\boldsymbol{v}\right) \cdot \delta \boldsymbol{v_A}  \right) \delta \boldsymbol{v_A} \right>\\
+&& +\left< \left(\rho \boldsymbol{v} \cdot \delta \boldsymbol{v} +\rho \boldsymbol{v_A} \cdot \delta \boldsymbol{v_A} -\frac{1}{2} \left(\rho'+\rho\right) \boldsymbol{v'_A} \cdot \boldsymbol{v_A} \right) \nabla' \cdot \boldsymbol{v'} \right>\\
+&& -\left< \left(\rho' \boldsymbol{v'} \cdot \delta \boldsymbol{v} + \rho' \boldsymbol{v'_A} \cdot \delta \boldsymbol{v_A} + \frac{1}{2} \left(\rho'+\rho\right) \boldsymbol{v'_A} \cdot \boldsymbol{v_A}  \right)\nabla \cdot \boldsymbol{v}\right>\\
+&&+ \left<\left(2 \rho' \boldsymbol{v'} \cdot \delta \boldsymbol{v_A}+\rho \boldsymbol{v} \cdot \boldsymbol{v'_A} - \rho' \boldsymbol{v'_A} \cdot \boldsymbol{v}  \right)\nabla \cdot \boldsymbol{v_A}\right>\\
+&&- \left<\left(2\rho \boldsymbol{v} \cdot \delta \boldsymbol{v_A} -\rho' \boldsymbol{v'} \cdot \boldsymbol{v_A} +  \rho \boldsymbol{v_A} \cdot \boldsymbol{v'} \right)\nabla' \cdot \boldsymbol{v'_A}\right> \\
+&&+ \frac{2}{\gamma\left(\gamma-1\right)} \nabla_{\boldsymbol{\ell}} \cdot \left<\delta \rho  \delta c^2_s \delta \boldsymbol{v}\right> + \frac{2}{\gamma} \left<\rho \left(\frac{1}{\gamma-1} \delta c^2_s - c'{}^2_s\right)\nabla' \cdot \boldsymbol{v'}  - \rho' \left(\frac{1}{\gamma-1}\delta c^2_s + c^2_s\right) \nabla \cdot \boldsymbol{v} \right>\\
+&&+  \nabla_{\boldsymbol{\ell}} \cdot \left< \left(\rho+\rho'\right) \left(\frac{c^2_s}{\gamma}+\frac{\boldsymbol{v_A}^2}{2}\right) \boldsymbol{v'} -  \left(\rho+\rho'\right) \left(\frac{c'{}^2_s}{\gamma}+\frac{\boldsymbol{v'_A}^2}{2}\right)  \boldsymbol{v} \right>\\
+&&- \left<\rho' \left(\frac{c^2_s}{\gamma}+\frac{\boldsymbol{v_A}^2}{2}\right)  \boldsymbol{v'} \cdot \frac{\nabla \rho}{\rho} + \rho \left(\frac{c'{}^2_s}{\gamma}+\frac{\boldsymbol{v'_A}^2}{2}\right)  \boldsymbol{v} \cdot \frac{\nabla' \rho'}{\rho'} \right>.
+\end{array}}
+\end{equation} 
+On remarque que la partie constante de l'énergie interne dépendant de $\rho_I$ ne survit pas étant donné que cette énergie n'apparaît que sous forme incrémentale. C'est aussi le cas avec la reformulation \eqref{eq:turb_ref_beta} où l'énergie interne apparaît dérivée. En considérant $\boldsymbol{v_A} = 0$, on peut trouver une loi exacte pour le modèle \cacro{HD} compressible polytrope :  
+\begin{eqnarray}
+-4\varepsilon &=& \nabla_{\boldsymbol{\ell}} \cdot \left<\left(\delta \rho\boldsymbol{v}\right) \cdot \delta \boldsymbol{v}\delta \boldsymbol{v} + \frac{2}{\gamma\left(\gamma-1\right)} \delta \rho  \delta c^2_s \delta \boldsymbol{v}\right> +\left< \rho \boldsymbol{v} \cdot \delta \boldsymbol{v}  \nabla' \cdot \boldsymbol{v'} - \rho' \boldsymbol{v'} \cdot \delta \boldsymbol{v} \nabla \cdot \boldsymbol{v}\right>\nonumber\\
+&&+   \frac{2}{\gamma} \left<\rho \left(\frac{1}{\gamma-1} \delta c^2_s - c'{}^2_s\right)\nabla' \cdot \boldsymbol{v'}  - \rho' \left(\frac{1}{\gamma-1}\delta c^2_s + c^2_s\right) \nabla \cdot \boldsymbol{v} \right>\\
+&&+  \nabla_{\boldsymbol{\ell}} \cdot \left< \left(\rho+\rho'\right) \frac{c^2_s}{\gamma} \boldsymbol{v'} -  \left(\rho+\rho'\right) \frac{c'{}^2_s}{\gamma}  \boldsymbol{v} \right> - \left<\rho' \frac{c^2_s}{\gamma}  \boldsymbol{v'} \cdot \frac{\nabla \rho}{\rho} + \rho \frac{c'{}^2_s}{\gamma} \boldsymbol{v} \cdot \frac{\nabla' \rho'}{\rho'} \right> .\nonumber
+\end{eqnarray} 
+On n'y reconnaît pas la loi proposée par \cite{banerjee_kolmogorov-like_2014} car ces derniers considèrent $\left<\frac{\rho c_s c'_s}{\gamma\left(\gamma-1\right)}\right>$ comme fonction de corrélation pour l'énergie interne. Passer de $\left<\frac{\rho c'{}^2_s }{\gamma\left(\gamma-1\right)}\right>$ à $\left<\frac{\rho c_s c'_s}{\gamma\left(\gamma-1\right)}\right>$ n'a pas été obtenu. Dans les essais effectués, on finissait toujours par supprimer la contribution de l'une et la remplacer par celle de l'autre. L'étude de la convergence de ces différentes formes de fonction de corrélation dans des simulations n'a pas été traitée dans ce travail.
+
+Dans le cas de la fermeture isentrope-isotherme, on peut aussi obtenir un résultat rapidement à partir de \eqref{eq:turb_elg_f1}. Après quelques manipulations et introduction d'autres notations, il est alors possible de retrouver la loi proposée par \cite{andres_alternative_2017} comme le montre \cite{simon_general_2021}.
+
+\section{Reformulation de la loi K41 générale dépendant d'une pression isotrope}
+\label{sec-132}
+
+Dans le Chapitre \ref{ch-21}, nous dériverons une loi exacte de type \cacro{K41} pour un modèle où l'isotropie de pression sera relaxée. Y imposer l'isotropie de pression, nous apporte la formulation suivante pour la loi générale \eqref{eq:turb_elg_f1} : 
+\begin{equation}
+\boxed{
+\begin{array}{lcl}
+\label{eq:turb_elg_f2}-4\varepsilon &=& \nabla_{\boldsymbol{\ell}} \cdot \left<\left(\delta \left(\rho\boldsymbol{v}\right) \cdot \delta \boldsymbol{v}+ \delta \left(\rho\boldsymbol{v_A}\right) \cdot \delta \boldsymbol{v_A}\right) \delta \boldsymbol{v}  -\left(\delta \left(\rho\boldsymbol{v_A}\right) \cdot \delta \boldsymbol{v}  + \delta \left(\rho\boldsymbol{v}\right) \cdot \delta \boldsymbol{v_A}  \right) \delta \boldsymbol{v_A} \right>\\
+&& + \nabla_{\boldsymbol{\ell}} \cdot \left<\delta \rho  \left(2\delta u - \delta \left(\frac{p_*}{\rho}\right)\right)\delta \boldsymbol{v}\right> \\
+&& +\left< \left(\rho \boldsymbol{v} \cdot \delta \boldsymbol{v} +\frac{1}{2} \rho \boldsymbol{v_A} \cdot \delta \boldsymbol{v_A} -\frac{1}{2} \boldsymbol{v_A} \cdot \delta \left(\rho \boldsymbol{v_A}\right) + 2\rho \left(\delta u - \delta \left(\frac{p}{\rho}\right)\right) \right) \nabla' \cdot \boldsymbol{v'} \right>\\
+&& -\left<\left( \rho' \boldsymbol{v'} \cdot \delta \boldsymbol{v} +\frac{1}{2} \rho' \boldsymbol{v'_A} \cdot \delta \boldsymbol{v_A} -\frac{1}{2} \boldsymbol{v'_A} \cdot \delta \left(\rho \boldsymbol{v_A}\right) + 2\rho' \left(\delta u - \delta \left(\frac{p}{\rho}\right)\right)  \right)\nabla \cdot \boldsymbol{v}\right>\\
+&&+ \left<\left(2 \rho' \boldsymbol{v'} \cdot \delta \boldsymbol{v_A}+ \delta\left(\rho \boldsymbol{v}\right) \cdot \boldsymbol{v'_A} - \rho' \boldsymbol{v'_A} \cdot \delta \boldsymbol{v}  \right)\nabla \cdot \boldsymbol{v_A}\right>\\
+&&- \left<\left(2\rho \boldsymbol{v} \cdot \delta \boldsymbol{v_A} + \delta\left(\rho \boldsymbol{v}\right) \cdot \boldsymbol{v_A} - \rho \boldsymbol{v_A} \cdot \delta \boldsymbol{v}  \right)\nabla' \cdot \boldsymbol{v'_A}\right> \\
+&&+  \left< \left(\frac{p_*}{\rho} \delta \rho - \rho \delta \left(\frac{p_*}{\rho}\right)  \right)\boldsymbol{v} \cdot \frac{\nabla' \rho'}{\rho'} - \left(\frac{p'_*}{\rho'} \delta \rho - \rho' \delta \left(\frac{p_*}{\rho}\right)  \right)  \boldsymbol{v'} \cdot \frac{\nabla \rho}{\rho} \right>.
+\end{array}}
+\end{equation} 
+Cette formulation  est plus élégante que la précédente, car les termes flux apparaissent tous sous la forme de fonctions de structure grâce à l'introduction de $\left<\delta \rho \delta \left(\frac{p_*}{\rho}\right) \delta \boldsymbol{v}\right>$, et les termes sources s'écrivent tous sous une forme généralisée du type $\left<X \delta Y \nabla' Z'\right>$ ou  $\left<X' \delta Y \nabla Z\right>$ avec l'opération entre $\nabla$ et $Z$ pouvant être une divergence si $Z$ est une quantité vectorielle (ex : $\boldsymbol{v}$) ou un gradient ($\frac{\nabla \rho}{\rho} = \nabla \left(\ln \rho\right)$). Cette forme rend évident qu'en $\boldsymbol{\ell} = 0$, $\varepsilon = 0$. Le passage d'une forme à l'autre s'effectue en remarquant que les contributions de pression (notée $\varepsilon_{p}$) et de pression magnétique (notée $\varepsilon_{pm}$) peuvent s'écrire : 
+%\begin{equation}
+\begin{align}
+\label{eq:turb_ref_p} &-4\varepsilon_{p}=\nabla_{\boldsymbol{\ell}} \cdot \left<\left(1+\frac{\rho'}{\rho}\right) p \boldsymbol{v'} - \left(1+\frac{\rho}{\rho'}\right)p'\boldsymbol{v} \right>  -2\left<\rho  \frac{p'}{\rho'} \nabla \cdot \boldsymbol{v'} + \rho' \frac{p}{\rho} \nabla \cdot \boldsymbol{v}\right> \nonumber\\
+&= - \nabla_{\boldsymbol{\ell}} \cdot \left<\delta \rho  \delta \frac{p}{\rho} \delta \boldsymbol{v} \right>  +   \left<2  \rho' \delta \left(\frac{p}{\rho}\right) \nabla \cdot \boldsymbol{v} - 2  \rho \delta \left(\frac{p}{\rho}\right) \nabla' \cdot \boldsymbol{v'} -\rho \frac{p'}{\rho'} \boldsymbol{v} \cdot \frac{\nabla'\rho'}{\rho'} - \rho' \frac{p}{\rho} \boldsymbol{v'} \cdot \frac{\nabla\rho}{\rho} \right> \nonumber\\ 
+&+ \left<\left(\delta \rho \frac{p}{\rho} - \rho \delta \left(\frac{p}{\rho}\right)\right)\boldsymbol{v} \cdot \frac{\nabla' \rho'}{\rho'} - \left(\delta \rho \frac{p'}{\rho'} - \rho' \delta \left(\frac{p}{\rho}\right)\right)\boldsymbol{v'} \cdot \frac{\nabla \rho}{\rho}\right>,
+\end{align}
+%\end{equation}
+
+%    \begin{equation}
+ \begin{align}
+\label{eq:turb_ref_pm}&-4\varepsilon_{pm}=  \nabla_{\boldsymbol{\ell}} \cdot \left<\left(1+\frac{\rho'}{\rho}\right) p_m \boldsymbol{v'} - \left(1+\frac{\rho}{\rho'}\right)p'_m\boldsymbol{v} \right> - \left<\rho \frac{p'_m}{\rho'} \boldsymbol{v} \cdot \frac{\nabla'\rho'}{\rho'} + \rho' \frac{p_m}{\rho} \boldsymbol{v'} \cdot \frac{\nabla\rho}{\rho}\right> \nonumber\\
+    &+\left<\left(\rho \boldsymbol{v_A} \cdot \delta \boldsymbol{v_A} - \frac{1}{2}\left(\rho' + \rho\right) \boldsymbol{v'_A} \cdot \boldsymbol{v_A}\right)\nabla' \cdot \boldsymbol{v'} - \left(\rho' \boldsymbol{v'_A} \cdot \delta \boldsymbol{v_A} + \frac{1}{2}\left(\rho' + \rho\right) \boldsymbol{v'_A} \cdot \boldsymbol{v_A}\right)\nabla \cdot \boldsymbol{v}\right> \nonumber \\
+    &=- \nabla_{\boldsymbol{\ell}} \cdot \left<\delta \rho  \delta \frac{p_m}{\rho} \delta \boldsymbol{v} \right> + \left<\left(\delta \rho \frac{p_m}{\rho} - \rho \delta \left(\frac{p_m}{\rho}\right)\right)\boldsymbol{v} \cdot \frac{\nabla' \rho'}{\rho'} - \left(\delta \rho \frac{p'_m}{\rho'} - \rho' \delta \left(\frac{p_m}{\rho}\right)\right)\boldsymbol{v'} \cdot \frac{\nabla \rho}{\rho}\right>\nonumber\\
+    &+\frac{1}{2}\left<\left(\rho \boldsymbol{v_A} \cdot \delta \boldsymbol{v_A} - \boldsymbol{v_A} \cdot \delta \left(\rho \boldsymbol{v_A}\right)\right)\nabla' \cdot \boldsymbol{v'} - \left(\rho' \boldsymbol{v'_A} \cdot \delta \boldsymbol{v_A} - \boldsymbol{v'_A} \cdot \delta \left(\rho \boldsymbol{v_A}\right)\right)\nabla \cdot \boldsymbol{v}\right>.
+     \end{align}
+% \end{equation}
+% 
+Dans le cas isentrope-polytrope avec $\gamma \neq 1$, $\delta \left(u - p/\rho\right) = \delta [\left(2-\gamma\right)\frac{c^2_s}{\gamma\left(\gamma-1\right)}] = \left(2-\gamma\right)\delta u$ et de même, $\delta \left(2u - p/\rho\right) = \left(3-\gamma\right)\delta u$. Dans le cas isentrope-isotherme, c'est-à-dire avec $\gamma = 1$ et $c_s$ constant, $\delta \left(u - p/\rho\right) = \delta u = \left(2-\gamma\right)\delta u$ et  $\delta \left(2u - p/\rho\right) = \left(3-\gamma\right)\delta u$. De plus, $p_*/\rho = \left(1+\beta\right) \boldsymbol{v_A}^2/2 $. Ainsi, on peut déduire de \eqref{eq:turb_elg_f2}, une formulation de la loi exacte isentrope-polytrope valable pour tout $\gamma$, incluant donc la fermeture isentrope-isotherme, et dépendant de $u$, $\gamma$ et $\beta$ : 
+\begin{equation}
+\boxed{
+\begin{array}{lcl}
+\label{eq:turb_elpol_f2}-4\varepsilon &=& \nabla_{\boldsymbol{\ell}} \cdot \left<\left(\delta \left(\rho\boldsymbol{v}\right) \cdot \delta \boldsymbol{v}+ \delta \left(\rho\boldsymbol{v_A}\right) \cdot \delta \boldsymbol{v_A}\right) \delta \boldsymbol{v}  -\left(\delta \left(\rho\boldsymbol{v_A}\right) \cdot \delta \boldsymbol{v}  + \delta \left(\rho\boldsymbol{v}\right) \cdot \delta \boldsymbol{v_A}  \right) \delta \boldsymbol{v_A} \right>\\
+&& + \nabla_{\boldsymbol{\ell}} \cdot \left<\delta \rho  \delta \left(\left(3-\gamma\right)u - \frac{\boldsymbol{v_A}^2}{2}\right)\delta \boldsymbol{v}\right> \\
+&& +\left< \left(\rho \boldsymbol{v} \cdot \delta \boldsymbol{v} +\frac{1}{2} \rho \boldsymbol{v_A} \cdot \delta \boldsymbol{v_A} -\frac{1}{2} \boldsymbol{v_A} \cdot \delta \left(\rho \boldsymbol{v_A}\right) + 2 \left(2-\gamma\right)\rho \delta u \right) \nabla' \cdot \boldsymbol{v'} \right>\\
+&& -\left< \left(\rho' \boldsymbol{v'} \cdot \delta \boldsymbol{v} +\frac{1}{2} \rho' \boldsymbol{v'_A} \cdot \delta \boldsymbol{v_A} -\frac{1}{2} \boldsymbol{v'_A} \cdot \delta \left(\rho \boldsymbol{v_A}\right) + 2\left(2-\gamma\right)\rho' \delta u   \right)\nabla \cdot \boldsymbol{v}\right>\\
+&&+ \left<\left(2 \rho' \boldsymbol{v'} \cdot \delta \boldsymbol{v_A}+ \delta\left(\rho \boldsymbol{v}\right) \cdot \boldsymbol{v'_A} - \rho' \boldsymbol{v'_A} \cdot \delta \boldsymbol{v}  \right)\nabla \cdot \boldsymbol{v_A}\right>\\
+&&- \left<\left(2\rho \boldsymbol{v} \cdot \delta \boldsymbol{v_A} + \delta\left(\rho \boldsymbol{v}\right) \cdot \boldsymbol{v_A} - \rho \boldsymbol{v_A} \cdot \delta \boldsymbol{v}  \right)\nabla' \cdot \boldsymbol{v'_A}\right> \\
+&&+  \left< \left(\frac{\boldsymbol{v_A}^2}{2} \left(1+\beta\right) \delta \rho - \rho \delta \left(\frac{\boldsymbol{v_A}^2}{2} \left(1+\beta\right)\right)  \right)\boldsymbol{v} \cdot \frac{\nabla' \rho'}{\rho'}\right>\\
+&&- \left<\left(\frac{\boldsymbol{v'_A}^2}{2} \left(1+\beta'\right) \delta \rho - \rho' \delta \left(\frac{\boldsymbol{v_A}^2}{2} \left(1+\beta\right)\right)  \right)  \boldsymbol{v'} \cdot \frac{\nabla \rho}{\rho} \right> .
+\end{array}}
+\end{equation} 
+
+La réécriture des termes de pression via les formules \eqref{eq:turb_ref_p} et \eqref{eq:turb_ref_pm} ne dépend pas de l'hypothèse d'isentropie de la zone inertielle. Cette réécriture est aussi applicable dans la loi \cacro{KHM} générale \eqref{eq:turb_cpi_khm} qui devient :
+\begin{equation}
+\boxed{
+\begin{array}{lcl}
+\label{eq:turb_cpi_khm2}\quad 4\partial_t \mathcal{R} &=&  \nabla_{\boldsymbol{\ell}} \cdot \left<\left(\delta \left(\rho\boldsymbol{v}\right) \cdot \delta \boldsymbol{v}+ \delta \left(\rho\boldsymbol{v_A}\right) \cdot \delta \boldsymbol{v_A}\right) \delta \boldsymbol{v}  -\left(\delta \left(\rho\boldsymbol{v_A}\right) \cdot \delta \boldsymbol{v}  + \delta \left(\rho\boldsymbol{v}\right) \cdot \delta \boldsymbol{v_A}  \right) \delta \boldsymbol{v_A} \right>\\
+&& + \nabla_{\boldsymbol{\ell}} \cdot \left<\delta \rho  \left(2\delta u - \delta \left(\frac{p_*}{\rho}\right)\right)\delta \boldsymbol{v}\right> \\
+&& +\left< \left(\rho \boldsymbol{v} \cdot \delta \boldsymbol{v} +\frac{1}{2} \rho \boldsymbol{v_A} \cdot \delta \boldsymbol{v_A} -\frac{1}{2} \boldsymbol{v_A} \cdot \delta \left(\rho \boldsymbol{v_A}\right) + 2\rho \left(\delta u - \delta \left(\frac{p}{\rho}\right)\right) \right) \nabla' \cdot \boldsymbol{v'} \right>\\
+&& -\left<\left( \rho' \boldsymbol{v'} \cdot \delta \boldsymbol{v} +\frac{1}{2} \rho' \boldsymbol{v'_A} \cdot \delta \boldsymbol{v_A} -\frac{1}{2} \boldsymbol{v'_A} \cdot \delta \left(\rho \boldsymbol{v_A}\right) + 2\rho' \left(\delta u - \delta \left(\frac{p}{\rho}\right)\right)  \right)\nabla \cdot \boldsymbol{v}\right>\\
+&&+ \left<\left(2 \rho' \boldsymbol{v'} \cdot \delta \boldsymbol{v_A}+ \delta\left(\rho \boldsymbol{v}\right) \cdot \boldsymbol{v'_A} - \rho' \boldsymbol{v'_A} \cdot \delta \boldsymbol{v}  \right)\nabla \cdot \boldsymbol{v_A}\right>\\
+&&- \left<\left(2\rho \boldsymbol{v} \cdot \delta \boldsymbol{v_A} + \delta\left(\rho \boldsymbol{v}\right) \cdot \boldsymbol{v_A} - \rho \boldsymbol{v_A} \cdot \delta \boldsymbol{v}  \right)\nabla' \cdot \boldsymbol{v'_A}\right> \\
+&&+  \left< \left(\frac{p_*}{\rho} \delta \rho - \rho \delta \left(\frac{p_*}{\rho}\right)  \right)\boldsymbol{v} \cdot \frac{\nabla' \rho'}{\rho'} - \left(\frac{p'_*}{\rho'} \delta \rho - \rho' \delta \left(\frac{p_*}{\rho}\right)  \right)  \boldsymbol{v'} \cdot \frac{\nabla \rho}{\rho} \right>\\
+&&-2\left<\frac{\rho}{\rho'}  \nabla' \cdot \boldsymbol{q'} + \frac{\rho'}{\rho}  \nabla \cdot \boldsymbol{q}  \right> \\
+&&+  \left<\left(\rho' + \rho\right)\left(\boldsymbol{v} \cdot \boldsymbol{f'_c} + \boldsymbol{v'} \cdot \boldsymbol{f_c} + \boldsymbol{v_A} \cdot \boldsymbol{f'_m} + \boldsymbol{v'_A} \cdot \boldsymbol{f_m}\right) \right>\\
+&&+ \left<\left(\rho' + \rho\right)\left(\boldsymbol{v} \cdot \boldsymbol{d'_c} + \boldsymbol{v'} \cdot \boldsymbol{d_c}+\boldsymbol{v_A} \cdot \boldsymbol{d'_m} + \boldsymbol{v'_A} \cdot \boldsymbol{d_m}\right)\right> .
+\end{array}}
+\end{equation}
+
+\section{Application à d'autres fermetures et deuxième reformulation}
+\label{sec-133}
+
+L'approche présentée dans la section \ref{sec-131} pour répondre à l'objectif initial est empreinte d'une volonté de généralisation des résultats dans le but de permettre à de futures études de ne pas avoir à redémontrer entièrement une loi exacte pour une nouvelle fermeture. Le résultat obtenu peut même être utilisé pour étudier d'autres situations comme celle proposée par  \cite{aluie_conservative_2012} et \cite{hellinger_spectral_2021}, où l'énergie cinétique/magnétique pourrait cascader indépendamment de l'énergie interne, sans transfert de pression. Comme discuté dans la section \ref{sec-122}, cela revient à supposer une zone inertielle isobare dans laquelle la description de cette cascade d'énergie via une loi exacte ne dépendrait d'aucune grandeur thermodynamique autre que la densité. Elle peut s'obtenir à partir de notre loi exacte générale \eqref{eq:turb_cpi_khm2} en supposant $\delta u \rightarrow 0$ pour supprimer la contribution d'énergie interne et $p \rightarrow 0$ pour supprimer celle de $p$. Ainsi : 
+\begin{eqnarray}
+\label{eq:turb_elisop_f2}-4\varepsilon &=& \nabla_{\boldsymbol{\ell}} \cdot \left<\left(\delta \left(\rho\boldsymbol{v}\right) \cdot \delta \boldsymbol{v}+ \delta \left(\rho\boldsymbol{v_A}\right) \cdot \delta \boldsymbol{v_A} - \delta \rho  \delta \left(\frac{\boldsymbol{v_A}^2}{2}\right)\right) \delta \boldsymbol{v}  \right> \\
+&&-\nabla_{\boldsymbol{\ell}} \cdot \left< \left(\delta \left(\rho\boldsymbol{v_A}\right) \cdot \delta \boldsymbol{v}  + \delta \left(\rho\boldsymbol{v}\right) \cdot \delta \boldsymbol{v_A}  \right) \delta \boldsymbol{v_A} \right> \nonumber\\
+&& +\left< \left(\rho \boldsymbol{v} \cdot \delta \boldsymbol{v} +\frac{1}{2} \rho \boldsymbol{v_A} \cdot \delta \boldsymbol{v_A} -\frac{1}{2} \boldsymbol{v_A} \cdot \delta \left(\rho \boldsymbol{v_A}\right) \right) \nabla' \cdot \boldsymbol{v'} \right>\nonumber\\
+&& -\left< \left(\rho' \boldsymbol{v'} \cdot \delta \boldsymbol{v} +\frac{1}{2} \rho' \boldsymbol{v'_A} \cdot \delta \boldsymbol{v_A} -\frac{1}{2} \boldsymbol{v'_A} \cdot \delta \left(\rho \boldsymbol{v_A}\right)  \right)\nabla \cdot \boldsymbol{v}\right>\nonumber\\
+&&+ \left<\left(2 \rho' \boldsymbol{v'} \cdot \delta \boldsymbol{v_A}+ \delta\left(\rho \boldsymbol{v}\right) \cdot \boldsymbol{v'_A} - \rho' \boldsymbol{v'_A} \cdot \delta \boldsymbol{v}  \right)\nabla \cdot \boldsymbol{v_A}\right>\nonumber\\
+&&- \left<\left(2\rho \boldsymbol{v} \cdot \delta \boldsymbol{v_A} + \delta\left(\rho \boldsymbol{v}\right) \cdot \boldsymbol{v_A} - \rho \boldsymbol{v_A} \cdot \delta \boldsymbol{v}  \right)\nabla' \cdot \boldsymbol{v'_A}\right>\nonumber \\
+&&+  \left< \left(\frac{\boldsymbol{v_A}^2}{2} \delta \rho - \rho \delta \left(\frac{\boldsymbol{v_A}^2}{2}\right)  \right)\boldsymbol{v} \cdot \frac{\nabla' \rho'}{\rho'}- \left(\frac{\boldsymbol{v'_A}^2}{2} \delta \rho - \rho' \delta \left(\frac{\boldsymbol{v_A}^2}{2} \right)  \right)  \boldsymbol{v'} \cdot \frac{\nabla \rho}{\rho} \right> .\nonumber
+\end{eqnarray} 
+On rappelle que l'utilisation de ce résultat dans le but d'estimer le taux de chauffage turbulent doit a priori être complétée par une estimation du taux de cascade d'énergie interne.
+
+L'hypothèse principale de notre approche étant une zone inertielle isentrope, une contribution y a été omise : la contribution du flux de chaleur. Cette contribution est une fenêtre s'ouvrant sur l'entropie à travers le terme de flux de chaleur présent dans l'équation d'énergie interne, comme on l'a vu dans la section \ref{sec-122}. De plus, \cite{eyink_cascades_2018} a démontré via la théorie du \og coarse-graining \fg{}\footnote{Cette autre approche de l'étude de la cascade turbulente implique schématiquement un filtrage de type passe-bas des échelles et permet une représentation locale dans l'espace et en échelle.} l'existence d'une cascade d'entropie. Cette cascade impacterait-elle celle d'énergie totale ? L'influence du flux de chaleur se limite-t-il bien qu'aux petites échelles, en dehors de la zone inertielle ? Ces questions seront posées dans la Partie \ref{part_3} mais, ici, on peut déjà répondre à la question : est-il possible d'obtenir analytiquement un terme de type flux dépendant du flux de chaleur dans la description générale (\cacro{KHM}) de la cascade turbulente ? La réponse est oui, et elle va même nous permettre de retravailler les termes de pression. 
+
+La contribution du flux de chaleur, gardée brute dans la relation \cacro{KHM} générale \eqref{eq:turb_cpi_khm} et que l'on va noter $\varepsilon_{q}$, peut s'écrire :
+    \begin{eqnarray}
+    \label{eq:turb_ref_q}    - 4\varepsilon_{q}  &=& - 2 \left<\frac{\rho'}{\rho} \nabla \cdot \boldsymbol{q} + \frac{\rho}{\rho'} \nabla' \cdot \boldsymbol{q'}\right>\nonumber\\
+        &=&\nabla_{\boldsymbol{\ell}} \cdot \left<2\delta \rho \delta \boldsymbol{q}\delta \left(1/\rho\right) \right> + \left< 2\rho  \delta \boldsymbol{q} \cdot \nabla'\left(\frac{1}{\rho'}\right) -  2\rho' \delta \boldsymbol{q} \cdot \nabla \left(\frac{1}{\rho}\right)\right> .
+    \end{eqnarray}
+
+De plus, si l'on compare les termes flux écrits avec la formulation précédente (\eqref{eq:turb_elg_f2}) et auxquels on ajoute celui de flux de chaleur (à gauche) avec les termes flux de l'équation de densité d'énergie totale \eqref{eq:model_cpi_e} (à droite) : 
+\begin{equation*}
+\begin{array}{r|l}
+  \nabla_{\boldsymbol{\ell}} \cdot \left<\left(\delta \left(\rho\boldsymbol{v}\right) \cdot \delta \boldsymbol{v}+ \delta \left(\rho\boldsymbol{v_A}\right) \cdot \delta \boldsymbol{v_A} + 2\delta u\right) \delta \boldsymbol{v} \right> & \frac{1}{2}\nabla \cdot \left(\left(\rho \boldsymbol{v}^2 + \rho \boldsymbol{v_A}^2 + 2\rho u\right) \boldsymbol{v} \right)\\
+   - \nabla_{\boldsymbol{\ell}} \cdot \left<\left(\delta \left(\rho\boldsymbol{v_A}\right) \cdot \delta \boldsymbol{v}  + \delta \left(\rho\boldsymbol{v}\right) \cdot \delta \boldsymbol{v_A}  \right) \delta \boldsymbol{v_A}  \right> & - \nabla \cdot \left(\rho \boldsymbol{v} \cdot \boldsymbol{v_A}\boldsymbol{v_A}\right)\\
+   -  \nabla_{\boldsymbol{\ell}} \cdot \left<\delta \rho \delta \left(p_*/\rho\right)\delta \boldsymbol{v}\right> & \nabla \cdot \left(p_* \boldsymbol{v}\right)\\
+   \nabla_{\boldsymbol{\ell}} \cdot \left<2\delta \rho \delta \boldsymbol{q}\delta \left(1/\rho\right) \right> & \nabla \cdot \left(\boldsymbol{q}\right),
+   \end{array}
+\end{equation*}
+on peut se demander s'il n'existe pas une formulation de la contribution de pression totale dans la loi exacte qui aurait un signe correspondant à celui présent dans l'équation de densité d'énergie totale. En effet, en s'inspirant de la forme de la fonction de structure dépendant du flux de chaleur, on remarque que la contribution de la pression totale peut s'écrire : 
+\begin{eqnarray}
+ \label{eq:turb_ref_ptot} -4\varepsilon_{p*}  &=&- \nabla_{\boldsymbol{\ell}} \cdot \left<\delta \rho  \delta \left(\frac{p_*}{\rho}\right) \delta \boldsymbol{v} \right> + \left<\left(\delta \rho \frac{p_*}{\rho} - \rho \delta \left(\frac{p_*}{\rho}\right)\right)\boldsymbol{v} \cdot \frac{\nabla' \rho'}{\rho'}\right>\nonumber\\
+ &&- \left<\left(\delta \rho \frac{p'_*}{\rho'} - \rho' \delta \left(\frac{p_*}{\rho}\right)\right)\boldsymbol{v'} \cdot \frac{\nabla \rho}{\rho}\right>\nonumber\\
+    &=&\nabla_{\boldsymbol{\ell}} \cdot \left<\delta p_*  \delta \left(\frac{1}{\rho}\right) \delta\left(\rho \boldsymbol{v}\right) \right> + \left< \delta \left(p_*\right) \rho \boldsymbol{v} \cdot \nabla'\left(\frac{1}{\rho'}\right) - \delta \left(p_*\right) \rho' \boldsymbol{v'} \cdot \nabla \left(\frac{1}{\rho}\right)\right> .\nonumber \\
+\end{eqnarray}
+Le nombre de termes est ainsi réduit de 5 à 3 et la loi \cacro{KHM} générale s'écrit : 
+\begin{equation}
+\boxed{
+\begin{array}{lcl}
+\label{eq:turb_cpi_khm3}\quad 4\partial_t \mathcal{R} &=& \nabla_{\boldsymbol{\ell}} \cdot \left<\left(\delta \left(\rho\boldsymbol{v}\right) \cdot \delta \boldsymbol{v}+ \delta \left(\rho\boldsymbol{v_A}\right) \cdot \delta \boldsymbol{v_A}\right) \delta \boldsymbol{v}  -\left(\delta \left(\rho\boldsymbol{v_A}\right) \cdot \delta \boldsymbol{v}  + \delta \left(\rho\boldsymbol{v}\right) \cdot \delta \boldsymbol{v_A}  \right) \delta \boldsymbol{v_A} \right>\\
+&& + \nabla_{\boldsymbol{\ell}} \cdot \left<2 \delta \rho \delta u \delta \boldsymbol{v}+ \delta p_*  \delta \left(1/\rho\right) \delta\left(\rho \boldsymbol{v}\right) + 2\delta \rho \delta \boldsymbol{q}\delta \left(1/\rho\right) \right> \\
+&& +\left< \left(\rho \boldsymbol{v} \cdot \delta \boldsymbol{v} +\frac{1}{2} \rho \boldsymbol{v_A} \cdot \delta \boldsymbol{v_A} -\frac{1}{2} \boldsymbol{v_A} \cdot \delta \left(\rho \boldsymbol{v_A}\right) + 2\rho \left(\delta u - \delta \left(\frac{p}{\rho}\right)\right) \right) \nabla' \cdot \boldsymbol{v'} \right>\\
+&& -\left<\left( \rho' \boldsymbol{v'} \cdot \delta \boldsymbol{v} +\frac{1}{2} \rho' \boldsymbol{v'_A} \cdot \delta \boldsymbol{v_A} -\frac{1}{2} \boldsymbol{v'_A} \cdot \delta \left(\rho \boldsymbol{v_A}\right) + 2\rho' \left(\delta u - \delta \left(\frac{p}{\rho}\right)\right)  \right)\nabla \cdot \boldsymbol{v}\right>\\
+&&+ \left<\left(2 \rho' \boldsymbol{v'} \cdot \delta \boldsymbol{v_A}+ \delta\left(\rho \boldsymbol{v}\right) \cdot \boldsymbol{v'_A} - \rho' \boldsymbol{v'_A} \cdot \delta \boldsymbol{v}  \right)\nabla \cdot \boldsymbol{v_A}\right>\\
+&&- \left<\left(2\rho \boldsymbol{v} \cdot \delta \boldsymbol{v_A} + \delta\left(\rho \boldsymbol{v}\right) \cdot \boldsymbol{v_A} - \rho \boldsymbol{v_A} \cdot \delta \boldsymbol{v}  \right)\nabla' \cdot \boldsymbol{v'_A}\right> \\
+&&+ \left< \left(\rho\boldsymbol{v} \delta \left(p_*\right)  + 2 \rho \delta \boldsymbol{q}\right) \cdot \nabla'\left(\frac{1}{\rho'}\right) - \left(\rho' \boldsymbol{v'}\delta \left(p_*\right) + 2\rho' \delta \boldsymbol{q} \right) \cdot \nabla \left(\frac{1}{\rho}\right)\right>\\
+&&+  \left<\left(\rho' + \rho\right)\left(\boldsymbol{v} \cdot \boldsymbol{f'_c} + \boldsymbol{v'} \cdot \boldsymbol{f_c} + \boldsymbol{v_A} \cdot \boldsymbol{f'_m} + \boldsymbol{v'_A} \cdot \boldsymbol{f_m}\right) \right>\\
+&&+ \left<\left(\rho' + \rho\right)\left(\boldsymbol{v} \cdot \boldsymbol{d'_c} + \boldsymbol{v'} \cdot \boldsymbol{d_c}+\boldsymbol{v_A} \cdot \boldsymbol{d'_m} + \boldsymbol{v'_A} \cdot \boldsymbol{d_m}\right)\right> .
+\end{array}}
+\end{equation}
+L'équation \eqref{eq:turb_cpi_khm3} est la formulation finale de la loi \cacro{KHM} compressible générale décrivant la cascade d'énergie totale à l'aide de la fonction de corrélation :  
+\begin{equation*}
+    \mathcal{R} = \left<\frac{1}{4} \left(\rho'+\rho\right) \boldsymbol{v'} \cdot  \boldsymbol{v} + \frac{1}{4} \left(\rho'+\rho\right) \boldsymbol{v'_A} \cdot  \boldsymbol{v_A} +\frac{1}{2} \left(\rho' u + \rho u'\right)\right>.
+\end{equation*}
+Cette formulation rappelle l'équation d'énergie totale générale \eqref{eq:model_cpi_e} et, tout comme elle, dépend de $p$, $u$ et $\boldsymbol{q}$. Cette dépendance reste à définir à l'aide d'une équation de fermeture et/ou à annuler en fonction du type de zone inertielle que l'on veut considérer. Son application dans des données ou des simulations n'impose qu'un postulat, à savoir que les équations de continuité \eqref{eq:turb_cpi_r}, vitesse \eqref{eq:turb_cpi_v}, induction \eqref{eq:turb_cpi_b} et énergie interne générale \eqref{eq:turb_cpi_u}\footnote{Hors cas isobare.} soient valides. En fonction du cas d'application, les autres formulations des contributions de pression $\varepsilon_p$ \eqref{eq:turb_ref_p}, pression magnétique $\varepsilon_{pm}$ \eqref{eq:turb_ref_pm}, pression totale $\varepsilon_{p*}$ \eqref{eq:turb_ref_ptot} et flux de chaleur $\varepsilon_q$ \eqref{eq:turb_ref_q} ou celle en appliquant le premier principe thermodynamique avec l'hypothèse d'isentropie \eqref{eq:turb_ref_beta} pourront tout à fait être préférées.
+
+Par exemple, si l'on veut utiliser l'expression du flux de chaleur en fonction de $\sigma$ pour obtenir une loi exacte de type \cacro{K41} dans le cadre d'une zone inertielle de type encore indéfinie (isobare, isentrope ou autre) mais pour un modèle fermé avec la fermeture polytrope, il semble plus à propos d'utiliser la formulation de $\varepsilon_q$ dépendant de $\nabla \cdot \boldsymbol{q}$ qui devient
+$- 4\varepsilon_q = - 2 \sigma \gamma\left< \rho'\frac{p}{\rho}\nabla \cdot \boldsymbol{v} + \rho\frac{p'}{\rho'}\nabla' \cdot \boldsymbol{v'} \right>$ puisque $\nabla \cdot \boldsymbol{q} = \sigma \gamma p \nabla \cdot \boldsymbol{v}$,.
+Ainsi en posant $p_* = \rho\boldsymbol{v'_A}^2\left(\beta +1\right)/2$, $c^s_2/\gamma = \boldsymbol{v'_A}^2\beta/2$ et $\tilde{u} = \frac{1}{\gamma-1}$ si $\gamma \neq 1$ ou $\ln\left(\rho/\rho_0\right)$ si $\gamma =1$, on obtient : 
+
+\begin{equation}
+\boxed{
+\begin{array}{lcl}
+\label{eq:turb_pol_khm3}\quad 4\partial_t \mathcal{R} &=& \nabla_{\boldsymbol{\ell}} \cdot \left<\left(\delta \left(\rho\boldsymbol{v}\right) \cdot \delta \boldsymbol{v}+ \delta \left(\rho\boldsymbol{v_A}\right) \cdot \delta \boldsymbol{v_A}\right) \delta \boldsymbol{v}  -\left(\delta \left(\rho\boldsymbol{v_A}\right) \cdot \delta \boldsymbol{v}  + \delta \left(\rho\boldsymbol{v}\right) \cdot \delta \boldsymbol{v_A}  \right) \delta \boldsymbol{v_A} \right>\\%\nonumber
+&& + \nabla_{\boldsymbol{\ell}} \cdot \left< \delta \rho \delta \left(\boldsymbol{v'_A}^2\beta\left(\sigma+1\right)\tilde{u}\right) \delta \boldsymbol{v}+ \delta \left(\rho\boldsymbol{v'_A}^2\left(\beta +1\right)/2\right)  \delta \left(1/\rho\right) \delta\left(\rho \boldsymbol{v}\right) \right> \\ %\nonumber
+&& +\left< \left(\rho \boldsymbol{v} \cdot \delta \boldsymbol{v} +\frac{1}{2} \rho \boldsymbol{v_A} \cdot \delta \boldsymbol{v_A} -\frac{1}{2} \boldsymbol{v_A} \cdot \delta \left(\rho \boldsymbol{v_A}\right)\right) \nabla' \cdot \boldsymbol{v'} \right>\\%\nonumber
+&& +\left< \left( \rho \delta \left(\boldsymbol{v'_A}^2\beta\left(\left(\sigma\gamma+1\right)\tilde{u} - 1\right)\right) -  \sigma \gamma \rho \boldsymbol{v'_A}^2\beta'\right) \nabla' \cdot \boldsymbol{v'} \right>\\%\nonumber
+&& -\left<\left( \rho' \boldsymbol{v'} \cdot \delta \boldsymbol{v} +\frac{1}{2} \rho' \boldsymbol{v'_A} \cdot \delta \boldsymbol{v_A} -\frac{1}{2} \boldsymbol{v'_A} \cdot \delta \left(\rho \boldsymbol{v_A}\right)\right) \nabla \cdot \boldsymbol{v} \right>\\%\nonumber
+&& -\left< \left( \rho' \delta \left(\boldsymbol{v'_A}^2\beta\left(\left(\sigma\gamma+1\right)\tilde{u} - 1\right)\right) +  \sigma \gamma \rho'\boldsymbol{v_A}^2\beta \right)\nabla \cdot \boldsymbol{v}\right>\\%\nonumber
+&&+ \left<\left(2 \rho' \boldsymbol{v'} \cdot \delta \boldsymbol{v_A}+ \delta\left(\rho \boldsymbol{v}\right) \cdot \boldsymbol{v'_A} - \rho' \boldsymbol{v'_A} \cdot \delta \boldsymbol{v}  \right)\nabla \cdot \boldsymbol{v_A}\right>\\%\nonumber
+&&- \left<\left(2\rho \boldsymbol{v} \cdot \delta \boldsymbol{v_A} + \delta\left(\rho \boldsymbol{v}\right) \cdot \boldsymbol{v_A} - \rho \boldsymbol{v_A} \cdot \delta \boldsymbol{v}  \right)\nabla' \cdot \boldsymbol{v'_A}\right> \\%\nonumber
+&&+ \left< \left(\rho\boldsymbol{v} \delta \left(\rho\boldsymbol{v'_A}^2\left(\beta +1\right)/2\right) \right) \cdot \nabla'\left(\frac{1}{\rho'}\right) - \left(\rho' \boldsymbol{v'}\delta \left(\rho\boldsymbol{v'_A}^2\left(\beta +1\right)/2\right) \right) \cdot \nabla \left(\frac{1}{\rho}\right)\right>\\%\nonumber
+&&+  \left<\left(\rho' + \rho\right)\left(\boldsymbol{v} \cdot \boldsymbol{f'_c} + \boldsymbol{v'} \cdot \boldsymbol{f_c} + \boldsymbol{v_A} \cdot \boldsymbol{f'_m} + \boldsymbol{v'_A} \cdot \boldsymbol{f_m}\right) \right>\\%\nonumber
+&&+ \left<\left(\rho' + \rho\right)\left(\boldsymbol{v} \cdot \boldsymbol{d'_c} + \boldsymbol{v'} \cdot \boldsymbol{d_c}+\boldsymbol{v_A} \cdot \boldsymbol{d'_m} + \boldsymbol{v'_A} \cdot \boldsymbol{d_m}\right)\right> .
+\end{array}}
+\end{equation}
+ Dans le cadre d'une zone inertielle isentrope, $\sigma=0$, et on y retrouve la loi exacte \eqref{eq:turb_elpol_f2} écrite avec la dernière formulation des termes de pression totale. 
+ 
+ Si le système est fermé de manière isotherme et qu'aucune hypothèse thermodynamique ne contraint la zone inertielle, alors $\gamma = 1$, $\sigma = -1$, $c^2_s$ est constant et :  
+\begin{eqnarray}
+\label{eq:turb_isot_khm3}\quad 4\partial_t \mathcal{R} &=& \nabla_{\boldsymbol{\ell}} \cdot \left<\left(\delta \left(\rho\boldsymbol{v}\right) \cdot \delta \boldsymbol{v}+ \delta \left(\rho\boldsymbol{v_A}\right) \cdot \delta \boldsymbol{v_A}\right) \delta \boldsymbol{v}  -\left(\delta \left(\rho\boldsymbol{v_A}\right) \cdot \delta \boldsymbol{v}  + \delta \left(\rho\boldsymbol{v}\right) \cdot \delta \boldsymbol{v_A}  \right) \delta \boldsymbol{v_A} \right>\nonumber\\
+&& + \nabla_{\boldsymbol{\ell}} \cdot \left<  \delta \left(\rho\boldsymbol{v'_A}^2/2\right)  \delta \left(1/\rho\right) \delta\left(\rho \boldsymbol{v}\right) \right> + c^2_s\left<  \rho \nabla' \cdot \boldsymbol{v'} +\rho'\nabla \cdot \boldsymbol{v}\right>\nonumber\\
+&& +\left< \left(\rho \boldsymbol{v} \cdot \delta \boldsymbol{v} +\frac{1}{2} \rho \boldsymbol{v_A} \cdot \delta \boldsymbol{v_A} -\frac{1}{2} \boldsymbol{v_A} \cdot \delta \left(\rho \boldsymbol{v_A}\right)\right) \nabla' \cdot \boldsymbol{v'} \right>\nonumber\\
+&& -\left<\left( \rho' \boldsymbol{v'} \cdot \delta \boldsymbol{v} +\frac{1}{2} \rho' \boldsymbol{v'_A} \cdot \delta \boldsymbol{v_A} -\frac{1}{2} \boldsymbol{v'_A} \cdot \delta \left(\rho \boldsymbol{v_A}\right)\right) \nabla \cdot \boldsymbol{v} \right>\nonumber\\
+&&+ \left<\left(2 \rho' \boldsymbol{v'} \cdot \delta \boldsymbol{v_A}+ \delta\left(\rho \boldsymbol{v}\right) \cdot \boldsymbol{v'_A} - \rho' \boldsymbol{v'_A} \cdot \delta \boldsymbol{v}  \right)\nabla \cdot \boldsymbol{v_A}\right>\nonumber\\
+&&- \left<\left(2\rho \boldsymbol{v} \cdot \delta \boldsymbol{v_A} + \delta\left(\rho \boldsymbol{v}\right) \cdot \boldsymbol{v_A} - \rho \boldsymbol{v_A} \cdot \delta \boldsymbol{v}  \right)\nabla' \cdot \boldsymbol{v'_A}\right> \nonumber\\
+&&+ \left< \left(\rho\boldsymbol{v} \delta \left(\rho\boldsymbol{v'_A}^2/2\right) \right) \cdot \nabla'\left(\frac{1}{\rho'}\right) - \left(\rho' \boldsymbol{v'}\delta \left(\rho\boldsymbol{v'_A}^2/2\right) \right) \cdot \nabla \left(\frac{1}{\rho}\right)\right>\nonumber\\
+&&+  \left<\left(\rho' + \rho\right)\left(\boldsymbol{v} \cdot \boldsymbol{f'_c} + \boldsymbol{v'} \cdot \boldsymbol{f_c} + \boldsymbol{v_A} \cdot \boldsymbol{f'_m} + \boldsymbol{v'_A} \cdot \boldsymbol{f_m}\right) \right>\nonumber\\
+&&+ \left<\left(\rho' + \rho\right)\left(\boldsymbol{v} \cdot \boldsymbol{d'_c} + \boldsymbol{v'} \cdot \boldsymbol{d_c}+\boldsymbol{v_A} \cdot \boldsymbol{d'_m} + \boldsymbol{v'_A} \cdot \boldsymbol{d_m}\right)\right> .
+\end{eqnarray}
+La contribution thermodynamique est alors très simple : $ c^2_s \left< \rho \nabla' \cdot \boldsymbol{v'} +\rho'\nabla \cdot \boldsymbol{v} \right>$. Sans elle, on obtiendrait la loi \cacro{KHM} décrivant la cascade isobare d'énergie cinétique-magnétique.  
+
+La loi exacte \cacro{KHM} \eqref{eq:turb_pol_khm3} décrit donc le transfert énergétique à travers les échelles \cacro{MHD}, qu'il existe ou non une zone inertielle, et cela dans tout modèle fermé avec une fermeture thermodynamique polytropique. Elle prend en compte les canaux de dissipation et injection d'énergie ainsi que la contribution du flux de chaleur. 
+
+Cette étude analytique analysant la prise en compte des fermetures thermodynamiques dans l'extension compressible de la théorie des lois exactes nous apporte donc un cadre général applicable à toute étude de cascade turbulente dans des modèles \cacro{MHD} avec pression isotrope. On verra dans le Chapitre \ref{ch-23} qu'en ajoutant quelques termes indépendants de la pression, ces résultats seront étendus d'une manière simple au modèle \cacro{MHDH}.
+
+\newpage
+\section{Synthèse de l'étude analytique de turbulence compressible avec pression isotrope}
+\label{synt-13}
+
+\fcolorbox{red}{white}{\begin{minipage}[c]{\linewidth}
+\paragraph{Equations utilisées pour calculer la loi générale  :} modèle \cacro{MHD}
+\begin{eqnarray}
+\label{eq:synth_turbi_r} \partial_t \rho &=& - \nabla \cdot \left(\rho \boldsymbol{v}\right), \\
+\label{eq:synth_turbi_v}\partial_t  \boldsymbol{v} &=&- \nabla \cdot \left(\boldsymbol{v}\boldsymbol{v}\right) + \boldsymbol{v} \nabla \cdot \boldsymbol{v}  + \frac{1}{\rho} \nabla \cdot \left(\rho \boldsymbol{v_A}\boldsymbol{v_A}\right) - \frac{1}{\rho}  \nabla p_*  + \boldsymbol{f_c} + \boldsymbol{d_c}, \\
+\label{eq:synth_turbi_b}\partial_t \boldsymbol{v_A} &=&   \nabla \cdot \left(\boldsymbol{v_A}\boldsymbol{v} - \boldsymbol{v}\boldsymbol{v_A}\right) -  \boldsymbol{v}  \nabla \cdot \boldsymbol{v_A} +  \frac{\boldsymbol{v_A}}{2}  \nabla \cdot \boldsymbol{v} + \boldsymbol{f_m} + \boldsymbol{d_m},\\
+\label{eq:synth_turbi_u}\partial_t u &=& - \nabla \cdot \left(u \boldsymbol{v}\right) + u  \nabla \cdot \boldsymbol{v} -\frac{1}{\rho} \nabla \cdot \boldsymbol{q}  - \frac{p}{\rho}  \nabla \cdot \boldsymbol{v}. 
+\end{eqnarray}
+
+\paragraph{Fonctions de corrélation d'énergie totale considérées  :} 
+\begin{itemize}
+ \item $\mathcal{R} = \frac{1}{2} \left<\frac{1}{2} \left(\rho'+\rho\right) \boldsymbol{v'} \cdot  \boldsymbol{v} + \frac{1}{2} \left(\rho'+\rho\right) \boldsymbol{v'_A} \cdot  \boldsymbol{v_A} +  \rho' u + \rho u' \right>$
+ \item $\mathcal{S} = \frac{1}{2} \left<\delta\left(\rho \boldsymbol{v}\right)\cdot \delta \boldsymbol{v} + \delta\left(\rho \boldsymbol{v_A}\right)\cdot \delta \boldsymbol{v_A} + 2 \delta \rho \delta u\right>$, la fonction incrémentale associée à $\mathcal{R}$
+ \item autres possibilités évoquées section \ref{sec-131}
+\end{itemize}
+
+\paragraph{Formulations (f1, f2 et f3) des lois exactes générales KHM et K41 et applications aux fermetures isentrope-polytrope et polytrope :} 
+\begin{itemize}
+    \item \cacro{KHM} f1 :  \eqref{eq:turb_cpi_khm},
+    \item \cacro{K41} f1 :  \eqref{eq:turb_elg_f1},
+    \item \cacro{K41} isentrope-polytrope f1 :  \eqref{eq:turb_elpol_f1} [Résultat répondant à l'objectif initial],
+    \item \cacro{KHM} f2 :  \eqref{eq:turb_cpi_khm2},
+    \item \cacro{K41} f2 :  \eqref{eq:turb_elg_f2},
+    \item \cacro{K41} isentrope-polytrope f2 :  \eqref{eq:turb_elpol_f2},
+    \item \cacro{KHM} f3 :  \eqref{eq:turb_cpi_khm3},
+    \item \cacro{KHM} polytrope f3 :  \eqref{eq:turb_pol_khm3}.
+\end{itemize}
+
+\paragraph{Réécriture des contributions de pression et flux de chaleur :}
+\begin{itemize}
+    \item Prise en compte du premier principe de la thermodynamique et de l'hypothèse d'isentropie dans f1 :  \eqref{eq:turb_ref_beta},
+    \item Contributions de pression $\varepsilon_p$ (f1 vers f2) : \eqref{eq:turb_ref_p},
+    \item Contributions de pression magnétique $\varepsilon_{pm}$ (f1 vers f2) : \eqref{eq:turb_ref_pm},
+    \item Contributions de pression totale $\varepsilon_{p*}$ (f2 vers f3) : \eqref{eq:turb_ref_ptot},
+    \item Contributions du flux de chaleur $\varepsilon_{q}$ (f1 et f2 vers f3) : \eqref{eq:turb_ref_q}.\\
+\end{itemize}
+
+Des applications aux autres fermetures définies dans le Chapitre \ref{ch-12} sont données au fil des sections \ref{sec-131}, \ref{sec-132} et \ref{sec-133}.
+Les résultats écrits avec f1 (section \ref{sec-131}) sont publiés dans \cite{simon_general_2021}. 
+\end{minipage}}
+
+
+ 

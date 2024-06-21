@@ -1,0 +1,30 @@
+\extraPartText{ }
+
+\part*{\linia
+        \bigskip
+        TABLES ET LISTES
+        \bigskip
+        \linia}
+
+\addtocontents{toc}{\protect\vspace{2ex}\textbf{TABLES ET LISTES }\par}     
+\refstepcounter{part}\label{part_tab}
+\renewcommand{\chaptername}{TABLES ET LISTES : }
+\renewcommand\Partie{TABLES ET LISTES : }
+\setcounter{chapter}{0}
+
+\renewcommand\LOdef{}
+
+\input{Backmatter/table_contents}
+\input{Backmatter/table_figures}
+\input{Backmatter/table_tables}
+\input{Backmatter/table_acronymes}
+\cleardoublepage\phantomsection
+\input{Backmatter/table_nomenclature}
+
+\cleardoublepage\phantomsection
+\renewcommand\partie{Bibliographie}
+\printbibliography[title=Bibliographie]
+ \addcontentsline{toc}{chapter}{Bibliographie}
+ 
+\input{Backmatter/list_articles}
+\input{Backmatter/couv_quatre}
